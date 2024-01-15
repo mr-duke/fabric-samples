@@ -189,8 +189,8 @@ download() {
     local URL=$2
     local DEST_DIR=$(pwd)
     echo "===> Downloading: " "${URL}"
-    if [ -d inf-evoting ]; then
-       DEST_DIR="inf-evoting"
+    if [ -d ../inf-evoting ]; then
+       DEST_DIR="../inf-evoting"
     fi
     echo "===> Will unpack to: ${DEST_DIR}"
     curl -L --retry 5 --retry-delay 3 "${URL}" | tar xz -C ${DEST_DIR}|| rc=$?
