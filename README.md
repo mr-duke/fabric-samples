@@ -13,6 +13,7 @@ Praxisprojekt für die Masterarbeit von Karl Herzog zum Thema *Blockchain-basier
 - [Git](https://git-scm.com/downloads)
 - [cURL](https://curl.se/download.html)
 - [Node.js](https://nodejs.org/en)
+- [Jq](https://jqlang.github.io/jq/download/)
 - [Docker](https://docs.docker.com/get-docker/)
 - Docker Compose:
 ```bash
@@ -35,6 +36,7 @@ sudo systemctl enable docker
 - Wichtig: Da der Sourcecode auf eine `Bash` Umgebung ausgerichtet, wird die Einrichtung von [WSL2](https://learn.microsoft.com/en-us/windows/wsl/install) sowie die Verwendung einer gängigen Linux-Distribution wie Ubuntu in der aktuellen LTS-Version sehr empfohlen.
 - [Docker Desktop](https://docs.docker.com/get-docker/)
 - [Node.js](https://nodejs.org/en)
+- [Jq](https://jqlang.github.io/jq/download/)
 - *Optional*: [Microsoft VS Code](https://code.visualstudio.com/) mit `Remote - WSL extension` zur vereinfachten Interaktion mit der WSL2 Linux-Distribution
 
 ### Download von Sourcecode, Hyperledger Docker Images und Binaries
