@@ -1,6 +1,7 @@
 [//]: # (SPDX-License-Identifier: CC-BY-4.0)
 
-# Praxisprojekt zur Masterarbeit von Karl Herzog: INF-eVoting
+# INF-eVoting
+Praxisprojekt für die Masterarbeit von Karl Herzog zum Thema *Blockchain-basierte Abstimmungssysteme: Grundlagen und prototypische Umsetzung in der Cloud* an der TH Rosenheim
 
 ## Installation (einmalig)
 ### Empfohlene Hardware-Voraussetzungen
