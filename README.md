@@ -43,7 +43,7 @@ Klonen des Repository für den Sourcecode in beliebiges Verzeichnis:
 
 `git clone https://github.com/mr-duke/inf-evoting.git`
 
-Verschieben und ausführbar machen des Installationsskripts:
+Verschieben des Installationsskripts ins aktuelle Verzeichnis und ausführbar machen der Datei:
 
 `mv inf-evoting/install-fabric.sh . && chmod +x install-fabric.sh`
 
