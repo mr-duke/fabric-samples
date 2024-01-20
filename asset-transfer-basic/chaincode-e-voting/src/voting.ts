@@ -2,7 +2,7 @@
  * SPDX-License-Identifier: Apache-2.0
  */
 // Deterministic JSON.stringify()
-import {Context, Contract, Info, Returns, Transaction} from 'fabric-contract-api';
+import {Context, Contract, Info, Returns, Transaction, ChaincodeStub } from 'fabric-contract-api';
 import stringify from 'json-stringify-deterministic';
 import sortKeysRecursive from 'sort-keys-recursive';
 import {Option} from './option';
@@ -46,7 +46,7 @@ export class VotingContract extends Contract {
 
     // CreateOption issues a new voting option to the world state with given details.
     @Transaction()
-    public async CreateOption(ctx: Context, id: string, name: string, voteCount: number): Promise<void> {
+    public async CreateOption(ctx: Context, id: string, name: string): Promise<void> {
         const exists = await this.optionExists(ctx, id);
         if (exists) {
             throw new Error(`Option with ID ${id} already exists`);
@@ -55,7 +55,7 @@ export class VotingContract extends Contract {
         const option = {
             ID: id,
             Name: name,
-            VoteCount: voteCount,
+            VoteCount: 0,
         };
         // Insert data in alphabetic order using 'json-stringify-deterministic' and 'sort-keys-recursive'
         await ctx.stub.putState(id, Buffer.from(stringify(sortKeysRecursive(option))));
@@ -69,6 +69,16 @@ export class VotingContract extends Contract {
             throw new Error(`Option with ID ${id} does not exist`);
         }
         return optionJSON.toString();
+    }
+
+    // When voting for a specified option, voteCount should be increased by 1
+    @Transaction()
+    public async CastVote(ctx: Context, id: string): Promise<void> {
+        const optionString = await this.ReadOption(ctx, id);
+        const option = JSON.parse(optionString);
+        option.VoteCount += 1;
+        // insert data in alphabetic order using 'json-stringify-deterministic' and 'sort-keys-recursive'
+        await ctx.stub.putState(id, Buffer.from(stringify(sortKeysRecursive(option))));
     }
 
     /* Updateballot updates an existing ballot in the world state with provided parameters.
@@ -142,6 +152,24 @@ export class VotingContract extends Contract {
             }
             allResults.push(record);
             result = await iterator.next();
+        }
+        return JSON.stringify(allResults);
+    }
+
+    @Transaction(false)
+    @Returns('string')
+    public async GetHistory(ctx: Context, id: string): Promise<string> {
+        const iter =  ctx.stub.getHistoryForKey(id);
+
+        const allResults = [];
+        for await (const res of iter) {
+            const record = {
+                timestamp: res.timestamp,
+                txId: res.txId,
+                isDelete: res.isDelete,
+                value: res.value.toString(),
+            };
+            allResults.push(record);
         }
         return JSON.stringify(allResults);
     }
