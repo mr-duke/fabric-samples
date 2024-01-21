@@ -76,7 +76,7 @@ In `test-network` Verzeichnis wechseln:
 
 Packen, Installieren, Prüfen und Commiten des Chaincode in Typescript:
 
-`./network.sh deployCC -ccn basic -ccp ../asset-transfer-basic/chaincode-e-voting/ -ccl typescript`
+`./network.sh deployCC -ccn basic -ccp ../asset-transfer-basic/chaincode-evoting/ -ccl typescript`
 
 Folgende Befehle nur während Testphase, falls Chaincode direkt über `Peer CLI` ohne Clientanwendung aufgerufen werden soll:
 

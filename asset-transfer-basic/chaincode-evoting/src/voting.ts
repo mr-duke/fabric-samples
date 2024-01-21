@@ -2,7 +2,7 @@
  * SPDX-License-Identifier: Apache-2.0
  */
 // Deterministic JSON.stringify()
-import {Context, Contract, Info, Returns, Transaction, ChaincodeStub } from 'fabric-contract-api';
+import {Context, Contract, Info, Returns, Transaction} from 'fabric-contract-api';
 import stringify from 'json-stringify-deterministic';
 import sortKeysRecursive from 'sort-keys-recursive';
 import {Option} from './option';
@@ -159,18 +159,25 @@ export class VotingContract extends Contract {
     @Transaction(false)
     @Returns('string')
     public async GetHistory(ctx: Context, id: string): Promise<string> {
-        const iter =  ctx.stub.getHistoryForKey(id);
+        const iterator = await ctx.stub.getHistoryForKey(id);
 
-        const allResults = [];
-        for await (const res of iter) {
-            const record = {
-                timestamp: res.timestamp,
-                txId: res.txId,
-                isDelete: res.isDelete,
-                value: res.value.toString(),
-            };
-            allResults.push(record);
+        const results = [];
+        let response;
+        while (true) {
+            response = await iterator.next();
+            if (response.value) {
+                const entry = {
+                    value: response.value.value.toString('utf8'),
+                    timestamp: response.value.timestamp ,
+                    txId: response.value.txId,
+                    isDeleted: response.value.isDelete
+                };
+                results.push(entry);
+            }
+            if (response.done) {
+                await iterator.close();
+                return JSON.stringify(results);
+            }
         }
-        return JSON.stringify(allResults);
     }
 }
