@@ -1,14 +1,15 @@
 /*
  * SPDX-License-Identifier: Apache-2.0
  */
-// Deterministic JSON.stringify()
-import {Context, Contract, Info, Returns, Transaction} from 'fabric-contract-api';
+import { Context, Contract, Info, Returns, Transaction } from 'fabric-contract-api';
 import stringify from 'json-stringify-deterministic';
 import sortKeysRecursive from 'sort-keys-recursive';
-import { Option } from './option';
-import {HistoryRecord } from './historyRecord';
 import Long from 'long';
 import { Timestamp } from 'fabric-shim';
+import { Option } from './option';
+import { HistoryRecord } from './historyRecord';
+import { error } from 'console';
+
 
 @Info({title: 'Voting Contract', description: 'Smart contract for e-voting'})
 export class VotingContract extends Contract {
@@ -64,7 +65,7 @@ export class VotingContract extends Contract {
         // Insert data in alphabetic order using 'json-stringify-deterministic' and 'sort-keys-recursive'
         await ctx.stub.putState(id, Buffer.from(stringify(sortKeysRecursive(option))));
     }
-/*
+
     // Returns the voting option stored in the world state with given id.
     @Transaction(false)
     @Returns('string')
@@ -84,9 +85,8 @@ export class VotingContract extends Contract {
         const iterator = ctx.stub.getStateByRange('', '');
         const allResults: Option[] = [];
         for await (const result of iterator) {
-            const valueString = Buffer.from(result.value.toString()).toString('utf8');
-            let record: Option;
-            record = JSON.parse(valueString);
+            const valueString = Buffer.from(result.value).toString('utf8');
+            let record: Option = JSON.parse(valueString);
             allResults.push(record);
         }
         return JSON.stringify(allResults);
@@ -114,22 +114,16 @@ export class VotingContract extends Contract {
 
     // Delete all options found in the world state.
     @Transaction()
-    public async deleteAllOptions(ctx: Context): Promise<void> {
-        // Range query with empty string for startKey and endKey does an open-ended query of all options in the chaincode namespace.
+    public async deleteAllOptions(ctx: Context): Promise<void> { 
+        // Range query with empty string for startKey and endKey does open-ended query of all options in the chaincode namespace.
         const iterator = ctx.stub.getStateByRange('', '');
         for await (const result of iterator) {
             const valueString = Buffer.from(result.value.toString()).toString('utf8');
-            let record: Option;
-            record = JSON.parse(valueString);
-            await this.deleteOption(ctx, record.id);
-        }
-        // Check if there are any options left. If so, throw error. 
-        const results = await this.getAllOptions(ctx);
-        if (results.length !== 0) {
-            throw new Error(`Not all options could be deleted`);
+            let option: Option = JSON.parse(valueString);
+            await ctx.stub.deleteState(option.id);
         }
     }
-*/
+
     // Get the recorded history of an Option
     @Transaction(false)
     @Returns('string')
@@ -137,27 +131,35 @@ export class VotingContract extends Contract {
         const iterator = ctx.stub.getHistoryForKey(id);
         const records: HistoryRecord[] = [];
         for await (const result of iterator) {
-            if (result.value) {
+            const utcDateTimeString = this.convertTimestampToSystemTime(result.timestamp);
+            
+            if (result.isDelete) {
+                const historyRecordDeleted: HistoryRecord = {
+                    name: 'DELETED',
+                    votes: 'DELETED',
+                    timestamp: utcDateTimeString,
+                    txId: result.txId,
+                };
+                records.push(historyRecordDeleted);
+            } else {
                 const valueString = Buffer.from(result.value.toString()).toString('utf8');
                 let option: Option = JSON.parse(valueString);
-                const utcDateTimeString = this.convertTimestampToSystemTime(result.timestamp); 
-                const historyRecord: HistoryRecord = {
+                const historyRecordNotDeleted: HistoryRecord = {
                     name: option.name,
                     votes: option.votes,
                     timestamp: utcDateTimeString,
                     txId: result.txId,
-                    isDeleted: result.isDelete
                 };
-                records.push(historyRecord);
+                records.push(historyRecordNotDeleted);
             }
         }
         return JSON.stringify(records);
     }
 
     // Returns true when an option with a given ID exists in world state.
-    @Transaction(false)
-    @Returns('boolean')
-    public async optionExists(ctx: Context, id: string): Promise<boolean> {
+    //@Transaction(false)
+    //@Returns('boolean')
+    private async optionExists(ctx: Context, id: string): Promise<boolean> {
         const option = await ctx.stub.getState(id); 
         return option && option.length > 0;
     }

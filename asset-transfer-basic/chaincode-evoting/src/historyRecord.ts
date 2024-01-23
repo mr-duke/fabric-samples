@@ -5,19 +5,18 @@
 import {Object, Property} from 'fabric-contract-api';
 
 @Object()
-export class HistoryRecord {
-    @Property()
-    public name: string;
+export class HistoryRecord { 
 
     @Property()
-    public votes: number;
+    public name: any;
+
+    @Property()
+    public votes: any;
     
     @Property()
     public timestamp: string;
     
     @Property()
     public txId: string;
-    
-    @Property()
-    public isDeleted: boolean
+
 }
