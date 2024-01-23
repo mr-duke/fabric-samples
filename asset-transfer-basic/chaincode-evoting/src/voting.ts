@@ -5,30 +5,33 @@
 import {Context, Contract, Info, Returns, Transaction} from 'fabric-contract-api';
 import stringify from 'json-stringify-deterministic';
 import sortKeysRecursive from 'sort-keys-recursive';
-import {Option} from './option';
+import { Option } from './option';
+import {HistoryRecord } from './historyRecord';
+import Long from 'long';
+import { Timestamp } from 'fabric-shim';
 
 @Info({title: 'Voting Contract', description: 'Smart contract for e-voting'})
 export class VotingContract extends Contract {
 
     @Transaction()
-    public async InitLedger(ctx: Context): Promise<void> {
+    public async initLedger(ctx: Context): Promise<void> {
         const options: Option[] = [
             {
-                ID: 'option1',
-                Name: 'Rom',
-                VoteCount: 0,
+                id: 'option1',
+                name: 'Rom',
+                votes: 0,
           
             },
             {
-                ID: 'option2',
-                Name: 'Singapur',
-                VoteCount: 0,
+                id: 'option2',
+                name: 'Singapur',
+                votes: 0,
           
             },
             {
-                ID: 'option3',
-                Name: 'Miami',
-                VoteCount: 0,
+                id: 'option3',
+                name: 'Miami',
+                votes: 0,
           
             },
         ];
@@ -39,145 +42,131 @@ export class VotingContract extends Contract {
             // use convetion of alphabetic order
             // we insert data in alphabetic order using 'json-stringify-deterministic' and 'sort-keys-recursive'
             // when retrieving data, in any lang, the order of data will be the same and consequently also the corresonding hash
-            await ctx.stub.putState(option.ID, Buffer.from(stringify(sortKeysRecursive(option))));
-            console.info(`Option with ID ${option.ID} initialized`);
+            await ctx.stub.putState(option.id, Buffer.from(stringify(sortKeysRecursive(option))));
+            console.info(`Option with ID ${option.id} initialized`);
         }
     }
 
     // CreateOption issues a new voting option to the world state with given details.
     @Transaction()
-    public async CreateOption(ctx: Context, id: string, name: string): Promise<void> {
+    public async createOption(ctx: Context, id: string, name: string): Promise<void> {
         const exists = await this.optionExists(ctx, id);
         if (exists) {
             throw new Error(`Option with ID ${id} already exists`);
         }
 
-        const option = {
-            ID: id,
-            Name: name,
-            VoteCount: 0,
+        const option: Option = {
+            docType: 'option',
+            id: id,
+            name: name,
+            votes: 0,
         };
         // Insert data in alphabetic order using 'json-stringify-deterministic' and 'sort-keys-recursive'
         await ctx.stub.putState(id, Buffer.from(stringify(sortKeysRecursive(option))));
     }
-
-    // ReadOption returns the voting option stored in the world state with given id.
-    @Transaction(false)
-    public async ReadOption(ctx: Context, id: string): Promise<string> {
-        const optionJSON = await ctx.stub.getState(id); // Get the option from chaincode state
-        if (!optionJSON || optionJSON.length === 0) {
-            throw new Error(`Option with ID ${id} does not exist`);
-        }
-        return optionJSON.toString();
-    }
-
-    // When voting for a specified option, voteCount should be increased by 1
-    @Transaction()
-    public async CastVote(ctx: Context, id: string): Promise<void> {
-        const optionString = await this.ReadOption(ctx, id);
-        const option = JSON.parse(optionString);
-        option.VoteCount += 1;
-        // insert data in alphabetic order using 'json-stringify-deterministic' and 'sort-keys-recursive'
-        await ctx.stub.putState(id, Buffer.from(stringify(sortKeysRecursive(option))));
-    }
-
-    /* Updateballot updates an existing ballot in the world state with provided parameters.
-    @Transaction()
-    public async Updateballot(ctx: Context, id: string, color: string, size: number, owner: string, appraisedValue: number): Promise<void> {
-        const exists = await this.ballotExists(ctx, id);
-        if (!exists) {
-            throw new Error(`The ballot ${id} does not exist`);
-        }
-
-        // overwriting original ballot with new ballot
-        const updatedballot = {
-            ID: id,
-            Color: color,
-            Size: size,
-            Owner: owner,
-            AppraisedValue: appraisedValue,
-        };
-        // we insert data in alphabetic order using 'json-stringify-deterministic' and 'sort-keys-recursive'
-        return ctx.stub.putState(id, Buffer.from(stringify(sortKeysRecursive(updatedballot))));
-    }
-    */
-
-    // DeleteOption deletes an given voting option from the world state.
-    @Transaction()
-    public async DeleteOption(ctx: Context, id: string): Promise<void> {
-        const exists = await this.optionExists(ctx, id);
-        if (!exists) {
-            throw new Error(`Option with ID ${id} does not exist`);
-        }
-        return ctx.stub.deleteState(id);
-    }
-
-    // optionExists returns true when an option with a given ID exists in world state.
-    @Transaction(false)
-    @Returns('boolean')
-    public async optionExists(ctx: Context, id: string): Promise<boolean> {
-        const optionJSON = await ctx.stub.getState(id);
-        return optionJSON && optionJSON.length > 0;
-    }
-
-    /* Transferballot updates the owner field of ballot with given id in the world state, and returns the old owner.
-    @Transaction()
-    public async Transferballot(ctx: Context, id: string, newOwner: string): Promise<string> {
-        const ballotString = await this.Readballot(ctx, id);
-        const ballot = JSON.parse(ballotString);
-        const oldOwner = ballot.Owner;
-        ballot.Owner = newOwner;
-        // we insert data in alphabetic order using 'json-stringify-deterministic' and 'sort-keys-recursive'
-        await ctx.stub.putState(id, Buffer.from(stringify(sortKeysRecursive(ballot))));
-        return oldOwner;
-    }
-    */
-
-    // GetAllOptions returns all options found in the world state.
+/*
+    // Returns the voting option stored in the world state with given id.
     @Transaction(false)
     @Returns('string')
-    public async GetAllOptions(ctx: Context): Promise<string> {
-        const allResults = [];
+    public async getOption(ctx: Context, id: string): Promise<string> {
+        const option = await ctx.stub.getState(id); // Get the option from chaincode state
+        if (!option || option.length === 0) {
+            throw new Error(`Option with ID ${id} does not exist`);
+        }
+        return option.toString();
+    }
+
+    // Returns all options found in the world state.
+    @Transaction(false)
+    @Returns('string')
+    public async getAllOptions(ctx: Context): Promise<string> {
         // Range query with empty string for startKey and endKey does an open-ended query of all options in the chaincode namespace.
-        const iterator = await ctx.stub.getStateByRange('', '');
-        let result = await iterator.next();
-        while (!result.done) {
-            const strValue = Buffer.from(result.value.value.toString()).toString('utf8');
-            let record;
-            try {
-                record = JSON.parse(strValue);
-            } catch (err) {
-                console.log(err);
-                record = strValue;
-            }
+        const iterator = ctx.stub.getStateByRange('', '');
+        const allResults: Option[] = [];
+        for await (const result of iterator) {
+            const valueString = Buffer.from(result.value.toString()).toString('utf8');
+            let record: Option;
+            record = JSON.parse(valueString);
             allResults.push(record);
-            result = await iterator.next();
         }
         return JSON.stringify(allResults);
     }
 
+    // When voting for a specified option, voteCount should be increased by 1
+    @Transaction()
+    public async castVote(ctx: Context, id: string): Promise<void> {
+        const optionString = await this.getOption(ctx, id);
+        const option: Option = JSON.parse(optionString);
+        option.votes += 1;
+        // insert data in alphabetic order using 'json-stringify-deterministic' and 'sort-keys-recursive'
+        await ctx.stub.putState(id, Buffer.from(stringify(sortKeysRecursive(option))));
+    }
+
+    // DeleteOption deletes an given voting option from the world state.
+    @Transaction()
+    public async deleteOption(ctx: Context, id: string): Promise<void> {
+        const exists = await this.optionExists(ctx, id);
+        if (!exists) {
+            throw new Error(`Option with ID ${id} does not exist`);
+        }
+        await ctx.stub.deleteState(id);
+    }
+
+    // Delete all options found in the world state.
+    @Transaction()
+    public async deleteAllOptions(ctx: Context): Promise<void> {
+        // Range query with empty string for startKey and endKey does an open-ended query of all options in the chaincode namespace.
+        const iterator = ctx.stub.getStateByRange('', '');
+        for await (const result of iterator) {
+            const valueString = Buffer.from(result.value.toString()).toString('utf8');
+            let record: Option;
+            record = JSON.parse(valueString);
+            await this.deleteOption(ctx, record.id);
+        }
+        // Check if there are any options left. If so, throw error. 
+        const results = await this.getAllOptions(ctx);
+        if (results.length !== 0) {
+            throw new Error(`Not all options could be deleted`);
+        }
+    }
+*/
+    // Get the recorded history of an Option
     @Transaction(false)
     @Returns('string')
-    public async GetHistory(ctx: Context, id: string): Promise<string> {
-        const iterator = await ctx.stub.getHistoryForKey(id);
-
-        const results = [];
-        let response;
-        while (true) {
-            response = await iterator.next();
-            if (response.value) {
-                const entry = {
-                    value: response.value.value.toString('utf8'),
-                    timestamp: response.value.timestamp ,
-                    txId: response.value.txId,
-                    isDeleted: response.value.isDelete
+    public async getHistory(ctx: Context, id: string): Promise<string> {
+        const iterator = ctx.stub.getHistoryForKey(id);
+        const records: HistoryRecord[] = [];
+        for await (const result of iterator) {
+            if (result.value) {
+                const valueString = Buffer.from(result.value.toString()).toString('utf8');
+                let option: Option = JSON.parse(valueString);
+                const utcDateTimeString = this.convertTimestampToSystemTime(result.timestamp); 
+                const historyRecord: HistoryRecord = {
+                    name: option.name,
+                    votes: option.votes,
+                    timestamp: utcDateTimeString,
+                    txId: result.txId,
+                    isDeleted: result.isDelete
                 };
-                results.push(entry);
-            }
-            if (response.done) {
-                await iterator.close();
-                return JSON.stringify(results);
+                records.push(historyRecord);
             }
         }
+        return JSON.stringify(records);
+    }
+
+    // Returns true when an option with a given ID exists in world state.
+    @Transaction(false)
+    @Returns('boolean')
+    public async optionExists(ctx: Context, id: string): Promise<boolean> {
+        const option = await ctx.stub.getState(id); 
+        return option && option.length > 0;
+    }
+
+    // Coverts Unix Epoch timestamp into readable UTC format
+    private convertTimestampToSystemTime(timestamp: Timestamp): string {
+        // Convert seconds and nanoseconds to milliseconds
+        const milliseconds = Long.fromValue(timestamp.seconds).multiply(1000).add(Math.floor(timestamp.nanos / 1e6));
+        const date = new Date(milliseconds.toNumber());    
+        return date.toString()
     }
 }

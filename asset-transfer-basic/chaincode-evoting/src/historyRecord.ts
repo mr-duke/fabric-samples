@@ -5,16 +5,19 @@
 import {Object, Property} from 'fabric-contract-api';
 
 @Object()
-export class Option {
-    @Property()
-    public docType?: string;
-
-    @Property()
-    public id: string;
-
+export class HistoryRecord {
     @Property()
     public name: string;
 
     @Property()
     public votes: number;
+    
+    @Property()
+    public timestamp: string;
+    
+    @Property()
+    public txId: string;
+    
+    @Property()
+    public isDeleted: boolean
 }
