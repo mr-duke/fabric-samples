@@ -100,6 +100,7 @@ export class VotingContract extends Contract {
         option.votes += 1;
         // insert data in alphabetic order using 'json-stringify-deterministic' and 'sort-keys-recursive'
         await ctx.stub.putState(id, Buffer.from(stringify(sortKeysRecursive(option))));
+        //ctx.stub.getTxID();
     }
 
     // DeleteOption deletes an given voting option from the world state.
