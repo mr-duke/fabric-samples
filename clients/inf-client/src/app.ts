@@ -17,8 +17,8 @@ import { Timestamp } from 'google-protobuf/google/protobuf/timestamp_pb';
 import { TransactionDetail } from './transactionDetail';
 
 
-const channelName = envOrDefault('CHANNEL_NAME', 'mychannel');
-const chaincodeName = envOrDefault('CHAINCODE_NAME', 'basic');
+const channelName = envOrDefault('CHANNEL_NAME', 'evoting-channel');
+const chaincodeName = envOrDefault('CHAINCODE_NAME', 'evoting-chaincode');
 const mspId = envOrDefault('MSP_ID', 'Org1MSP');
 
 // Path to crypto materials.
@@ -40,7 +40,7 @@ const peerEndpoint = envOrDefault('PEER_ENDPOINT', 'localhost:7051');
 const peerHostAlias = envOrDefault('PEER_HOST_ALIAS', 'peer0.org1.example.com');
 
 const utf8Decoder = new TextDecoder();
-const assetId = `asset${Date.now()}`;
+//const assetId = `asset${Date.now()}`;
 
 async function main(): Promise<void> {
 
@@ -74,7 +74,7 @@ async function main(): Promise<void> {
 
         // Get the smart contract from the network.
         const contract = network.getContract(chaincodeName);
-
+/*
         // Initialize a set of asset data on the ledger using the chaincode 'InitLedger' function.
         await initLedger(contract);
 
@@ -107,9 +107,9 @@ async function main(): Promise<void> {
 
         // Check if all options on the world state have been deleted.
         await getAllOptions(contract);
-    
+*/    
         // Get transaction details from Blockchain for a given Transaction ID 
-        //await getTransactionById(network.getContract('qscc'), channelName, '957a367a1257eadeccbe615094623557eb623b5614cbe04579edc4e1c76a8b93' )
+        await getTransactionById(network.getContract('qscc'), channelName, 'd3500377399aae8d91d5a6bd37b8929e9dc8daab764feefa3640e8e79053a45e' )
 
     } finally {
         gateway.close();
@@ -252,6 +252,7 @@ async function getTransactionById(contract: Contract, channelName: string, txId:
     const processedTransaction = ProcessedTransaction.deserializeBinary(resultBytes);
     const validationCode = processedTransaction.getValidationcode();
     if (validationCode === 0) {
+        console.log("Servus");
         const payloadBytes = processedTransaction.getTransactionenvelope()!.getPayload_asU8();
         const payload = Payload.deserializeBinary(payloadBytes);
         const parsedPayload = parsePayload(payload,validationCode);
@@ -265,6 +266,7 @@ async function getTransactionById(contract: Contract, channelName: string, txId:
             creator: transaction.getCreator().mspId,
             txID: transaction.getChannelHeader().getTxId(),
         }
+        console.log('*** Result', transactionDetail);
         return transactionDetail;
     } else {
         console.log('*** Transaction not successful');

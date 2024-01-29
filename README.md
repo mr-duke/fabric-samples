@@ -72,7 +72,7 @@ Starten eines Netzwerks mit zwei Peers, einem Orderig Service und CA-Infrastrukt
 
 In `test-network` Verzeichnis ausführen zum Packen, Installieren, Prüfen und Commiten des Chaincode in Typescript:
 
-`./network.sh deployCC -ccn evoting-chaincode -ccp ./chaincode -ccl typescript`
+`./network.sh deployCC -ccn evoting-chaincode -ccp ../chaincode -ccl typescript`
 
 Folgende Befehle nur während Testphase, falls Chaincode direkt über `Peer CLI` ohne Clientanwendung aufgerufen werden soll:
 
