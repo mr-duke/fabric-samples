@@ -12,9 +12,9 @@ import * as path from 'path';
 import { TextDecoder } from 'util';
 import { ProcessedTransaction } from '@hyperledger/fabric-protos/lib/peer';
 import { Payload } from '@hyperledger/fabric-protos/lib/common';
-import { common } from '@hyperledger/fabric-protos';
 import { newTransaction, parsePayload } from './blockParser';
 import { Timestamp } from 'google-protobuf/google/protobuf/timestamp_pb';
+import { TransactionDetail } from './transactionDetail';
 
 
 const channelName = envOrDefault('CHANNEL_NAME', 'mychannel');
@@ -75,11 +75,7 @@ async function main(): Promise<void> {
         // Get the smart contract from the network.
         const contract = network.getContract(chaincodeName);
 
-        // Get transaction details
-        await getTransactionByKey(network.getContract('qscc'), channelName, 'bcf787a1db9ed0cf474f33c26552957a60961c31f1fda08ee2c4521a4fe62446Q' )
-
-        /*
-        // Initialize a set of asset data on the ledger using the chaincode 'InitLedger' function.
+        /*// Initialize a set of asset data on the ledger using the chaincode 'InitLedger' function.
         await initLedger(contract);
 
         // Return all the current options on the ledger.
@@ -114,7 +110,9 @@ async function main(): Promise<void> {
 
         // Check if all options on the world state have been deleted.
         await getAllOptions(contract);
-*/
+    */
+        // Get transaction details from Blockchain for a given Transaction ID 
+        await getTransactionByKey(network.getContract('qscc'), channelName, '957a367a1257eadeccbe615094623557eb623b5614cbe04579edc4e1c76a8b93' )
 
     } finally {
         gateway.close();
@@ -187,29 +185,6 @@ async function createOption(contract: Contract, id: string, name: string): Promi
     console.log('*** Transaction committed successfully');
 }
 
-/**
- * Submit transaction asynchronously, allowing the application to process the smart contract response (e.g. update a UI)
- * while waiting for the commit notification.
- 
-async function transferAssetAsync(contract: Contract): Promise<void> {
-    console.log('\n--> Async Submit Transaction: TransferAsset, updates existing asset owner');
-
-    const commit = await contract.submitAsync('TransferAsset', {
-        arguments: [assetId, 'Saptha'],
-    });
-    const oldOwner = utf8Decoder.decode(commit.getResult());
-
-    console.log(`*** Successfully submitted transaction to transfer ownership from ${oldOwner} to Saptha`);
-    console.log('*** Waiting for transaction commit');
-
-    const status = await commit.getStatus();
-    if (!status.successful) {
-        throw new Error(`Transaction ${status.transactionId} failed to commit with status code ${status.code}`);
-    }
-
-    console.log('*** Transaction committed successfully');
-}*/
-
 async function getOptionByID(contract: Contract, id: string): Promise<void> {
     console.log('\n--> Evaluate Transaction: getOption, function returns option attributes');
 
@@ -226,9 +201,10 @@ async function getOptionByID(contract: Contract, id: string): Promise<void> {
 async function castVote(contract: Contract, id: string): Promise<void> {
     console.log('\n--> Submit Transaction: castVote, function cast a vote for a specified option, increasing its vote count by 1');
 
-    await contract.submitTransaction('castVote', id);
+    const txIdBytes = await contract.submitTransaction('castVote', id);
+    const txId = utf8Decoder.decode(txIdBytes);
 
-    console.log('*** Transaction committed successfully');
+    console.log(`*** Transaction committed successfully. TxID: ${txId}`);
 }
 
 /**
@@ -288,7 +264,7 @@ async function getTransactionByKey(contract: Contract, channelName: string, txId
     const transaction = newTransaction(parsedPayload);
     const timestamp = transaction.getChannelHeader().getTimestamp();
     if(timestamp){
-    const transactionDetails = {
+    const transactionDetails: TransactionDetail = {
         isValid: transaction.isValid(),
         validationCode: transaction.getValidationCode(),
         timestamp: convertTimestampToCET(timestamp),

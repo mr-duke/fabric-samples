@@ -94,13 +94,13 @@ export class VotingContract extends Contract {
 
     // When voting for a specified option, voteCount should be increased by 1
     @Transaction()
-    public async castVote(ctx: Context, id: string): Promise<void> {
+    public async castVote(ctx: Context, id: string): Promise<string> {
         const optionString = await this.getOption(ctx, id);
         const option: Option = JSON.parse(optionString);
         option.votes += 1;
         // insert data in alphabetic order using 'json-stringify-deterministic' and 'sort-keys-recursive'
         await ctx.stub.putState(id, Buffer.from(stringify(sortKeysRecursive(option))));
-        //ctx.stub.getTxID();
+        return ctx.stub.getTxID();
     }
 
     // DeleteOption deletes an given voting option from the world state.
