@@ -66,17 +66,13 @@ Entfernen möglicher alter Artefakte:
 
 Starten eines Netzwerks mit zwei Peers, einem Orderig Service und CA-Infrastruktur (Channelname `-c` beliebig wählbar):
 
-`./network.sh up createChannel -c mychannel -ca`
+`./network.sh up createChannel -c evoting-channel -ca`
 
 ### Deployen des Smart Contract / Chaincode
 
-In `test-network` Verzeichnis wechseln:
+In `test-network` Verzeichnis ausführen zum Packen, Installieren, Prüfen und Commiten des Chaincode in Typescript:
 
-`cd inf-evoting/test-network`
-
-Packen, Installieren, Prüfen und Commiten des Chaincode in Typescript:
-
-`./network.sh deployCC -ccn basic -ccp ../asset-transfer-basic/chaincode-evoting/ -ccl typescript`
+`./network.sh deployCC -ccn evoting-chaincode -ccp ./chaincode -ccl typescript`
 
 Folgende Befehle nur während Testphase, falls Chaincode direkt über `Peer CLI` ohne Clientanwendung aufgerufen werden soll:
 
@@ -112,7 +108,7 @@ export CORE_PEER_ADDRESS=localhost:9051
 
 In neuem Terminal navigieren zur Beispielanwendung in Typescript:
 
-`cd ../asset-transfer-basic/application-gateway-typescript`
+`cd ../clients/inf-client`
 
 Installieren der Abhängigkeiten:
 
