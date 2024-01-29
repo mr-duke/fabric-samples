@@ -75,44 +75,41 @@ async function main(): Promise<void> {
         // Get the smart contract from the network.
         const contract = network.getContract(chaincodeName);
 
-        /*// Initialize a set of asset data on the ledger using the chaincode 'InitLedger' function.
+        // Initialize a set of asset data on the ledger using the chaincode 'InitLedger' function.
         await initLedger(contract);
 
         // Return all the current options on the ledger.
         await getAllOptions(contract);
 
         // Create a new asset on the ledger.
-        await createOption(contract, 'option4', 'Tokio');
-
-        // Update an existing asset asynchronously.
-        //await transferAssetAsync(contract);
+        await createOption(contract, 'New York');
 
         // Get the asset details by assetID.
-        await getOptionByID(contract, 'option4');
+        await getOptionByKey(contract, 'New   York');
 
         // Update an asset which does not exist.
         //await updateNonExistentAsset(contract)
 
         // Cast a vote for a specified option
-        await castVote(contract, 'option4');
+        await castVote(contract, 'New York');
 
         // Cast another vote for a specified option
-        await castVote(contract, 'option4');
+        await castVote(contract, 'New York');
 
         // Delete an option
-        await deleteOption(contract, 'option4');
+        await deleteOption(contract, 'New York');
         
         // Get the history of an option
-        await getHistoryForKey(contract, 'option4');
+        await getHistoryForKey(contract, 'New York');
 
         // Delete all options
         await deleteAllOptions(contract);
 
         // Check if all options on the world state have been deleted.
         await getAllOptions(contract);
-    */
+    
         // Get transaction details from Blockchain for a given Transaction ID 
-        await getTransactionByKey(network.getContract('qscc'), channelName, '957a367a1257eadeccbe615094623557eb623b5614cbe04579edc4e1c76a8b93' )
+        //await getTransactionById(network.getContract('qscc'), channelName, '957a367a1257eadeccbe615094623557eb623b5614cbe04579edc4e1c76a8b93' )
 
     } finally {
         gateway.close();
@@ -159,6 +156,17 @@ async function initLedger(contract: Contract): Promise<void> {
 }
 
 /**
+ * Submit a transaction synchronously, blocking until it has been committed to the ledger.
+ */
+async function createOption(contract: Contract, name: string): Promise<void> {
+    console.log('\n--> Submit Transaction: createOption, creates new option with and name argument');
+
+    await contract.submitTransaction('createOption', name);
+
+    console.log('*** Transaction committed successfully');
+}
+
+/**
  * Evaluate a transaction to query ledger state.
  */
 async function getAllOptions(contract: Contract): Promise<void> {
@@ -171,24 +179,12 @@ async function getAllOptions(contract: Contract): Promise<void> {
 }
 
 /**
- * Submit a transaction synchronously, blocking until it has been committed to the ledger.
+ * Evaluate a transaction to query ledger state.
  */
-async function createOption(contract: Contract, id: string, name: string): Promise<void> {
-    console.log('\n--> Submit Transaction: createOption, creates new option with ID and name arguments');
-
-    await contract.submitTransaction(
-        'createOption',
-        id,
-        name,
-    );
-
-    console.log('*** Transaction committed successfully');
-}
-
-async function getOptionByID(contract: Contract, id: string): Promise<void> {
+async function getOptionByKey(contract: Contract, key: string): Promise<void> {
     console.log('\n--> Evaluate Transaction: getOption, function returns option attributes');
 
-    const resultBytes = await contract.evaluateTransaction('getOption', id);
+    const resultBytes = await contract.evaluateTransaction('getOption', key);
 
     const resultJson = utf8Decoder.decode(resultBytes);
     const result = JSON.parse(resultJson);
@@ -198,10 +194,10 @@ async function getOptionByID(contract: Contract, id: string): Promise<void> {
 /**
  * Submit a transaction synchronously, blocking until it has been committed to the ledger.
  */
-async function castVote(contract: Contract, id: string): Promise<void> {
+async function castVote(contract: Contract, key: string): Promise<void> {
     console.log('\n--> Submit Transaction: castVote, function cast a vote for a specified option, increasing its vote count by 1');
 
-    const txIdBytes = await contract.submitTransaction('castVote', id);
+    const txIdBytes = await contract.submitTransaction('castVote', key);
     const txId = utf8Decoder.decode(txIdBytes);
 
     console.log(`*** Transaction committed successfully. TxID: ${txId}`);
@@ -210,10 +206,10 @@ async function castVote(contract: Contract, id: string): Promise<void> {
 /**
  * Submit a transaction synchronously, blocking until it has been committed to the ledger.
  */
-async function deleteOption(contract: Contract, id: string): Promise<void> {
+async function deleteOption(contract: Contract, key: string): Promise<void> {
     console.log('\n--> Submit Transaction: deleteOption, function deletes a voting options on the ledger');
 
-    await contract.submitTransaction('deleteOption', id);
+    await contract.submitTransaction('deleteOption', key);
 
     console.log('*** Transaction committed successfully');
 }
@@ -232,10 +228,10 @@ async function deleteAllOptions(contract: Contract): Promise<void> {
 /**
  * Evaluate a transaction to query ledger state.
  */
-async function getHistoryForKey(contract: Contract, id: string): Promise<void> {
+async function getHistoryForKey(contract: Contract, key: string): Promise<void> {
     console.log('\n--> Evaluate Transaction: getHistoryForKey function returns the completes history for a given key');
 
-    const resultBytes = await contract.evaluateTransaction('getHistory', id);
+    const resultBytes = await contract.evaluateTransaction('getHistoryForKey', key);
     const resultJson = utf8Decoder.decode(resultBytes);
     const result = JSON.parse(resultJson);
     console.log('*** Result:', result);
@@ -244,62 +240,41 @@ async function getHistoryForKey(contract: Contract, id: string): Promise<void> {
 /**
  * Evaluate a transaction to query ledger state.
  */
-async function getTransactionByKey(contract: Contract, channelName: string, txId: string): Promise<void> {
+async function getTransactionById(contract: Contract, channelName: string, txId: string): Promise<TransactionDetail | {}> {
     console.log('\n--> Evaluate Transaction: getTransactionByKey function returns the transaction details for a given key');
     let resultBytes;
     try {
         resultBytes = await contract.evaluateTransaction('GetTransactionByID', channelName, txId);
     } catch (error) {
         console.log('*** No data');
-        return
-    }
-    //const resultBytes = await contract.evaluateTransaction('GetTransactionByID', channelName, txId);
+        return {}
+    };
     const processedTransaction = ProcessedTransaction.deserializeBinary(resultBytes);
     const validationCode = processedTransaction.getValidationcode();
-
-    const payloadBytes = processedTransaction.getTransactionenvelope()?.getPayload_asU8();
-    if( payloadBytes ) {
-    const payload = Payload.deserializeBinary(payloadBytes);
-    const parsedPayload = parsePayload(payload,validationCode);
-    const transaction = newTransaction(parsedPayload);
-    const timestamp = transaction.getChannelHeader().getTimestamp();
-    if(timestamp){
-    const transactionDetails: TransactionDetail = {
-        isValid: transaction.isValid(),
-        validationCode: transaction.getValidationCode(),
-        timestamp: convertTimestampToCET(timestamp),
-        creator: transaction.getCreator().mspId,
-        txID: transaction.getChannelHeader().getTxId(),
+    if (validationCode === 0) {
+        const payloadBytes = processedTransaction.getTransactionenvelope()!.getPayload_asU8();
+        const payload = Payload.deserializeBinary(payloadBytes);
+        const parsedPayload = parsePayload(payload,validationCode);
+        const transaction = newTransaction(parsedPayload);
+        const timestamp = transaction.getChannelHeader().getTimestamp()!;
+        
+        const transactionDetail: TransactionDetail = {
+            isValid: transaction.isValid(),
+            validationCode: transaction.getValidationCode(),
+            timestamp: convertTimestampToCET(timestamp),
+            creator: transaction.getCreator().mspId,
+            txID: transaction.getChannelHeader().getTxId(),
+        }
+        return transactionDetail;
+    } else {
+        console.log('*** Transaction not successful');
+        return {};
     }
-
-    console.log('*** Result:', transactionDetails);
-    }
-    
-    
-
-    //const payload = parsePayload(payloadByte, validationCode)
-    //const payload = Payload.deserializeBinary(payloadByte).getData_asU8();
-    //const jsonString = new TextDecoder('utf-8').decode(payload);
-    //const jsonObject = JSON.parse(jsonString);
-    //console.log(jsonString);
-    //console.log('*** Result:', payload);
-    //const parsedPayload = parsePayload(payload, 200);
-    //const result = JSON.parse(resultJson);
-    /*console.log('*** Result:', parsedPayload.isValid());
-    console.log('*** Result:', parsedPayload.toProto);
-    console.log('*** Result:', parsedPayload.getTransactionValidationCode);
-    console.log('*** Result:', parsedPayload.toProto());
-    console.log('*** Result:', parsedPayload.getChannelHeader()); */
-    //if (processedTransaction.getTransactionenvelope().getPayload_asU8()){
-    //const valueString = Buffer.from(processedTransaction?.getTransactionenvelope()?.getPayload_asU8()?.toString()).toString('utf8');
-    //console.log('*** Result:', processedTransaction);
-    //const resultJson = utf8Decoder.decode(bytes);
-    //result?.getTransactionenvelope().getPayload().toString()
-    //const result = JSON.parse(resultJson);
-    //const result = resultBytes.toString();    
 }
-}
-// Coverts Unix Epoch timestamp to CET (Central European Time)
+
+/**
+ * Coverts Unix Epoch timestamp to CET (Central European Time)
+ */
 function convertTimestampToCET(timestamp: Timestamp): string {
     // Convert seconds and nanoseconds to milliseconds
     const milliseconds = timestamp.getSeconds() * 1000 + Math.floor(timestamp.getNanos() / 1e6);
@@ -308,27 +283,6 @@ function convertTimestampToCET(timestamp: Timestamp): string {
     const options: Intl.DateTimeFormatOptions = { timeZone: 'Europe/Berlin', year: 'numeric', month: 'numeric', day: 'numeric', hour: 'numeric', minute: 'numeric', second: 'numeric',  weekday: 'long'};
     return date.toLocaleString('de-DE', options);
 }
-
-/**
- * submitTransaction() will throw an error containing details of any error responses from the smart contract.
- 
-async function updateNonExistentAsset(contract: Contract): Promise<void>{
-    console.log('\n--> Submit Transaction: UpdateAsset asset70, asset70 does not exist and should return an error');
-
-    try {
-        await contract.submitTransaction(
-            'UpdateAsset',
-            'asset70',
-            'blue',
-            '5',
-            'Tomoko',
-            '300',
-        );
-        console.log('******** FAILED to return an error');
-    } catch (error) {
-        console.log('*** Successfully caught the error: \n', error);
-    }
-}*()
 
 /**
  * envOrDefault() will return the value of an environment variable, or a default value if the variable is undefined.

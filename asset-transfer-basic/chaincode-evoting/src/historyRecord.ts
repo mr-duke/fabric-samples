@@ -8,6 +8,9 @@ import {Object, Property} from 'fabric-contract-api';
 export class HistoryRecord { 
 
     @Property()
+    public key: any;  
+  
+    @Property()
     public name: any;
 
     @Property()

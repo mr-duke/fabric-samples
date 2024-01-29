@@ -10,7 +10,7 @@ export class Option {
     public docType?: string;
 
     @Property()
-    public id: string;
+    public key: string;
 
     @Property()
     public name: string;
