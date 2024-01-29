@@ -157,32 +157,6 @@ singleImagePull() {
     done
 }
 
-#cloneSamplesRepo() {
-    # clone (if needed) hyperledger/fabric-samples and checkout corresponding
-    # version to the binaries and docker images to be downloaded
-#    if [ -d test-network ]; then
-        # if we are in the fabric-samples repo, checkout corresponding version
-#        echo "==> Already in fabric-samples repo"
-#    elif [ -d fabric-samples ]; then
-        # if fabric-samples repo already cloned and in current directory,
-        # cd fabric-samples
-#        echo "===> Changing directory to fabric-samples"
-#        cd fabric-samples
-#    else
-#        echo "===> Cloning hyperledger/fabric-samples repo"
-#        git clone -b main https://github.com/mr-duke/fabric-samples.git && cd fabric-samples
-        #git clone -b main https://github.com/hyperledger/fabric-samples.git && cd fabric-samples
-#    fi
-
-#    if GIT_DIR=.git git rev-parse v${VERSION} >/dev/null 2>&1; then
-#        echo "===> Checking out v${VERSION} of hyperledger/fabric-samples"
-#        git checkout -q v${VERSION}
-#    else
-#        echo "fabric-samples v${VERSION} does not exist, defaulting to main. fabric-samples main branch is intended to work with recent versions of fabric."
-#        git checkout -q main
-#    fi
-#}
-
 # This will download the .tar.gz
 download() {
     local BINARY_FILE=$1
@@ -249,7 +223,6 @@ pullImages() {
     fi
 }
 
-
 # Main code starts here
 parse_commandline "$@"
 handle_passed_args_count
@@ -277,22 +250,13 @@ fi
 BINARY_FILE=hyperledger-fabric-${PLATFORM}-${VERSION}.tar.gz
 CA_BINARY_FILE=hyperledger-fabric-ca-${PLATFORM}-${CA_VERSION}.tar.gz
 
-# if nothing has been specified, assume everything
+# if nothing has been specified, assume binaries and docker images
 if [[ ${_arg_comp[@]} =~ ^$ ]]; then
-    echo "No options selected: Getting all binaries, and docker images"
+    echo "No options selected: Getting all binaries and docker images"
     echo "Abort now if not the intention"
     sleep 3 # just to give a chance to abort if this wasn't intended
     _arg_comp=('binary','docker')
 fi
-
-# Process samples first then the binaries. So if the fabric-samples dir is present
-# the binaries will go there
-#if [[ "${_arg_comp[@]}" =~ (^| |,)s(amples)? ]]; then
-#        echo
-#        echo "Clone hyperledger/fabric-samples repo"
-#        echo
-#        cloneSamplesRepo
-#fi
 
 if [[ "${_arg_comp[@]}" =~ (^| |,)b(inary)? ]]; then
         echo

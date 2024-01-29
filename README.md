@@ -41,48 +41,64 @@ sudo systemctl enable docker
 
 ### Download von Sourcecode, Hyperledger Docker Images und Binaries
 
-Klonen des Repository für den Sourcecode in beliebiges Verzeichnis:
+Klonen des Repository für den Sourcecode in beliebiges Root-Verzeichnis (z.B. in `/home/<username>`):
 
-`git clone https://github.com/mr-duke/inf-evoting.git`
+```bash
+git clone https://github.com/mr-duke/inf-evoting.git
+```
 
-Verschieben des Installationsskripts ins aktuelle Verzeichnis und ausführbar machen der Datei:
+Verschieben des Installationsskripts ins Root-Verzeichnis und ausführbar machen der Datei:
 
-`mv inf-evoting/install-fabric.sh . && chmod +x install-fabric.sh`
+```bash
+mv inf-evoting/install-fabric.sh . && chmod +x install-fabric.sh
+```
 
 Ausführen des Installationsskripts (Es werden die notwendigen Hyperledger Docker Images und Binaries heruntergeladen):
 
-`./install-fabric.sh`
+```bash
+./install-fabric.sh
+```
 
 ## Benutzung
 ### Starten des Blockchain-Netzwerks (falls noch nicht geschehen)
 
 Zu folgendem Verzeichnis navigieren:
 
-`cd inf-evoting/test-network`
+```bash
+cd inf-evoting/test-network
+```
 
 Entfernen möglicher alter Artefakte:
 
-`./network.sh down`
+```bash
+./network.sh down
+```
 
 Starten eines Netzwerks mit zwei Peers, einem Orderig Service und CA-Infrastruktur (Channelname `-c` beliebig wählbar):
 
-`./network.sh up createChannel -c evoting-channel -ca`
+```bash
+./network.sh up createChannel -c evoting-channel -ca
+```
 
 ### Deployen des Smart Contract / Chaincode
 
-In `test-network` Verzeichnis ausführen zum Packen, Installieren, Prüfen und Commiten des Chaincode in Typescript:
+Im `test-network` Verzeichnis ausführen zum Packen, Installieren, Prüfen und Commiten des Chaincode (Typescript):
 
-`./network.sh deployCC -ccn evoting-chaincode -ccp ../chaincode -ccl typescript`
+```bash
+./network.sh deployCC -ccn evoting-chaincode -ccp ../chaincode -ccl typescript
+```
 
 Folgende Befehle nur während Testphase, falls Chaincode direkt über `Peer CLI` ohne Clientanwendung aufgerufen werden soll:
 
 Umgebungsvariablen für `Peer CLI`setzen:
+
 ```bash
 export PATH=${PWD}/../bin:$PATH
 export FABRIC_CFG_PATH=$PWD/../config/
 ```
 
 Umgebungsvariablen setzen, um als Admin (von Org1 oder Org2) zu operieren:
+
 ```bash
 export CORE_PEER_TLS_ENABLED=true
 export CORE_PEER_LOCALMSPID="Org1MSP"
@@ -102,21 +118,29 @@ export CORE_PEER_ADDRESS=localhost:9051
 
 Überprüfen des installierten Chaincode:
 
-`peer lifecycle chaincode queryinstalled`
-
-### Beispielanwendung vorbereiten
-
-In neuem Terminal navigieren zur Beispielanwendung in Typescript:
-
-`cd ../clients/inf-client`
-
-Installieren der Abhängigkeiten:
-
-`npm install`
+```bash
+peer lifecycle chaincode queryinstalled
+```
 
 ### Beispielanwendung ausführen
 
-`npm start`
+Zur Beispielanwendung für Typescript navigieren:
+
+```bash
+cd ../clients/inf-client
+```
+
+Installieren der Abhängigkeiten:
+
+```bash
+npm install
+```
+
+Beispielanwendung starten:
+
+```bash
+npm start
+```
 
 Für beide Organisationen wurde jeweils eine *User-Identity* angelegt, die für die Interaktionen mit der Blockchain verwendet werden. Die Anwendung führt folgende CRUD-Funktionen aus: 
 - Anlegen von Beispiel-Datensätzen (*Assets*)
