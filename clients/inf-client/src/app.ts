@@ -25,10 +25,10 @@ const mspId = envOrDefault('MSP_ID', 'Org1MSP');
 const cryptoPath = envOrDefault('CRYPTO_PATH', path.resolve(__dirname, '..', '..', '..', 'test-network', 'organizations', 'peerOrganizations', 'org1.example.com'));
 
 // Path to user private key directory.
-const keyDirectoryPath = envOrDefault('KEY_DIRECTORY_PATH', path.resolve(cryptoPath, 'users', 'User1@org1.example.com', 'msp', 'keystore'));
+const keyDirectoryPath = envOrDefault('KEY_DIRECTORY_PATH', path.resolve(cryptoPath, 'users', 'Inf-User1@org1.example.com', 'msp', 'keystore'));
 
 // Path to user certificate.
-const certPath = envOrDefault('CERT_PATH', path.resolve(cryptoPath, 'users', 'User1@org1.example.com', 'msp', 'signcerts', 'cert.pem'));
+const certPath = envOrDefault('CERT_PATH', path.resolve(cryptoPath, 'users', 'Inf-User1@org1.example.com', 'msp', 'signcerts', 'cert.pem'));
 
 // Path to peer tls certificate.
 const tlsCertPath = envOrDefault('TLS_CERT_PATH', path.resolve(cryptoPath, 'peers', 'peer0.org1.example.com', 'tls', 'ca.crt'));
@@ -76,7 +76,7 @@ async function main(): Promise<void> {
         const contract = network.getContract(chaincodeName);
 
         // Initialize a set of asset data on the ledger using the chaincode 'InitLedger' function.
-        await initLedger(contract);
+      /*  await initLedger(contract);
 
         // Return all the current options on the ledger.
         await getAllOptions(contract);
@@ -107,9 +107,9 @@ async function main(): Promise<void> {
 
         // Check if all options on the world state have been deleted.
         await getAllOptions(contract);
-
+*/
         // Get transaction details from Blockchain for a given Transaction ID 
-        //await getTransactionById(network.getContract('qscc'), channelName, 'd3500377399aae8d91d5a6bd37b8929e9dc8daab764feefa3640e8e79053a45e' )
+        await getTransactionById(network.getContract('qscc'), channelName, '5623b79cd0e928f3301c457ff518381c84092d398df36962a29dac6f5061db4f' )
 
     } finally {
         gateway.close();
@@ -252,7 +252,6 @@ async function getTransactionById(contract: Contract, channelName: string, txId:
     const processedTransaction = ProcessedTransaction.deserializeBinary(resultBytes);
     const validationCode = processedTransaction.getValidationcode();
     if (validationCode === 0) {
-        console.log("Servus");
         const payloadBytes = processedTransaction.getTransactionenvelope()!.getPayload_asU8();
         const payload = Payload.deserializeBinary(payloadBytes);
         const parsedPayload = parsePayload(payload,validationCode);
@@ -263,7 +262,7 @@ async function getTransactionById(contract: Contract, channelName: string, txId:
             isValid: transaction.isValid(),
             validationCode: transaction.getValidationCode(),
             timestamp: convertTimestampToCET(timestamp),
-            creator: transaction.getCreator().mspId,
+            creator: utf8Decoder.decode(transaction.getCreator().credentials),
             txID: transaction.getChannelHeader().getTxId(),
         }
         console.log('*** Result', transactionDetail);
