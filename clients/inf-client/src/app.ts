@@ -262,6 +262,7 @@ async function getTransactionById(contract: Contract, channelName: string, txId:
             isValid: transaction.isValid(),
             validationCode: transaction.getValidationCode(),
             timestamp: convertTimestampToCET(timestamp),
+            org: transaction.getCreator().mspId,
             creator: utf8Decoder.decode(transaction.getCreator().credentials),
             txID: transaction.getChannelHeader().getTxId(),
         }
