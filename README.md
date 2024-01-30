@@ -93,6 +93,7 @@ cd ./addOrg3
 Im `test-network` Verzeichnis ausführen zum Packen, Installieren, Prüfen und Commiten des Chaincode (Typescript):
 
 ```bash
+cd ..
 ./network.sh deployCC -ccp ../chaincode -ccn evoting-chaincode -ccl typescript
 ```
 
