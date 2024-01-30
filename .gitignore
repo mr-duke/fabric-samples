@@ -30,3 +30,7 @@ external-chaincode/
 
 # override the ignore of all config/ folders
 !full-stack-asset-transfer-guide/infrastructure/sample-network/config
+
+# fabric-ca for Org3, except fabric-ca-server-config.yaml
+test-network/addOrg3/fabric-ca/org3/*
+!test-network/addOrg3/fabric-ca/org3/fabric-ca-server-config.yaml
