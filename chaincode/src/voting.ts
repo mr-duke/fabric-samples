@@ -140,9 +140,9 @@ export class VotingContract extends Contract {
             
             if (result.isDelete) {
                 const historyRecordDeleted: HistoryRecord = {
-                    key: 'GELÖSCHT',
-                    name: 'GELÖSCHT',
-                    votes: 'GELÖSCHT',
+                    key: 'GELOESCHT',
+                    name: 'GELOESCHT',
+                    votes: 'GELOESCHT',
                     timestamp: cetDateTimeString,
                     txId: result.txId,
                 };

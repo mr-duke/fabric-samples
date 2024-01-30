@@ -74,7 +74,7 @@ async function main(): Promise<void> {
 
         // Get the smart contract from the network.
         const contract = network.getContract(chaincodeName);
-/*
+
         // Initialize a set of asset data on the ledger using the chaincode 'InitLedger' function.
         await initLedger(contract);
 
@@ -107,9 +107,9 @@ async function main(): Promise<void> {
 
         // Check if all options on the world state have been deleted.
         await getAllOptions(contract);
-*/    
+
         // Get transaction details from Blockchain for a given Transaction ID 
-        await getTransactionById(network.getContract('qscc'), channelName, 'd3500377399aae8d91d5a6bd37b8929e9dc8daab764feefa3640e8e79053a45e' )
+        //await getTransactionById(network.getContract('qscc'), channelName, 'd3500377399aae8d91d5a6bd37b8929e9dc8daab764feefa3640e8e79053a45e' )
 
     } finally {
         gateway.close();
