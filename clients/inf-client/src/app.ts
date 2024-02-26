@@ -76,7 +76,7 @@ async function main(): Promise<void> {
         const contract = network.getContract(chaincodeName);
 
         // Initialize a set of asset data on the ledger using the chaincode 'InitLedger' function.
-      /*  await initLedger(contract);
+/*        await initLedger(contract);
 
         // Return all the current options on the ledger.
         await getAllOptions(contract);
@@ -109,7 +109,7 @@ async function main(): Promise<void> {
         await getAllOptions(contract);
 */
         // Get transaction details from Blockchain for a given Transaction ID 
-        await getTransactionById(network.getContract('qscc'), channelName, '5623b79cd0e928f3301c457ff518381c84092d398df36962a29dac6f5061db4f' )
+        await getTransactionById(network.getContract('qscc'), channelName, '6edc93c87530d483c2f8d7496d5e3228bce4f2657dd747b3d21ff076f269ff36' )
 
     } finally {
         gateway.close();

@@ -60,6 +60,16 @@ function createOrg1() {
   fabric-ca-client register --caname ca-org1 --id.name inf-user3 --id.secret inf-user3pw --id.type client --tls.certfiles "${PWD}/organizations/fabric-ca/org1/ca-cert.pem"
   { set +x; } 2>/dev/null
 
+  infoln "Registering inf-user4"
+  set -x
+  fabric-ca-client register --caname ca-org1 --id.name inf-user4 --id.secret inf-user4pw --id.type client --tls.certfiles "${PWD}/organizations/fabric-ca/org1/ca-cert.pem"
+  { set +x; } 2>/dev/null
+
+  infoln "Registering inf-user5"
+  set -x
+  fabric-ca-client register --caname ca-org1 --id.name inf-user5 --id.secret inf-user5pw --id.type client --tls.certfiles "${PWD}/organizations/fabric-ca/org1/ca-cert.pem"
+  { set +x; } 2>/dev/null
+
   infoln "Registering the org admin"
   set -x
   fabric-ca-client register --caname ca-org1 --id.name org1admin --id.secret org1adminpw --id.type admin --tls.certfiles "${PWD}/organizations/fabric-ca/org1/ca-cert.pem"
@@ -102,6 +112,20 @@ function createOrg1() {
   { set +x; } 2>/dev/null
 
   cp "${PWD}/organizations/peerOrganizations/org1.example.com/msp/config.yaml" "${PWD}/organizations/peerOrganizations/org1.example.com/users/Inf-User3@org1.example.com/msp/config.yaml"
+
+  infoln "Generating inf-user4 msp"
+  set -x
+  fabric-ca-client enroll -u https://inf-user4:inf-user4pw@localhost:7054 --caname ca-org1 -M "${PWD}/organizations/peerOrganizations/org1.example.com/users/Inf-User4@org1.example.com/msp" --tls.certfiles "${PWD}/organizations/fabric-ca/org1/ca-cert.pem"
+  { set +x; } 2>/dev/null
+
+  cp "${PWD}/organizations/peerOrganizations/org1.example.com/msp/config.yaml" "${PWD}/organizations/peerOrganizations/org1.example.com/users/Inf-User4@org1.example.com/msp/config.yaml"
+
+  infoln "Generating inf-user5 msp"
+  set -x
+  fabric-ca-client enroll -u https://inf-user5:inf-user5pw@localhost:7054 --caname ca-org1 -M "${PWD}/organizations/peerOrganizations/org1.example.com/users/Inf-User5@org1.example.com/msp" --tls.certfiles "${PWD}/organizations/fabric-ca/org1/ca-cert.pem"
+  { set +x; } 2>/dev/null
+
+  cp "${PWD}/organizations/peerOrganizations/org1.example.com/msp/config.yaml" "${PWD}/organizations/peerOrganizations/org1.example.com/users/Inf-User5@org1.example.com/msp/config.yaml"
 
   infoln "Generating the org admin msp"
   set -x
@@ -171,6 +195,16 @@ function createOrg2() {
   fabric-ca-client register --caname ca-org2 --id.name wif-user3 --id.secret wif-user3pw --id.type client --tls.certfiles "${PWD}/organizations/fabric-ca/org2/ca-cert.pem"
   { set +x; } 2>/dev/null
 
+  infoln "Registering wif-user4"
+  set -x
+  fabric-ca-client register --caname ca-org2 --id.name wif-user4 --id.secret wif-user4pw --id.type client --tls.certfiles "${PWD}/organizations/fabric-ca/org2/ca-cert.pem"
+  { set +x; } 2>/dev/null
+
+  infoln "Registering wif-user5"
+  set -x
+  fabric-ca-client register --caname ca-org2 --id.name wif-user5 --id.secret wif-user5pw --id.type client --tls.certfiles "${PWD}/organizations/fabric-ca/org2/ca-cert.pem"
+  { set +x; } 2>/dev/null
+
   infoln "Registering the org admin"
   set -x
   fabric-ca-client register --caname ca-org2 --id.name org2admin --id.secret org2adminpw --id.type admin --tls.certfiles "${PWD}/organizations/fabric-ca/org2/ca-cert.pem"
@@ -213,6 +247,20 @@ function createOrg2() {
   { set +x; } 2>/dev/null
 
   cp "${PWD}/organizations/peerOrganizations/org2.example.com/msp/config.yaml" "${PWD}/organizations/peerOrganizations/org2.example.com/users/Wif-User3@org2.example.com/msp/config.yaml"
+
+  infoln "Generating wif-user4 msp"
+  set -x
+  fabric-ca-client enroll -u https://wif-user4:wif-user4pw@localhost:8054 --caname ca-org2 -M "${PWD}/organizations/peerOrganizations/org2.example.com/users/Wif-User4@org2.example.com/msp" --tls.certfiles "${PWD}/organizations/fabric-ca/org2/ca-cert.pem"
+  { set +x; } 2>/dev/null
+
+  cp "${PWD}/organizations/peerOrganizations/org2.example.com/msp/config.yaml" "${PWD}/organizations/peerOrganizations/org2.example.com/users/Wif-User4@org2.example.com/msp/config.yaml"
+
+  infoln "Generating wif-user5 msp"
+  set -x
+  fabric-ca-client enroll -u https://wif-user5:wif-user5pw@localhost:8054 --caname ca-org2 -M "${PWD}/organizations/peerOrganizations/org2.example.com/users/Wif-User5@org2.example.com/msp" --tls.certfiles "${PWD}/organizations/fabric-ca/org2/ca-cert.pem"
+  { set +x; } 2>/dev/null
+
+  cp "${PWD}/organizations/peerOrganizations/org2.example.com/msp/config.yaml" "${PWD}/organizations/peerOrganizations/org2.example.com/users/Wif-User5@org2.example.com/msp/config.yaml"
 
   infoln "Generating the org admin msp"
   set -x
