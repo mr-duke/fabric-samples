@@ -17,7 +17,7 @@
             <div class="col">
             </div>
         </div>
-        <button @click="setUserName" type="button" class="btn btn-primary mt-3">
+        <button @click="connectToGateway" type="button" class="btn btn-primary mt-3">
             <i class="bi bi-box-arrow-in-right me-2"></i> Anmelden
         </button>
         <div class="mt-3">
@@ -28,15 +28,20 @@
   
 <script setup lang="ts">
 import { ref } from 'vue'
-import { useUserStore } from '@/stores/user';
+import { useUserStore } from '@/stores/userStore';
+import { useGatewayStore } from '@/stores/gatewayStore';
+import { establishGatewayConnection } from '@/utils/gatewayConnection';
 import { useRouter } from 'vue-router';
-import router from '@/router';
 
 const userStore = useUserStore();
+const gatewayStore = useGatewayStore();
+const router = useRouter();
+
 const selectedUser = ref();
 
-function setUserName() {
+const connectToGateway = async () => {
     userStore.userName = selectedUser.value;
+    //gatewayStore.gateway = await establishGatewayConnection();
     router.push('/voting')
 }
 

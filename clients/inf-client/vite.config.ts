@@ -12,5 +12,6 @@ export default defineConfig({
     alias: {
       '@': fileURLToPath(new URL('./src', import.meta.url))
     }
-  }
+  },
+  optimizeDeps: { exclude: ["./build/Release/pkcs11.node"] },
 })

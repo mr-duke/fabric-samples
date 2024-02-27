@@ -23,10 +23,11 @@
   
 <script setup lang="ts">
 import { ref, computed } from 'vue'
-import { useUserStore } from '@/stores/user';
+import { useUserStore } from '@/stores/userStore';
 import { RouterLink, RouterView } from 'vue-router'
 
 const userStore = useUserStore();
+
 const alreadyVotedMessage = ref("");
 const notAllowedToVote = computed(() => {
     if (userStore.alreadyVotedList.includes(userStore.userName)) {
