@@ -34,7 +34,7 @@ const router = useRouter();
 
 const login = async () => {
     userStore.userName = selectedUser.value;
-    router.push('/cast-vote')
+    router.push('/voting')
 }
 
 </script>
