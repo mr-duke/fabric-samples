@@ -32,9 +32,13 @@ const selectedUser = ref();
 const userStore = useUserStore();
 const router = useRouter();
 
-const login = async () => {
+const login = () => {
     userStore.userName = selectedUser.value;
-    router.push('/voting')
+    if (userStore.userName === "Admin") {
+        router.push('/admin')
+    } else {
+        router.push('/voting')
+    }
 }
 
 </script>
