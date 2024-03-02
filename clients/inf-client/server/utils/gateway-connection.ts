@@ -7,17 +7,20 @@ import type { Contract, Identity, Signer, Gateway } from '@hyperledger/fabric-ga
 import * as crypto from 'crypto';
 import { promises as fs } from 'fs';
 import * as path from 'path';
+import { fileURLToPath } from 'url';
+
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
+//import { useUserStore } from '~/stores/user';
 
 const mspId = envOrDefault('MSP_ID', 'Org1MSP');
-const userStore = useUserStore();
+//const userStore = useUserStore();
 // Path to crypto materials.
-const cryptoPath = envOrDefault('CRYPTO_PATH', path.resolve(__dirname, '..', '..', '..', 'test-network', 'organizations', 'peerOrganizations', 'org1.example.com'));
+const cryptoPath = envOrDefault('CRYPTO_PATH', path.resolve(__dirname, '..', '..', '..', '..', 'test-network', 'organizations', 'peerOrganizations', 'org1.example.com'));
 // Path to user private key directory.
-const keyDirectoryPath = envOrDefault('KEY_DIRECTORY_PATH', path.resolve(cryptoPath, 'users', `${userStore.userName}@org1.example.com`, 'msp', 'keystore'));
+const keyDirectoryPath = envOrDefault('KEY_DIRECTORY_PATH', path.resolve(cryptoPath, 'users', 'Inf-User1@org1.example.com', 'msp', 'keystore'));
 // Path to user certificate.
-const certPath = envOrDefault('CERT_PATH', path.resolve(cryptoPath, 'users', `${userStore.userName}@org1.example.com`, 'msp', 'signcerts', 'cert.pem'));
-// The gRPC client connection should be shared by all Gateway connections to this endpoint.
-const client = await getGrpcClient();
+const certPath = envOrDefault('CERT_PATH', path.resolve(cryptoPath, 'users', 'Inf-User1@org1.example.com', 'msp', 'signcerts', 'cert.pem'));
 
 let gatewayInstance: Gateway | null = null;
 
@@ -34,7 +37,8 @@ export function resetGateway() {
 
 async function createGateway(): Promise<Gateway> {
     const gateway = connect({
-        client,
+        // The gRPC client connection should be shared by all Gateway connections to this endpoint.
+        client: await getGrpcClient(),
         identity: await newIdentity(),
         signer: await newSigner(),
         // Default timeouts for different gRPC calls
