@@ -49,3 +49,4 @@ const castVote = () => {
 </script>
   
 <style scoped></style>
+  

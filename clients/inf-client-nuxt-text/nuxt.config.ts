@@ -5,6 +5,9 @@ export default defineNuxtConfig({
     'bootstrap/dist/css/bootstrap.css',
     'bootstrap-icons/font/bootstrap-icons.css'
   ],
+  plugins: [
+    { src: '~/plugins/bootstrap.js', mode: 'client' }
+  ],
   modules: [
     '@pinia/nuxt',
   ],

@@ -3,4 +3,4 @@ export const useUserStore = defineStore('userStore', () => {
     const alreadyVotedList = ref<string[]>([]);
  
     return { userName, alreadyVotedList }
-})
+  })
