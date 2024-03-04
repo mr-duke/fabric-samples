@@ -17,7 +17,7 @@
             <div class="col">
             </div>
         </div>
-        <button @click="login" type="button" class="btn btn-primary mt-3">
+        <button v-if="selectedUser" @click="login" type="button" class="btn btn-primary mt-3">
             <i class="bi bi-box-arrow-in-right me-2"></i> Anmelden
         </button>
         <div class="mt-3">
