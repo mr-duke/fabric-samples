@@ -27,7 +27,6 @@
 </template>
 
 <script setup lang="ts">
-
 const selectedUser = ref();
 const userStore = useUserStore();
 const router = useRouter();

@@ -25,22 +25,29 @@ interface Option {
   votes: number;
 }
 
+const userStore = useUserStore();
+
 const options = ref<Option[]>();
 
 const createDemo = async () => {
-    const { data, pending, status, error } = await useFetch('/api/init-ledger');
-    await getAllOptions()
-    console.log("Data: " + data.value);
-    console.log("pending: " + pending.value);
-    console.log("status: " + status.value);
-    console.log("error: " + error.value);
+    await useFetch('/api/init-ledger',{
+      method: 'post',
+      body: { 
+        user: userStore.userName 
+      }
+    });
+    await getAllOptions();
 };
 
 const getAllOptions = async () => {
-    const { data, pending, status, error } = await useFetch('/api/get-all-options');
+    const { data } = await useFetch('/api/get-all-options',{
+      method: 'post',
+      body: { 
+        user: userStore.userName 
+      }
+    });
     options.value = data.value;
 }
-
 
 </script>
   
