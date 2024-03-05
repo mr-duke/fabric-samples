@@ -2,7 +2,7 @@
   <h3>Administration</h3>
   <h4> Demo </h4>
   <div class="d-flex">
-    <button @click="createDemo" type="button" class="btn btn-primary me-3">
+    <button @click="createDemo" type="button" class="btn btn-primary me-3 mb-3">
       <i class="bi bi-easel2 me-2"></i> Erzeuge Demo-Abstimmung
     </button>
     <div v-if="isDemoLoading" class="spinner-border text-primary" role="status">
@@ -11,16 +11,11 @@
   <div v-if="isDemoGenerated" class="d-flex alert alert-success" role="alert">
     {{ "Demo-Abstimmung wurde erfolgreich erstellt" }}
   </div>
-  <ul class="mt-3">
-    <li v-for="(option, index) in demoOptions" :key="index">
-      {{ option.name }} ({{ option.key }}) - Stimmen: {{ option.votes }}
-    </li>
-  </ul>
   <h4> Wahl verwalten </h4>
   <input class="form-control mb-2" type="text" placeholder="Neue Wahloption eingeben" v-model="optionToAdd" />
   <div class="d-flex">
     <button @click="createOption" type="button" class="btn btn-primary me-3 mb-3" :disabled="isEmptyOptionInput">
-      <i class="bi bi-plus-square me-2"></i> Hinzufügen
+      <i class="bi bi-plus-square me-2"></i> Option hinzufügen
     </button>
     <div v-if="isOptionLoading" class="spinner-border text-primary" role="status">
     </div>
@@ -31,15 +26,28 @@
   <div v-if="isOptionNotCreated" class="d-flex alert alert-danger" role="alert">
     {{ "Wahloption konnte nicht hinzugefügt werden" }}
   </div>
+  <div class="d-flex">
+    <button @click="resetElection" type="button" class="btn btn-primary me-3 mb-3">
+      <i class="bi bi-trash me-2"></i> Abstimmung zurücksetzen
+    </button>
+    <div v-if="isResetLoading" class="spinner-border text-primary" role="status">
+    </div>
+  </div>
+  <div v-if="isElectionResetted" class="d-flex alert alert-success" role="alert">
+    {{ "Abstimmung wurde erfolgreich zurückgesetzt" }}
+  </div>
+  <div v-if="isElectionNotResetted" class="d-flex alert alert-danger" role="alert">
+    {{ "Abstimmung konnte nicht zurückgesetzt werden" }}
+  </div>
   <h4> Wahloptionen anzeigen </h4>
-  <button @click="getAllOptions" type="button" class="btn btn-primary mb-3">
-    <i class="bi bi-card-list me-2"></i> Zeige alle Optionen
-  </button>
   <ul>
     <li v-for="(option, index) in existingOptions" :key="index">
-      {{ option.name }} ({{ option.key }}) - {{ option.votes }}
+      {{ option.name }} ({{ option.key }}) - Stimmen: {{ option.votes }}
     </li>
   </ul>
+  <div v-if="!doOptionsExist" class="d-flex alert alert-warning" role="alert">
+    {{ "Keine Optionen angelegt" }}
+  </div>
 </template>
 
 <script setup lang="ts">
@@ -50,19 +58,27 @@ interface Option {
   votes: number;
 }
 
-const userStore = useUserStore();
+onMounted(async() => {
+  await getAllOptions();
+});
 
+const userStore = useUserStore();
 const existingOptions = ref<Option[]>();
-const demoOptions = ref<Option[]>();
 const optionToAdd = ref<string | null>();
 const isDemoLoading = ref<boolean>(false);
 const isDemoGenerated = ref<boolean>(false);
 const isOptionLoading = ref<boolean>(false);
 const isOptionCreated = ref<boolean>(false);
 const isOptionNotCreated = ref<boolean>(false);
+const isResetLoading = ref<boolean>(false);
+const isElectionResetted = ref<boolean>(false);
+const isElectionNotResetted = ref<boolean>(false);
 
 const isEmptyOptionInput = computed(() => {
   return !optionToAdd.value
+});
+const doOptionsExist = computed(() => {
+ return (existingOptions.value?.length !== 0)
 });
 
 const createDemo = async () => {
@@ -74,23 +90,13 @@ const createDemo = async () => {
     }
   });
 
-  await getDemoOptions();
+  await getAllOptions();
 
   isDemoLoading.value = false;
   isDemoGenerated.value = true
   setTimeout(() => {
     isDemoGenerated.value = false;
   }, 2000);
-}
-
-const getDemoOptions = async () => {
-  const { data } = await useFetch('/api/get-all-options', {
-    method: 'post',
-    body: {
-      user: userStore.userName
-    }
-  });
-  demoOptions.value = data.value;
 }
 
 const getAllOptions = async () => {
@@ -104,7 +110,7 @@ const getAllOptions = async () => {
 }
 
 const createOption = async () => {
-  isOptionLoading.value= true;
+  isOptionLoading.value = true;
   const { status } = await useFetch('/api/create-option', {
     method: 'post',
     body: {
@@ -112,7 +118,7 @@ const createOption = async () => {
       data: optionToAdd.value,
     }
   });
-  isOptionLoading.value= false;
+  isOptionLoading.value = false;
 
   if (status.value === "success") {
     isOptionCreated.value = true;
@@ -127,6 +133,31 @@ const createOption = async () => {
     }, 3000);
     optionToAdd.value = null
   }
+  await getAllOptions();
+}
+
+const resetElection = async () => {
+  isResetLoading.value = true;
+  const { status } = await useFetch('/api/reset-election', {
+    method: 'post',
+    body: {
+      user: userStore.userName,
+    }
+  });
+  isResetLoading.value = false;
+
+  if (status.value === "success") {
+    isElectionResetted.value = true;
+    setTimeout(() => {
+      isElectionResetted.value = false;
+    }, 2500);
+  } else {
+    isElectionNotResetted.value = true;
+    setTimeout(() => {
+      isElectionNotResetted.value = false;
+    }, 2500);
+  }
+  await getAllOptions();
 }
 
 </script>
