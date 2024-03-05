@@ -139,9 +139,9 @@ export CORE_PEER_ADDRESS=localhost:11051
 peer lifecycle chaincode queryinstalled
 ```
 
-### Beispielanwendung ausführen
+### E-Voting Client ausführen
 
-Zur Beispielanwendung für Typescript navigieren:
+Zur Client-Anwendung (Typescript) navigieren:
 
 ```bash
 cd ../clients/inf-client
@@ -153,19 +153,11 @@ Installieren der Abhängigkeiten:
 npm install
 ```
 
-Beispielanwendung starten:
+E-Voting Client starten:
 
 ```bash
-npm start
+npm run dev
 ```
-
-Für beide Organisationen wurde jeweils eine *User-Identity* angelegt, die für die Interaktionen mit der Blockchain verwendet werden. Die Anwendung führt folgende CRUD-Funktionen aus: 
-- Anlegen von Beispiel-Datensätzen (*Assets*)
-- Lesen aller Datensätze
-- Anlegen eines neuen Datensatzen
-- Update eines Datensatzes
-- Lesen des aktualisierten Datensatzes
-- Error Handling
 
 ### Stoppen und Aufräumen des Netzwerks
 
