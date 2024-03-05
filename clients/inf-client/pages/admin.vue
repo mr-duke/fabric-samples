@@ -1,6 +1,8 @@
 <template>
+    <h3 class="fst-italic">Administrations-Bereich</h3>
     <div>
         <AdminSetup />
+        <AdminAssetHistory />
     </div>
     <button @click="router.back()" type="button" class="btn btn-primary mt-3">
         <i class="bi bi-box-arrow-left me-2"></i> Zurück

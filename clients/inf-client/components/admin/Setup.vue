@@ -1,6 +1,5 @@
 <template>
-  <h3>Administration</h3>
-  <h4> Demo </h4>
+  <h4 class="mt-3"> Demo </h4>
   <div class="d-flex">
     <button @click="createDemo" type="button" class="btn btn-primary me-3 mb-3">
       <i class="bi bi-easel2 me-2"></i> Erzeuge Demo-Abstimmung
@@ -8,22 +7,26 @@
     <div v-if="isDemoLoading" class="spinner-border text-primary" role="status">
     </div>
   </div>
-  <div v-if="isDemoGenerated" class="d-flex alert alert-success" role="alert">
+  <div v-if="isDemoGenerated" class="d-flex alert alert-success col-7" role="alert">
     {{ "Demo-Abstimmung wurde erfolgreich erstellt" }}
   </div>
+  <br />
+
   <h4> Wahl verwalten </h4>
-  <input class="form-control mb-2" type="text" placeholder="Neue Wahloption eingeben" v-model="optionToAdd" />
-  <div class="d-flex">
-    <button @click="createOption" type="button" class="btn btn-primary me-3 mb-3" :disabled="isEmptyOptionInput">
+  <div class="col-7">
+    <input class="form-control mb-3" type="text" placeholder="Neue Wahloption eingeben" v-model="optionToAdd" />
+  </div>
+  <div class="d-flex mb-3">
+    <button @click="createOption" type="button" class="btn btn-primary me-3" :disabled="isEmptyOptionInput">
       <i class="bi bi-plus-square me-2"></i> Option hinzufügen
     </button>
     <div v-if="isOptionLoading" class="spinner-border text-primary" role="status">
     </div>
   </div>
-  <div v-if="isOptionCreated" class="d-flex alert alert-success" role="alert">
+  <div v-if="isOptionCreated" class="d-flex alert alert-success col-7" role="alert">
     {{ "Wahloption wurde erfolgreich hinzugefügt" }}
   </div>
-  <div v-if="isOptionNotCreated" class="d-flex alert alert-danger" role="alert">
+  <div v-if="isOptionNotCreated" class="d-flex alert alert-danger col-7" role="alert">
     {{ "Wahloption konnte nicht hinzugefügt werden" }}
   </div>
   <div class="d-flex">
@@ -33,21 +36,37 @@
     <div v-if="isResetLoading" class="spinner-border text-primary" role="status">
     </div>
   </div>
-  <div v-if="isElectionResetted" class="d-flex alert alert-success" role="alert">
+  <div v-if="isElectionResetted" class="d-flex alert alert-success col-7" role="alert">
     {{ "Abstimmung wurde erfolgreich zurückgesetzt" }}
   </div>
-  <div v-if="isElectionNotResetted" class="d-flex alert alert-danger" role="alert">
+  <div v-if="isElectionNotResetted" class="d-flex alert alert-danger col-7" role="alert">
     {{ "Abstimmung konnte nicht zurückgesetzt werden" }}
   </div>
+  <br />
+
   <h4> Wahloptionen anzeigen </h4>
-  <ul>
-    <li v-for="(option, index) in existingOptions" :key="index">
-      {{ option.name }} ({{ option.key }}) - Stimmen: {{ option.votes }}
-    </li>
-  </ul>
-  <div v-if="!doOptionsExist" class="d-flex alert alert-warning" role="alert">
+  <div class="col-7">
+    <table class="table table-striped" v-if="doOptionsExist">
+      <thead>
+        <tr>
+          <th scope="col">Key</th>
+          <th scope="col">Name</th>
+          <th scope="col">Stimmen</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr v-for="(option, index) in existingOptions" :key="index">
+          <td scope="row"> {{ option.key }} </td>
+          <td scope="row"> {{ option.name }} </td>
+          <td scope="row"> {{ option.votes }} </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+  <div v-if="!doOptionsExist" class="d-flex alert alert-warning col-7" role="alert">
     {{ "Keine Optionen angelegt" }}
   </div>
+  <br />
 </template>
 
 <script setup lang="ts">
@@ -58,7 +77,7 @@ interface Option {
   votes: number;
 }
 
-onMounted(async() => {
+onMounted(async () => {
   await getAllOptions();
 });
 
@@ -78,7 +97,7 @@ const isEmptyOptionInput = computed(() => {
   return !optionToAdd.value
 });
 const doOptionsExist = computed(() => {
- return (existingOptions.value?.length !== 0)
+  return (existingOptions.value?.length !== 0)
 });
 
 const createDemo = async () => {
@@ -124,13 +143,13 @@ const createOption = async () => {
     isOptionCreated.value = true;
     setTimeout(() => {
       isOptionCreated.value = false;
-    }, 3000);
+    }, 2500);
     optionToAdd.value = null
   } else {
     isOptionNotCreated.value = true;
     setTimeout(() => {
       isOptionNotCreated.value = false;
-    }, 3000);
+    }, 2500);
     optionToAdd.value = null
   }
   await getAllOptions();

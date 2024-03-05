@@ -20,9 +20,6 @@
         <button v-if="selectedUser" @click="login" type="button" class="btn btn-primary mt-3">
             <i class="bi bi-box-arrow-in-right me-2"></i> Anmelden
         </button>
-        <div class="mt-3">
-            Selected: <strong>{{ userStore.userName }}</strong>
-        </div>
     </div>
 </template>
 
