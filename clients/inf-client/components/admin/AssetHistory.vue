@@ -40,7 +40,7 @@ interface HistoryRecord {
 }
 
 const userStore = useUserStore();
-const keyToSearch = ref<string | null>();
+const keyToSearch = ref<string|null>();
 const isHistoryLoading = ref<boolean>(false);
 const isHistoryCreated = ref<boolean>(false);
 const isHistoryNotCreated = ref<boolean>(false);

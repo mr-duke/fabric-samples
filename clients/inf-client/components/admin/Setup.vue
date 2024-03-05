@@ -83,7 +83,7 @@ onMounted(async () => {
 
 const userStore = useUserStore();
 const existingOptions = ref<Option[]>();
-const optionToAdd = ref<string | null>();
+const optionToAdd = ref<string|null>();
 const isDemoLoading = ref<boolean>(false);
 const isDemoGenerated = ref<boolean>(false);
 const isOptionLoading = ref<boolean>(false);

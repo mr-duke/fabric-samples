@@ -76,7 +76,7 @@ const router = useRouter();
 const isVoteLoading = ref<boolean>(false);
 const isVoteCast = ref<boolean>(false);
 const isVoteNotCast = ref<boolean>(false);
-const transactionId = ref<string>();
+const transactionId = ref<string|null>();
 const existingOptions = ref<Option[]>();
 const votedOption = ref<string>();
 
