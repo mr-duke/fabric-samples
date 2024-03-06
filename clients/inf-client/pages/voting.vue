@@ -1,5 +1,13 @@
 <template>
     <h3 class="fst-italic">Wahl-Bereich</h3>
+    <div class="card col-7">
+        <div class="card-header fw-bold">
+            Exkursion der Fakultät für Informatik
+        </div>
+        <div class="card-body">
+            <p class="card-text">Stimmen Sie über das Ziel der nächsten Exkursion ab. <br/> Sie haben <strong>1 Stimme</strong>.</p>
+        </div>
+    </div>
     <div>
         <UserVote />
     </div>
@@ -8,10 +16,10 @@
     </button>
 
 </template>
-  
+
 <script setup lang="ts">
 const router = useRouter();
 
 </script>
-  
+
 <style scoped></style>
