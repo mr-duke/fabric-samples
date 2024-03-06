@@ -33,7 +33,7 @@ const login = () => {
     if (userStore.userName === "Admin") {
         router.push('/admin')
     } else {
-        router.push('/voting')
+        router.push('/user')
     }
 }
 

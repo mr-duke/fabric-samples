@@ -1,5 +1,5 @@
 <template>
-    <h4 class="mt-3"> Abstimmen </h4>
+    <h4 class="mt-3"> Abstimmung </h4>
 
     <div v-if="isAllowedToVote" class="form-check" v-for="(option, index) in existingOptions" :key="index">
         <input class="form-check-input" type="radio" name="flexRadioDefault" :id=option.key :value=option.key
@@ -16,20 +16,20 @@
         <div v-if="isVoteLoading" class="spinner-border text-primary" role="status">
         </div>
     </div>
-    <div v-if="isVoteCast" class="d-flex alert alert-success col-6 mt-3" role="alert">
+    <div v-if="isVoteCast" class="d-flex alert alert-success col-7 mt-3" role="alert">
         {{ "Stimme wurde erfolgreich abgegeben" }} <br/>
         {{ "Ihre Transaktions-ID: " }} {{ transactionId }}
     </div>
-    <div v-if="isVoteNotCast" class="d-flex alert alert-danger col-6 mt-3" role="alert">
+    <div v-if="isVoteNotCast" class="d-flex alert alert-danger col-7 mt-3" role="alert">
         {{ "Stimme konnte nicht abgegeben werden" }}
     </div>
-    <div v-if="!isAllowedToVote" class="d-flex alert alert-warning col-6 mt-3">
+    <div v-if="!isAllowedToVote" class="d-flex alert alert-warning col-7 mt-3">
         {{ "Sie haben bereits abgestimmt" }}
     </div>
 
     <div v-if="!isAllowedToVote">
         <h4> Ergebnis</h4>
-        <div class="col-6">
+        <div class="col-7">
             <table class="table table-striped">
                 <thead>
                     <tr>

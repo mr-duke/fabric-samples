@@ -1,5 +1,4 @@
 <template>
-    <h3 class="fst-italic">Administrations-Bereich</h3>
     <div>
         <AdminSetup />
         <AdminAssetHistory />

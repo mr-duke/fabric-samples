@@ -1,8 +1,8 @@
 <template>
     <h4>Asset-Verlauf</h4>
-    <div class="col-7" >
-    <input class="col-7 form-control mb-3" type="text" placeholder="Gesuchten Key eingeben" v-model="keyToSearch" />
-</div>
+    <div class="col-7">
+        <input class="col-7 form-control mb-3" type="text" placeholder="Gesuchten Key eingeben" v-model="keyToSearch" />
+    </div>
     <div class="d-flex">
         <button @click="getHistoryForKey" type="button" class="btn btn-primary me-3 mb-3" :disabled="isEmptyKeyInput">
             <i class="bi bi-plus-square me-2"></i> Verlauf anzeigen
@@ -52,7 +52,7 @@ const isEmptyKeyInput = computed(() => {
 
 const getHistoryForKey = async () => {
     isHistoryLoading.value = true;
-    const { data, status } = await useFetch('/api/get-asset-history', {
+    const { data } = await useFetch('/api/get-asset-history', {
         method: 'post',
         body: {
             user: userStore.userName,
@@ -61,7 +61,7 @@ const getHistoryForKey = async () => {
     });
     isHistoryLoading.value = false;
 
-    if (data.value.length !== 0 ) {
+    if (data.value.length !== 0) {
         isHistoryCreated.value = true;
         setTimeout(() => {
             isHistoryCreated.value = false;
