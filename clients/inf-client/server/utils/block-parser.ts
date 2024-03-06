@@ -6,7 +6,7 @@
 
 import { Identity } from '@hyperledger/fabric-gateway';
 import { common, ledger, msp, peer } from '@hyperledger/fabric-protos';
-import { assertDefined, cache } from './utils';
+import { assertDefined, cache } from './helpers'
 
 export interface Block {
     getNumber(): bigint;

@@ -15,7 +15,7 @@
     <div v-if="isVerificationSuccess" class="card col-7">
         <i class="card-img-top text-center text-success display-4 bi bi-check-circle"></i>
         <div class="card-body">
-            <h5 class="card-title text-success text-center">Verifikation erfolgreich</h5>
+            <h5 class="card-title text-success text-center fw-bold">Verifikation erfolgreich</h5>
             <p class="card-text text-center">{{ verificationMessage }}</p>
         </div>
         <ul class="list-group list-group-flush">
@@ -26,7 +26,7 @@
     <div v-if="isVerificationNotSuccess" class="card col-7">
         <i class="card-img-top text-center text-danger display-4 bi bi-x-circle"></i>
         <div class="card-body">
-            <h5 class="card-title text-danger text-center">Verifikation fehlgeschlagen</h5>
+            <h5 class="card-title text-danger text-center fw-bold">Verifikation fehlgeschlagen</h5>
             <p class="card-text text-center">{{ verificationMessage }}</p>
         </div>
     </div>
