@@ -1,9 +1,26 @@
 [//]: # (SPDX-License-Identifier: CC-BY-4.0)
 
 # INF-eVoting
-Praxisprojekt für die Masterarbeit von Karl Herzog zum Thema *Blockchain-basierte Abstimmungssysteme: Grundlagen und prototypische Umsetzung in der Cloud* an der TH Rosenheim
+Praxisprojekt für die Masterarbeit von Karl Herzog zum Thema **Blockchain-basierte Abstimmungssysteme: Grundlagen und prototypische Umsetzung mit Hyperledger Fabric** an der TH Rosenheim
 
-## Installation (einmalig)
+**Inhaltsverzeichnis**
+
+- [INF-eVoting](#inf-evoting)
+  - [Installation der Systemvoraussetzungen](#installation-der-systemvoraussetzungen)
+    - [Empfohlene Hardware-Voraussetzungen](#empfohlene-hardware-voraussetzungen)
+    - [Software-Voraussetzungen](#software-voraussetzungen)
+    - [Alternatives Vorgehen unter Windows](#alternatives-vorgehen-unter-windows)
+    - [Klonen des Repository](#klonen-des-repository)
+    - [Download von Docker Images und Binaries](#download-von-docker-images-und-binaries)
+  - [Einrichtung des Fabric-Netzwerks](#einrichtung-des-fabric-netzwerks)
+    - [Starten der Netzwerk-Infrastruktur](#starten-der-netzwerk-infrastruktur)
+    - [Deployen des Smart Contract / Chaincode](#deployen-des-smart-contract--chaincode)
+    - [E-Voting Client ausführen](#e-voting-client-ausführen)
+    - [Stoppen und Aufräumen des Netzwerks](#stoppen-und-aufräumen-des-netzwerks)
+  - [License ](#license-)
+
+
+## Installation der Systemvoraussetzungen
 ### Empfohlene Hardware-Voraussetzungen
 - mind. 4-8 CPU-Kerne
 - mind 16 GB RAM
@@ -32,35 +49,35 @@ docker-compose --version
 # Optional: If you want the Docker daemon to start when the system starts, use the following:
 sudo systemctl enable docker
 ```
-### Alternative Einrichtung unter Windows
+### Alternatives Vorgehen unter Windows
 - Wichtig: Da der Sourcecode auf eine `Bash` Umgebung ausgerichtet, wird die Einrichtung von [WSL2](https://learn.microsoft.com/en-us/windows/wsl/install) sowie die Verwendung einer gängigen Linux-Distribution wie Ubuntu in der aktuellen LTS-Version sehr empfohlen.
 - [Docker Desktop](https://docs.docker.com/get-docker/)
 - [Node.js](https://nodejs.org/en)
 - [Jq](https://jqlang.github.io/jq/download/)
 - *Optional*: [Microsoft VS Code](https://code.visualstudio.com/) mit `Remote - WSL extension` zur vereinfachten Interaktion mit der WSL2 Linux-Distribution
 
-### Download von Sourcecode, Hyperledger Docker Images und Binaries
-
-Klonen des Repository für den Sourcecode in beliebiges Root-Verzeichnis (z.B. in `/home/<username>`):
+### Klonen des Repository
+Klonen des Git-Repository in beliebiges Root-Verzeichnis (z.B. `/home/<username>`):
 
 ```bash
 git clone https://github.com/mr-duke/inf-evoting.git
 ```
 
+### Download von Docker Images und Binaries
 Verschieben des Installationsskripts ins Root-Verzeichnis und ausführbar machen der Datei:
 
 ```bash
 mv inf-evoting/install-fabric.sh . && chmod +x install-fabric.sh
 ```
 
-Ausführen des Installationsskripts (Es werden die notwendigen Hyperledger Docker Images und Binaries heruntergeladen):
+Ausführen des Installationsskripts. Es werden alle notwendigen Docker Images für Hyperledger Fabric und die Binaries für die Fabric CLI Tools heruntergeladen (Hyperledger Version im Skript bei Bedarf anpassen):
 
 ```bash
 ./install-fabric.sh
 ```
 
-## Benutzung
-### Starten des Blockchain-Netzwerks (falls noch nicht geschehen)
+## Einrichtung des Fabric-Netzwerks
+### Starten der Netzwerk-Infrastruktur
 
 Zu folgendem Verzeichnis navigieren:
 
