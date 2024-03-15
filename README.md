@@ -13,10 +13,10 @@ Praxisprojekt für die Masterarbeit von Karl Herzog zum Thema **Blockchain-basie
     - [Klonen des Repository](#klonen-des-repository)
     - [Download von Docker Images und Binaries](#download-von-docker-images-und-binaries)
   - [Einrichtung des Fabric-Netzwerks](#einrichtung-des-fabric-netzwerks)
-    - [Starten der Netzwerk-Infrastruktur](#starten-der-netzwerk-infrastruktur)
-    - [Deployen des Smart Contract / Chaincode](#deployen-des-smart-contract--chaincode)
-    - [E-Voting Client ausführen](#e-voting-client-ausführen)
-    - [Stoppen und Aufräumen des Netzwerks](#stoppen-und-aufräumen-des-netzwerks)
+  - [Deployment des Chaincode](#deployment-des-chaincode)
+    - [Optional: Prüfen des Chaincode während Testphase](#optional-prüfen-des-chaincode-während-testphase)
+    - [Starten der E-Voting Clientanwendung](#starten-der-e-voting-clientanwendung)
+  - [Stoppen und Löschen des Netzwerks](#stoppen-und-löschen-des-netzwerks)
   - [License ](#license-)
 
 
@@ -77,7 +77,6 @@ Ausführen des Installationsskripts. Es werden alle notwendigen Docker Images f�
 ```
 
 ## Einrichtung des Fabric-Netzwerks
-### Starten der Netzwerk-Infrastruktur
 
 Zu folgendem Verzeichnis navigieren:
 
@@ -104,8 +103,7 @@ cd ./addOrg3
 ./addOrg3.sh up -c evoting-channel -ca
 ```
 
-
-### Deployen des Smart Contract / Chaincode
+## Deployment des Chaincode
 
 Im `test-network` Verzeichnis ausführen zum Packen, Installieren, Prüfen und Commiten des Chaincode (Typescript):
 
@@ -114,7 +112,8 @@ cd ..
 ./network.sh deployCC -ccp ../chaincode -ccn evoting-chaincode -ccl typescript
 ```
 
-Folgende Befehle nur während Testphase, falls Chaincode direkt über `Peer CLI` ohne Clientanwendung aufgerufen werden soll:
+### Optional: Prüfen des Chaincode während Testphase
+Folgende Befehle sollten nur während der Testphase ausgeführt werden und ermöglichen es, den Chaincode direkt über die `Peer CLI` aufzurufen. Hierzu ist keine Clientwanwendung notwendig.
 
 Umgebungsvariablen für `Peer CLI`setzen:
 
@@ -156,7 +155,7 @@ export CORE_PEER_ADDRESS=localhost:11051
 peer lifecycle chaincode queryinstalled
 ```
 
-### E-Voting Client ausführen
+### Starten der E-Voting Clientanwendung
 
 Zur Client-Anwendung (Typescript) navigieren:
 
@@ -176,7 +175,7 @@ E-Voting Client starten:
 npm run dev
 ```
 
-### Stoppen und Aufräumen des Netzwerks
+## Stoppen und Löschen des Netzwerks
 
 Zum  Löschen aller Netzwerkkomponenten und der Blockchain im Verzeichnis `test-network` ausführen:
 
