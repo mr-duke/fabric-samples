@@ -3,19 +3,17 @@
  * Use Singleton pattern to ensure only one Gateway per user will be created 
  */ 
 import { connect, signers } from '@hyperledger/fabric-gateway';
-import type { Contract, Identity, Signer, Gateway } from '@hyperledger/fabric-gateway';
+import type { Identity, Signer, Gateway } from '@hyperledger/fabric-gateway';
 import * as crypto from 'crypto';
 import { promises as fs } from 'fs';
 import * as path from 'path';
-import { fileURLToPath } from 'url';
 
 export async function getGateway(user: string): Promise <Gateway> {
 
-    const __filename = fileURLToPath(import.meta.url);
-    const __dirname = path.dirname(__filename);
     const mspId = envOrDefault('MSP_ID', 'Org1MSP');
     // Path to crypto materials.
-    const cryptoPath = envOrDefault('CRYPTO_PATH', path.resolve(__dirname, '..', '..', '..', '..', 'test-network', 'organizations', 'peerOrganizations', 'org1.example.com'));
+    const cryptoPath = envOrDefault('CRYPTO_PATH', path.resolve('test-network', 'organizations', 'peerOrganizations', 'org1.example.com'));
+
     // Path to user private key directory.
     const keyDirectoryPath = envOrDefault('KEY_DIRECTORY_PATH', path.resolve(cryptoPath, 'users', `${user}@org1.example.com`, 'msp', 'keystore'));
     // Path to user certificate.

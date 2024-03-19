@@ -1,0 +1,16 @@
+version: '3'
+services:
+  inf-client:
+    build: ./inf-client
+    ports:
+      - "3001:3000"
+    volumes:
+      - ./../test-network:/src/test-network
+  #wif-client:
+  #  build: ./wif-client
+  #  ports:
+  #    - "3002:3000"
+  #aai-client:
+  #  build: ./aai-client
+  #  ports:
+  #    - "3003:3000"

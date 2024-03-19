@@ -5,19 +5,15 @@
 import * as grpc from '@grpc/grpc-js';
 import { promises as fs } from 'fs';
 import * as path from 'path';
-import { fileURLToPath } from 'url';
-
-const __filename = fileURLToPath(import.meta.url);
-const __dirname = path.dirname(__filename);
 
 // Path to crypto materials.
-const cryptoPath = envOrDefault('CRYPTO_PATH', path.resolve(__dirname, '..', '..', '..', '..', 'test-network', 'organizations', 'peerOrganizations', 'org1.example.com'));
+const cryptoPath = envOrDefault('CRYPTO_PATH', path.resolve('test-network', 'organizations', 'peerOrganizations', 'org1.example.com'));
 
 // Path to peer tls certificate.
 const tlsCertPath = envOrDefault('TLS_CERT_PATH', path.resolve(cryptoPath, 'peers', 'peer0.org1.example.com', 'tls', 'ca.crt'));
 
 // Gateway peer endpoint.
-const peerEndpoint = envOrDefault('PEER_ENDPOINT', 'localhost:7051');
+const peerEndpoint = envOrDefault('PEER_ENDPOINT', 'inf-evoting.inf.fh-rosenheim.de:7051');
 
 // Gateway peer SSL host name override.
 const peerHostAlias = envOrDefault('PEER_HOST_ALIAS', 'peer0.org1.example.com');

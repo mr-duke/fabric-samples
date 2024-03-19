@@ -16,8 +16,10 @@ Praxisprojekt für die Masterarbeit von Karl Herzog zum Thema **Blockchain-basie
   - [Deployment des Chaincode](#deployment-des-chaincode)
     - [Optional: Prüfen des Chaincode während Testphase](#optional-prüfen-des-chaincode-während-testphase)
     - [Starten der E-Voting Clientanwendung](#starten-der-e-voting-clientanwendung)
-  - [Stoppen und Löschen des Netzwerks](#stoppen-und-löschen-des-netzwerks)
-  - [License ](#license-)
+  - [Beenden der Anwendung](#beenden-der-anwendung)
+    - [Beenden und Löschen von Netzwerk und Chaincode](#beenden-und-löschen-von-netzwerk-und-chaincode)
+    - [Beenden der Clientanwendungen](#beenden-der-clientanwendungen)
+  - [Lizenz / License ](#lizenz--license-)
 
 
 ## Installation der Systemvoraussetzungen
@@ -157,33 +159,42 @@ peer lifecycle chaincode queryinstalled
 
 ### Starten der E-Voting Clientanwendung
 
-Zur Client-Anwendung (Typescript) navigieren:
+Im `clients`-Verzeichnis ausführen, um die drei Clientanwendungen mit Docker Compose zu starten:
+- Das `--build` Flag ist optional und muss nur bei Änderungen am Quellcode verwendet werden. 
+- Alternativ kann Docker Compose auch im Hintergrund mit dem zusätzlichen  `-d` Flag gestartet werden
 
 ```bash
-cd ../clients/inf-client
+docker compose up --build
 ```
 
-Installieren der Abhängigkeiten:
+Die drei E-Voting Clientanwendungen sind nun unter folgenden URLs im internen TH-Netz erreichbar:
+
+| Name       | URL                                                                                   |
+|------------|---------------------------------------------------------------------------------------|
+| INF Client | [inf-evoting.inf.fh-rosenheim.de:3001](http://inf-evoting.inf.fh-rosenheim.de:3001)   |
+| WIF Client | [inf-evoting.inf.fh-rosenheim.de:3002](http://inf-evoting.inf.fh-rosenheim.de:3002)   |
+| AAI Client | [inf-evoting.inf.fh-rosenheim.de:3003](http://inf-evoting.inf.fh-rosenheim.de:3003)   |
+
+## Beenden der Anwendung 
+### Beenden und Löschen von Netzwerk und Chaincode
+
+Im Verzeichnis `test-network` ausführen:
 
 ```bash
-npm install
+./network.sh down
 ```
 
-E-Voting Client starten:
+### Beenden der Clientanwendungen
+
+Im Verzeichnis `clients` ausführen:
 
 ```bash
-npm run dev
+docker compose down
 ```
 
-## Stoppen und Löschen des Netzwerks
-
-Zum  Löschen aller Netzwerkkomponenten und der Blockchain im Verzeichnis `test-network` ausführen:
-
-`./network.sh down`
 
 
-
-## License <a name="license"></a>
+## Lizenz / License <a name="license"></a>
 
 Hyperledger Project source code files are made available under the Apache
 License, Version 2.0 (Apache-2.0), located in the [LICENSE](LICENSE) file.
