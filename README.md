@@ -15,7 +15,7 @@ Praxisprojekt für die Masterarbeit von Karl Herzog zum Thema **Blockchain-basie
   - [Einrichtung des Fabric-Netzwerks](#einrichtung-des-fabric-netzwerks)
   - [Deployment des Chaincode](#deployment-des-chaincode)
     - [Optional: Prüfen des Chaincode während Testphase](#optional-prüfen-des-chaincode-während-testphase)
-    - [Starten der E-Voting Clientanwendung](#starten-der-e-voting-clientanwendung)
+  - [Starten der E-Voting Clientanwendung](#starten-der-e-voting-clientanwendung)
   - [Beenden der Anwendung](#beenden-der-anwendung)
     - [Beenden und Löschen von Netzwerk und Chaincode](#beenden-und-löschen-von-netzwerk-und-chaincode)
     - [Beenden der Clientanwendungen](#beenden-der-clientanwendungen)
@@ -157,7 +157,7 @@ export CORE_PEER_ADDRESS=localhost:11051
 peer lifecycle chaincode queryinstalled
 ```
 
-### Starten der E-Voting Clientanwendung
+## Starten der E-Voting Clientanwendung
 
 Im `clients`-Verzeichnis ausführen, um die drei Clientanwendungen mit Docker Compose zu starten:
 - Das `--build` Flag ist optional und muss nur bei Änderungen am Quellcode verwendet werden. 
