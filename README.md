@@ -164,6 +164,7 @@ Im `clients`-Verzeichnis ausführen, um die drei Clientanwendungen mit Docker Co
 - Alternativ kann Docker Compose auch im Hintergrund mit dem zusätzlichen  `-d` Flag gestartet werden
 
 ```bash
+cd ../clients/
 docker compose up --build
 ```
 
@@ -191,8 +192,6 @@ Im Verzeichnis `clients` ausführen:
 ```bash
 docker compose down
 ```
-
-
 
 ## Lizenz / License <a name="license"></a>
 
