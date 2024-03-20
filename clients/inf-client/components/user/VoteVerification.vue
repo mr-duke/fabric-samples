@@ -1,6 +1,5 @@
 <template>
-    <h4 class="mt-3"> Verifikation </h4>
-
+    <h4> Verifikation Ihrer Stimme</h4>
     <div class="col-7">
         <input class="col-7 form-control mb-3" type="text" placeholder="Transaktions-ID eingeben"
             v-model="txIdToSearch" />

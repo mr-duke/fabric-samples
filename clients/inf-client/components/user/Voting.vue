@@ -1,6 +1,5 @@
 <template>
     <h4 class="mt-3"> Abstimmung </h4>
-
     <div v-if="isAllowedToVote" class="form-check" v-for="(option, index) in existingOptions" :key="index">
         <input class="form-check-input" type="radio" name="flexRadioDefault" :id=option.key :value=option.key
             v-model="votedOption">
@@ -8,9 +7,12 @@
             {{ option.name }}
         </label>
     </div>
+    <div v-if="!doOptionsExist" class="d-flex alert alert-warning col-7" role="alert">
+        {{ "Keine Wahloptionen angelegt" }}
+    </div>
 
     <div class="d-flex mt-3">
-        <button @click="castVote" type="button" class="btn btn-primary me-3" :disabled="!isAllowedToVote">
+        <button v-if="doOptionsExist" @click="castVote" type="button" class="btn btn-primary me-3" :disabled="!isAllowedToVote">
             <i class="bi bi-envelope-paper me-2"></i> Abstimmen
         </button>
         <div v-if="isVoteLoading" class="spinner-border text-primary" role="status">
@@ -18,17 +20,19 @@
     </div>
     <div v-if="isVoteCast" class="d-flex alert alert-success col-7 mt-3" role="alert">
         {{ "Stimme wurde erfolgreich abgegeben" }} <br/>
-        {{ "Ihre Transaktions-ID: " }} {{ transactionId }}
+        {{ "Ihre Transaktions-ID: " }} <br/>
+        {{ transactionId }}
     </div>
     <div v-if="isVoteNotCast" class="d-flex alert alert-danger col-7 mt-3" role="alert">
         {{ "Stimme konnte nicht abgegeben werden" }}
     </div>
     <div v-if="!isAllowedToVote" class="d-flex alert alert-warning col-7 mt-3">
-        {{ "Sie haben bereits abgestimmt" }}
+        {{ `Vielen Dank, ${userStore.userName}, Sie haben bereits abgestimmt` }}
     </div>
+    <br/>
 
     <div v-if="!isAllowedToVote">
-        <h4> Ergebnis</h4>
+        <h4>Ergebnis</h4>
         <div class="col-7">
             <table class="table table-striped">
                 <thead>
@@ -45,17 +49,7 @@
                 </tbody>
             </table>
         </div>
-    </div>
-    <br />
-
-    <h4>Bereits abgestimmt:</h4>
-    <ul>
-        <li v-for="(item, index) in userStore.alreadyVotedList" :key="index">
-            {{ item }}
-        </li>
-    </ul>
-    <div class="mt-3">
-        Eingeloggt: {{ userStore.userName }}
+        <br/>
     </div>
 </template>
 
@@ -72,7 +66,6 @@ onMounted(async () => {
 });
 
 const userStore = useUserStore();
-const router = useRouter();
 const isVoteLoading = ref<boolean>(false);
 const isVoteCast = ref<boolean>(false);
 const isVoteNotCast = ref<boolean>(false);
@@ -90,6 +83,10 @@ const isAllowedToVote = computed(() => {
         return true
     }
 });
+const doOptionsExist = computed(() => {
+  return (existingOptions.value?.length !== 0)
+});
+
 const castVote = async () => {
     isVoteLoading.value = true;
     const { data, status } = await useFetch('/api/cast-vote', {

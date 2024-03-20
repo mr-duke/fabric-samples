@@ -4,7 +4,7 @@
             Exkursion
         </div>
         <div class="card-body">
-            <p class="card-text">Stimmen Sie über das Ziel der nächsten Exkursion ab. <br/> Sie haben <strong>1 Stimme</strong>.</p>
+            <p class="card-text">Bitte stimmen Sie über das Ziel der nächsten Exkursion ab. <br/> Sie haben <strong>1 Stimme</strong>.</p>
         </div>
     </div>
     <div>

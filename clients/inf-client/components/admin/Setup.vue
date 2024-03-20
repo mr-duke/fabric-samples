@@ -12,13 +12,13 @@
   </div>
   <br />
 
-  <h4> Wahl verwalten </h4>
+  <h4> Abstimmung verwalten </h4>
   <div class="col-7">
     <input class="form-control mb-3" type="text" placeholder="Neue Wahloption eingeben" v-model="optionToAdd" />
   </div>
   <div class="d-flex mb-3">
     <button @click="createOption" type="button" class="btn btn-primary me-3" :disabled="isEmptyOptionInput">
-      <i class="bi bi-plus-square me-2"></i> Option hinzufügen
+      <i class="bi bi-plus-square me-2"></i> Wahloption hinzufügen
     </button>
     <div v-if="isOptionLoading" class="spinner-border text-primary" role="status">
     </div>
@@ -31,7 +31,7 @@
   </div>
   <div class="d-flex">
     <button @click="resetElection" type="button" class="btn btn-primary me-3 mb-3">
-      <i class="bi bi-trash me-2"></i> Abstimmung zurücksetzen
+      <i class="bi bi-arrow-return-left me-2"></i> Abstimmung zurücksetzen
     </button>
     <div v-if="isResetLoading" class="spinner-border text-primary" role="status">
     </div>
@@ -44,7 +44,7 @@
   </div>
   <br />
 
-  <h4> Wahloptionen anzeigen </h4>
+  <h4> Aktuellen Stand anzeigen </h4>
   <div class="col-7">
     <table class="table table-striped" v-if="doOptionsExist">
       <thead>
@@ -64,8 +64,19 @@
     </table>
   </div>
   <div v-if="!doOptionsExist" class="d-flex alert alert-warning col-7" role="alert">
-    {{ "Keine Optionen angelegt" }}
+    {{ "Keine Wahloptionen angelegt" }}
   </div>
+  <br />
+
+  <h4>Bereits abgestimmt</h4>
+    <div v-if="userStore.alreadyVotedList.length === 0" class="d-flex alert alert-warning col-7" role="alert">
+      {{ "Noch kein Wähler hat abgestimmt" }}
+    </div>
+    <ul>
+        <li v-for="(item, index) in userStore.alreadyVotedList" :key="index">
+            {{ item }}
+        </li>
+    </ul>
   <br />
 </template>
 
@@ -167,6 +178,7 @@ const resetElection = async () => {
 
   if (status.value === "success") {
     isElectionResetted.value = true;
+    userStore.resetAlreadyVotedList();
     setTimeout(() => {
       isElectionResetted.value = false;
     }, 2500);

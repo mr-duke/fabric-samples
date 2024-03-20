@@ -1,7 +1,10 @@
 <template>
     <div>
-        <div class="row mt-3">
-            <div class="col form-group">
+        <div class="row">
+            <div>
+                <img src="/Logo-INF-E-Voting.png" class="rounded float-start mt-3" alt="Logo INF E-Voting">
+            </div>
+            <div class="col-4 form-group mt-3">
                 <label for="userSelect">Wählen Sie Ihren Benutzer aus:</label>
                 <select class="form-select" v-model="selectedUser" id="userSelect">
                     <option value="Admin">INF-Admin</option>
@@ -11,10 +14,6 @@
                     <option value="Inf-User4">INF-User 4</option>
                     <option value="Inf-User5">INF-User 5</option>
                 </select>
-            </div>
-            <div class="col">
-            </div>
-            <div class="col">
             </div>
         </div>
         <button v-if="selectedUser" @click="login" type="button" class="btn btn-primary mt-3">

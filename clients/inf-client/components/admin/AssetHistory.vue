@@ -1,11 +1,11 @@
 <template>
-    <h4>Asset-Verlauf</h4>
+    <h4>Transaktionsverlauf</h4>
     <div class="col-7">
         <input class="col-7 form-control mb-3" type="text" placeholder="Gesuchten Key eingeben" v-model="keyToSearch" />
     </div>
     <div class="d-flex">
         <button @click="getHistoryForKey" type="button" class="btn btn-primary me-3 mb-3" :disabled="isEmptyKeyInput">
-            <i class="bi bi-plus-square me-2"></i> Verlauf anzeigen
+            <i class="bi bi-card-list me-2"></i> Verlauf anzeigen
         </button>
         <div v-if="isHistoryLoading" class="spinner-border text-primary" role="status">
         </div>
