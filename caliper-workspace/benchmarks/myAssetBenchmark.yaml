@@ -1,0 +1,31 @@
+test:
+  name: evoting-contract-benchmark
+  description: test benchmark
+  workers:
+    number: 2
+  rounds:
+    - label: readAsset
+      description: Read asset benchmark
+      txDuration: 30
+      rateControl:
+        type: maximum-rate
+        opts:
+          tps: 100
+          step: 100
+          sampleInterval: 10
+          includeFailed: true
+      workload:
+        module: workload/readAsset.js
+        arguments:
+          assets: 5
+          contractId: evoting-chaincode
+monitors:
+  resource:
+  - module: docker
+    options:
+      interval: 5
+      cpuUsageNormalization: true
+      containers:
+      - all
+
+

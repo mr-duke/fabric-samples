@@ -1,0 +1,23 @@
+name: Caliper test
+version: "2.0.0"
+
+caliper:
+  blockchain: fabric
+
+channels:
+  - channelName: evoting-channel
+    contracts:
+    - id: evoting-chaincode
+
+organizations:
+  - mspid: Org1MSP
+    identities:
+      certificates:
+      - name: 'Inf-User1'
+        clientPrivateKey:
+          path: '../test-network/organizations/peerOrganizations/org1.example.com/users/Inf-User1@org1.example.com/msp/keystore/6e508e185b00608b7ab5015da29b53c3af98c39cefd16eabe6954838588bce2c_sk'
+        clientSignedCert:
+          path: '../test-network/organizations/peerOrganizations/org1.example.com/users/Inf-User1@org1.example.com/msp/signcerts/cert.pem'
+    connectionProfile:
+      path: '../test-network/organizations/peerOrganizations/org1.example.com/connection-org1.yaml'
+      discover: true
