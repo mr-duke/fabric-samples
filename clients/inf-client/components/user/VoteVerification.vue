@@ -40,8 +40,11 @@ interface VoteVerification {
     txID: string;
 }
 
-const userStore = useUserStore();
+onMounted(async () => {
+    userName.value = localStorage.getItem('userName') ?? "";
+});
 
+const userName = ref<string>("");
 const txIdToSearch = ref<string | null>();
 const isVerificationLoading = ref<boolean>(false);
 const isVerificationSuccess = ref<boolean>(false);
@@ -62,7 +65,7 @@ const verifyVote = async () => {
     const { data } = await useFetch('/api/verify-vote', {
         method: 'post',
         body: {
-            user: userStore.userName,
+            user: userName.value,
             transactionId: txIdToSearch.value,
         }
     });

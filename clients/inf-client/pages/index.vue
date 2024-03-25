@@ -23,13 +23,16 @@
 </template>
 
 <script setup lang="ts">
-const selectedUser = ref();
-const userStore = useUserStore();
+const selectedUser = ref<string>("");
 const router = useRouter();
 
+onMounted(async () => {
+    localStorage.removeItem('userName');
+});
+
 const login = () => {
-    userStore.userName = selectedUser.value;
-    if (userStore.userName === "Admin") {
+    localStorage.setItem('userName', selectedUser.value);
+    if (selectedUser.value === "Admin") {
         router.push('/admin')
     } else {
         router.push('/user')

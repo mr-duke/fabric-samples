@@ -38,8 +38,11 @@ interface HistoryRecord {
     timestamp: string;
     txId: string;
 }
+onMounted(async () => {
+    userName.value = localStorage.getItem('userName') ?? "";
+});
 
-const userStore = useUserStore();
+const userName = ref<string>("");
 const keyToSearch = ref<string|null>();
 const isHistoryLoading = ref<boolean>(false);
 const isHistoryCreated = ref<boolean>(false);
@@ -55,7 +58,7 @@ const getHistoryForKey = async () => {
     const { data } = await useFetch('/api/get-asset-history', {
         method: 'post',
         body: {
-            user: userStore.userName,
+            user: userName.value,
             key: keyToSearch.value,
         }
     });

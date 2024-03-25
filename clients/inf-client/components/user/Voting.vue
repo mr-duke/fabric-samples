@@ -27,7 +27,7 @@
         {{ "Stimme konnte nicht abgegeben werden" }}
     </div>
     <div v-if="!isAllowedToVote" class="d-flex alert alert-warning col-7 mt-3">
-        {{ `Vielen Dank, ${userStore.userName}, Sie haben bereits abgestimmt` }}
+        {{ `Vielen Dank, ${userName}, Sie haben bereits abgestimmt` }}
     </div>
     <br/>
 
@@ -62,11 +62,12 @@ interface Option {
 }
 
 onMounted(async () => {
+    userName.value = localStorage.getItem('userName') ?? "";
     await getAllOptions();
     await getAllVoters();
 });
 
-const userStore = useUserStore();
+const userName = ref<string>("");
 const isVoteLoading = ref<boolean>(false);
 const isVoteCast = ref<boolean>(false);
 const isVoteNotCast = ref<boolean>(false);
@@ -76,10 +77,10 @@ const alreadyVoted = ref<string[]>([]);
 const votedOption = ref<string>();
 
 const isAllowedToVote = computed(() => {
-    if (alreadyVoted.value.includes(userStore.userName)) {
+    if (alreadyVoted.value.includes(userName.value)) {
         return false
     // Admins should not be allowed to vote in the first place    
-    } else if (userStore.userName === "Admin") {
+    } else if (userName.value === "Admin") {
         return false
     } else {
         return true
@@ -94,14 +95,13 @@ const castVote = async () => {
     const { data, status } = await useFetch('/api/cast-vote', {
         method: 'post',
         body: {
-            user: userStore.userName,
+            user: userName.value,
             key: votedOption.value,
         }
     });
-    await addVoter();
-    isVoteLoading.value = false;
 
-    if (status.value === "success" && alreadyVoted.value.length !== 0) {
+    if (status.value === "success") {
+        await addVoter();
         isVoteCast.value = true;
         transactionId.value = data.value;
         await getAllOptions();
@@ -111,23 +111,24 @@ const castVote = async () => {
             isVoteNotCast.value = false;
         }, 2500);
     }
+    isVoteLoading.value = false;
 }
 
 const getAllOptions = async () => {
     const { data } = await useFetch('/api/get-all-options', {
         method: 'post',
         body: {
-            user: userStore.userName
+            user: userName.value
         }
     });
-    existingOptions.value = data.value;
+   existingOptions.value = data.value;
 }
 
 const getAllVoters = async () => {
     const { data } = await useFetch('/api/get-all-voters', {
         method: 'post',
         body: {
-            user: userStore.userName
+            user: userName.value
         }
     });
     alreadyVoted.value = data.value;
@@ -137,7 +138,7 @@ const addVoter = async () => {
     const { status } = await useFetch('/api/add-voter', {
         method: 'post',
         body: {
-            user: userStore.userName
+            user: userName.value
         }
     });
     if (status.value === "success") {

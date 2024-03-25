@@ -89,12 +89,13 @@ interface Option {
 }
 
 onMounted(async () => {
+  userName.value = localStorage.getItem('userName') ?? "";
   await getAllOptions();
   await getAllVoters();
 });
 
-const userStore = useUserStore();
-const existingOptions = ref<Option[]>();
+const userName = ref<string>("");
+const existingOptions = ref<Option[]>([]);
 const optionToAdd = ref<string|null>();
 const isDemoLoading = ref<boolean>(false);
 const isDemoGenerated = ref<boolean>(false);
@@ -118,7 +119,7 @@ const createDemo = async () => {
   await useFetch('/api/init-ledger', {
     method: 'post',
     body: {
-      user: userStore.userName
+      user: userName.value
     }
   });
 
@@ -132,13 +133,13 @@ const createDemo = async () => {
 }
 
 const getAllOptions = async () => {
-  const { data } = await useFetch('/api/get-all-options', {
+  const { data , status } = await useFetch('/api/get-all-options', {
     method: 'post',
     body: {
-      user: userStore.userName
-    }
+      user: userName.value
+    },
   });
-  existingOptions.value = data.value;
+    existingOptions.value = data.value;
 }
 
 const createOption = async () => {
@@ -146,7 +147,7 @@ const createOption = async () => {
   const { status } = await useFetch('/api/create-option', {
     method: 'post',
     body: {
-      user: userStore.userName,
+      user: userName.value,
       data: optionToAdd.value,
     }
   });
@@ -173,11 +174,10 @@ const resetElection = async () => {
   const { status } = await useFetch('/api/reset-election', {
     method: 'post',
     body: {
-      user: userStore.userName,
+      user: userName.value,
     }
   });
   await resetAllVoters();
-  isResetLoading.value = false;
 
   // If status is success and list of users who already voted is empty, 
   // the election has successfully been resetted  
@@ -192,6 +192,7 @@ const resetElection = async () => {
       isElectionNotResetted.value = false;
     }, 2500);
   }
+  isResetLoading.value = false;
   await getAllOptions();
 }
 
@@ -199,17 +200,17 @@ const getAllVoters = async () => {
     const { data } = await useFetch('/api/get-all-voters', {
         method: 'post',
         body: {
-            user: userStore.userName
+            user: userName.value
         }
     });
     alreadyVoted.value = data.value;
-}
+    }
 
 const resetAllVoters = async () => {
     const { status } = await useFetch('/api/reset-all-voters', {
         method: 'post',
         body: {
-            user: userStore.userName
+            user: userName.value
         }
     });
     if (status.value === "success") {
