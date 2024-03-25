@@ -176,11 +176,13 @@ const resetElection = async () => {
       user: userStore.userName,
     }
   });
+  await resetAllVoters();
   isResetLoading.value = false;
 
-  if (status.value === "success") {
+  // If status is success and list of users who already voted is empty, 
+  // the election has successfully been resetted  
+  if (status.value === "success" && alreadyVoted.value.length === 0) {
     isElectionResetted.value = true;
-    userStore.resetAlreadyVotedList();
     setTimeout(() => {
       isElectionResetted.value = false;
     }, 2500);

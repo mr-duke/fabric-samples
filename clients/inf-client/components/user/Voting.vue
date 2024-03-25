@@ -98,10 +98,10 @@ const castVote = async () => {
             key: votedOption.value,
         }
     });
+    await addVoter();
     isVoteLoading.value = false;
 
-    if (status.value === "success") {
-        await addVoter();
+    if (status.value === "success" && alreadyVoted.value.length !== 0) {
         isVoteCast.value = true;
         transactionId.value = data.value;
         await getAllOptions();

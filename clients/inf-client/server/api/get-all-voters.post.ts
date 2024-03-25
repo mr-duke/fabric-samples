@@ -14,7 +14,7 @@ export default defineEventHandler(async (event) => {
     console.log('\n--> Evaluate Transaction: getAllVoters function returns all the voters on the ledger who already cast their vote');
     const resultBytes = await contract.evaluateTransaction(chaincodeFunction);
     const resultJson = utf8Decoder.decode(resultBytes);
-    const result = JSON.parse(resultJson) as string[];
+    const result = JSON.parse(resultJson);
     console.log('*** Result:', result);
     
     gateway.close();

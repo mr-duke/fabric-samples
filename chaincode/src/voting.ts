@@ -13,7 +13,10 @@ import { VoterMonitor } from './voterMonitor';
 
 @Info({title: 'Voting Contract', description: 'Smart contract for e-voting'})
 export class VotingContract extends Contract {
+    
+    voterMonitorKey = 'voterMonitor';
 
+    // InitLedger creates the initial set of options in the world state for demo purposes.
     @Transaction()
     public async initLedger(ctx: Context): Promise<void> {
         const options: Option[] = [
@@ -77,7 +80,7 @@ export class VotingContract extends Contract {
         return option.toString();
     }
 
-    // Returns all options found in the world state.
+    // Returns all voting options found in the world state.
     @Transaction(false)
     @Returns('string')
     public async getAllOptions(ctx: Context): Promise<string> {
@@ -87,7 +90,10 @@ export class VotingContract extends Contract {
         for await (const result of iterator) {
             const valueString = Buffer.from(result.value).toString('utf8');
             let record: Option = JSON.parse(valueString);
-            allResults.push(record);
+            // Exclude voterMonitor from the list of voting options
+            if(record.key !== this.voterMonitorKey){
+                allResults.push(record);
+            }
         }
         return JSON.stringify(allResults);
     }
@@ -164,23 +170,24 @@ export class VotingContract extends Contract {
         return JSON.stringify(records);
     }
 
-    // Add a user to the list of voters who already cast their vote
-    // in order to prevent multiple voting
+    // Add a user to the list of voters who already cast their vote 
+    // in order to prevent multiple voting by one user
     @Transaction()
     public async addToVoters(ctx: Context, voterName: string): Promise<void> {
-        const voterMonitorKey = 'voterMonitor';
-        const voterMonitor = await ctx.stub.getState(voterMonitorKey); // Get the option from chaincode state
-        
+        const voterMonitor = await ctx.stub.getState(this.voterMonitorKey);
+        // Check if VoterMonitor already exists
+        // If not, create new VoterMonitor with voterName
         if (!voterMonitor || voterMonitor.length === 0) {
             const newVoterMonitor = {
-                key: voterMonitorKey,
+                key: this.voterMonitorKey,
                 alreadyVoted: [voterName],
             };
-            await ctx.stub.putState(voterMonitorKey, Buffer.from(stringify(sortKeysRecursive(newVoterMonitor))));
+            await ctx.stub.putState(this.voterMonitorKey, Buffer.from(stringify(sortKeysRecursive(newVoterMonitor))));
+        // Else add voter to existing VoterMonitor
         } else {
             const voterMonitorObject: VoterMonitor = JSON.parse(voterMonitor.toString());
             voterMonitorObject.alreadyVoted.push(voterName);
-            await ctx.stub.putState(voterMonitorKey, Buffer.from(stringify(sortKeysRecursive(voterMonitorObject))));
+            await ctx.stub.putState(this.voterMonitorKey, Buffer.from(stringify(sortKeysRecursive(voterMonitorObject))));
         }
     }
 
@@ -188,8 +195,7 @@ export class VotingContract extends Contract {
     @Transaction(false)
     @Returns('string')
     public async getAllVoters(ctx: Context): Promise<string[]> {
-        const voterMonitorKey = 'voterMonitor';
-        const voterMonitor = await ctx.stub.getState(voterMonitorKey);
+        const voterMonitor = await ctx.stub.getState(this.voterMonitorKey);
         if (!voterMonitor || voterMonitor.length === 0) {
             return [];
         } else {
@@ -201,8 +207,7 @@ export class VotingContract extends Contract {
     // Delete VoteMonitor from world state, including all voters who already cast their vote
     @Transaction()
     public async deleteAllVoters(ctx: Context): Promise<void> {
-        const voterMonitorKey = 'voterMonitor';
-        await ctx.stub.deleteState(voterMonitorKey);
+        await ctx.stub.deleteState(this.voterMonitorKey);
     }
 
 
