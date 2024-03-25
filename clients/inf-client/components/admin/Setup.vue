@@ -69,11 +69,11 @@
   <br />
 
   <h4>Bereits abgestimmt</h4>
-    <div v-if="userStore.alreadyVotedList.length === 0" class="d-flex alert alert-warning col-7" role="alert">
+    <div v-if="alreadyVoted.length === 0" class="d-flex alert alert-warning col-7" role="alert">
       {{ "Noch kein Wähler hat abgestimmt" }}
     </div>
     <ul>
-        <li v-for="(item, index) in userStore.alreadyVotedList" :key="index">
+        <li v-for="(item, index) in alreadyVoted" :key="index">
             {{ item }}
         </li>
     </ul>
@@ -90,6 +90,7 @@ interface Option {
 
 onMounted(async () => {
   await getAllOptions();
+  await getAllVoters();
 });
 
 const userStore = useUserStore();
@@ -103,6 +104,7 @@ const isOptionNotCreated = ref<boolean>(false);
 const isResetLoading = ref<boolean>(false);
 const isElectionResetted = ref<boolean>(false);
 const isElectionNotResetted = ref<boolean>(false);
+const alreadyVoted = ref<string[]>([]);
 
 const isEmptyOptionInput = computed(() => {
   return !optionToAdd.value
@@ -189,6 +191,28 @@ const resetElection = async () => {
     }, 2500);
   }
   await getAllOptions();
+}
+
+const getAllVoters = async () => {
+    const { data } = await useFetch('/api/get-all-voters', {
+        method: 'post',
+        body: {
+            user: userStore.userName
+        }
+    });
+    alreadyVoted.value = data.value;
+}
+
+const resetAllVoters = async () => {
+    const { status } = await useFetch('/api/reset-all-voters', {
+        method: 'post',
+        body: {
+            user: userStore.userName
+        }
+    });
+    if (status.value === "success") {
+        await getAllVoters();
+    }
 }
 
 </script>

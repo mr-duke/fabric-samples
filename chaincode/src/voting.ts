@@ -8,6 +8,7 @@ import Long from 'long';
 import { Timestamp } from 'fabric-shim';
 import { Option } from './option';
 import { HistoryRecord } from './historyRecord';
+import { VoterMonitor } from './voterMonitor';
 
 
 @Info({title: 'Voting Contract', description: 'Smart contract for e-voting'})
@@ -162,6 +163,48 @@ export class VotingContract extends Contract {
         }
         return JSON.stringify(records);
     }
+
+    // Add a user to the list of voters who already cast their vote
+    // in order to prevent multiple voting
+    @Transaction()
+    public async addToVoters(ctx: Context, voterName: string): Promise<void> {
+        const voterMonitorKey = 'voterMonitor';
+        const voterMonitor = await ctx.stub.getState(voterMonitorKey); // Get the option from chaincode state
+        
+        if (!voterMonitor || voterMonitor.length === 0) {
+            const newVoterMonitor = {
+                key: voterMonitorKey,
+                alreadyVoted: [voterName],
+            };
+            await ctx.stub.putState(voterMonitorKey, Buffer.from(stringify(sortKeysRecursive(newVoterMonitor))));
+        } else {
+            const voterMonitorObject: VoterMonitor = JSON.parse(voterMonitor.toString());
+            voterMonitorObject.alreadyVoted.push(voterName);
+            await ctx.stub.putState(voterMonitorKey, Buffer.from(stringify(sortKeysRecursive(voterMonitorObject))));
+        }
+    }
+
+    // Return all voters from VoteMonitor who already cast their vote
+    @Transaction(false)
+    @Returns('string')
+    public async getAllVoters(ctx: Context): Promise<string[]> {
+        const voterMonitorKey = 'voterMonitor';
+        const voterMonitor = await ctx.stub.getState(voterMonitorKey);
+        if (!voterMonitor || voterMonitor.length === 0) {
+            return [];
+        } else {
+            const voterMonitorObject: VoterMonitor = JSON.parse(voterMonitor.toString());
+            return voterMonitorObject.alreadyVoted;
+        }
+    }
+
+    // Delete VoteMonitor from world state, including all voters who already cast their vote
+    @Transaction()
+    public async deleteAllVoters(ctx: Context): Promise<void> {
+        const voterMonitorKey = 'voterMonitor';
+        await ctx.stub.deleteState(voterMonitorKey);
+    }
+
 
     // Returns true when an option with a given ID exists in world state.
     private async optionExists(ctx: Context, key: string): Promise<boolean> {

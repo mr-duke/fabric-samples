@@ -63,6 +63,7 @@ interface Option {
 
 onMounted(async () => {
     await getAllOptions();
+    await getAllVoters();
 });
 
 const userStore = useUserStore();
@@ -70,11 +71,12 @@ const isVoteLoading = ref<boolean>(false);
 const isVoteCast = ref<boolean>(false);
 const isVoteNotCast = ref<boolean>(false);
 const transactionId = ref<string|null>();
-const existingOptions = ref<Option[]>();
+const existingOptions = ref<Option[]>([]);
+const alreadyVoted = ref<string[]>([]);
 const votedOption = ref<string>();
 
 const isAllowedToVote = computed(() => {
-    if (userStore.alreadyVotedList.includes(userStore.userName)) {
+    if (alreadyVoted.value.includes(userStore.userName)) {
         return false
     // Admins should not be allowed to vote in the first place    
     } else if (userStore.userName === "Admin") {
@@ -99,7 +101,7 @@ const castVote = async () => {
     isVoteLoading.value = false;
 
     if (status.value === "success") {
-        userStore.alreadyVotedList.push(userStore.userName);
+        await addVoter();
         isVoteCast.value = true;
         transactionId.value = data.value;
         await getAllOptions();
@@ -119,6 +121,28 @@ const getAllOptions = async () => {
         }
     });
     existingOptions.value = data.value;
+}
+
+const getAllVoters = async () => {
+    const { data } = await useFetch('/api/get-all-voters', {
+        method: 'post',
+        body: {
+            user: userStore.userName
+        }
+    });
+    alreadyVoted.value = data.value;
+}
+
+const addVoter = async () => {
+    const { status } = await useFetch('/api/add-voter', {
+        method: 'post',
+        body: {
+            user: userStore.userName
+        }
+    });
+    if (status.value === "success") {
+        await getAllVoters();
+    }
 }
 
 </script>

@@ -19,6 +19,7 @@ Praxisprojekt für die Masterarbeit von Karl Herzog zum Thema **Blockchain-basie
   - [Beenden der Anwendung](#beenden-der-anwendung)
     - [Beenden und Löschen von Netzwerk und Chaincode](#beenden-und-löschen-von-netzwerk-und-chaincode)
     - [Beenden der Clientanwendungen](#beenden-der-clientanwendungen)
+  - [Performanz-/Lasttests mit Hyperledger Caliper](#performanz-lasttests-mit-hyperledger-caliper)
   - [Lizenz / License ](#lizenz--license-)
 
 
@@ -192,6 +193,8 @@ Im Verzeichnis `clients` ausführen:
 ```bash
 docker compose down
 ```
+
+## Performanz-/Lasttests mit Hyperledger Caliper
 
 ## Lizenz / License <a name="license"></a>
 
