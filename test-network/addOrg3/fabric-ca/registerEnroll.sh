@@ -5,6 +5,7 @@
 # SPDX-License-Identifier: Apache-2.0
 #
 
+# AAI 
 function createOrg3 {
 	infoln "Enrolling the CA admin"
 	mkdir -p ../organizations/peerOrganizations/org3.example.com/
@@ -35,9 +36,29 @@ function createOrg3 {
 	fabric-ca-client register --caname ca-org3 --id.name peer0 --id.secret peer0pw --id.type peer --tls.certfiles "${PWD}/fabric-ca/org3/tls-cert.pem"
   { set +x; } 2>/dev/null
 
-  infoln "Registering user"
+  infoln "Registering aai-user1"
   set -x
-  fabric-ca-client register --caname ca-org3 --id.name user1 --id.secret user1pw --id.type client --tls.certfiles "${PWD}/fabric-ca/org3/tls-cert.pem"
+  fabric-ca-client register --caname ca-org3 --id.name aai-user1 --id.secret aai-user1pw --id.type client --tls.certfiles "${PWD}/fabric-ca/org3/tls-cert.pem"
+  { set +x; } 2>/dev/null
+
+  infoln "Registering aai-user2"
+  set -x
+  fabric-ca-client register --caname ca-org3 --id.name aai-user2 --id.secret aai-user2pw --id.type client --tls.certfiles "${PWD}/fabric-ca/org3/tls-cert.pem"
+  { set +x; } 2>/dev/null
+
+  infoln "Registering aai-user3"
+  set -x
+  fabric-ca-client register --caname ca-org3 --id.name aai-user3 --id.secret aai-user3pw --id.type client --tls.certfiles "${PWD}/fabric-ca/org3/tls-cert.pem"
+  { set +x; } 2>/dev/null
+
+  infoln "Registering aai-user4"
+  set -x
+  fabric-ca-client register --caname ca-org3 --id.name aai-user4 --id.secret aai-user4pw --id.type client --tls.certfiles "${PWD}/fabric-ca/org3/tls-cert.pem"
+  { set +x; } 2>/dev/null
+
+  infoln "Registering aai-user5"
+  set -x
+  fabric-ca-client register --caname ca-org3 --id.name aai-user5 --id.secret aai-user5pw --id.type client --tls.certfiles "${PWD}/fabric-ca/org3/tls-cert.pem"
   { set +x; } 2>/dev/null
 
   infoln "Registering the org admin"
@@ -71,12 +92,40 @@ function createOrg3 {
   mkdir "${PWD}/../organizations/peerOrganizations/org3.example.com/ca"
   cp "${PWD}/../organizations/peerOrganizations/org3.example.com/peers/peer0.org3.example.com/msp/cacerts/"* "${PWD}/../organizations/peerOrganizations/org3.example.com/ca/ca.org3.example.com-cert.pem"
 
-  infoln "Generating the user msp"
+  infoln "Generating aai-user1 msp"
   set -x
-	fabric-ca-client enroll -u https://user1:user1pw@localhost:11054 --caname ca-org3 -M "${PWD}/../organizations/peerOrganizations/org3.example.com/users/User1@org3.example.com/msp" --tls.certfiles "${PWD}/fabric-ca/org3/tls-cert.pem"
+	fabric-ca-client enroll -u https://aai-user1:aai-user1pw@localhost:11054 --caname ca-org3 -M "${PWD}/../organizations/peerOrganizations/org3.example.com/users/Aai-User1@org3.example.com/msp" --tls.certfiles "${PWD}/fabric-ca/org3/tls-cert.pem"
   { set +x; } 2>/dev/null
 
-  cp "${PWD}/../organizations/peerOrganizations/org3.example.com/msp/config.yaml" "${PWD}/../organizations/peerOrganizations/org3.example.com/users/User1@org3.example.com/msp/config.yaml"
+  cp "${PWD}/../organizations/peerOrganizations/org3.example.com/msp/config.yaml" "${PWD}/../organizations/peerOrganizations/org3.example.com/users/Aai-User1@org3.example.com/msp/config.yaml"
+
+  infoln "Generating aai-user2 msp"
+  set -x
+	fabric-ca-client enroll -u https://aai-user2:aai-user2pw@localhost:11054 --caname ca-org3 -M "${PWD}/../organizations/peerOrganizations/org3.example.com/users/Aai-User2@org3.example.com/msp" --tls.certfiles "${PWD}/fabric-ca/org3/tls-cert.pem"
+  { set +x; } 2>/dev/null
+
+  cp "${PWD}/../organizations/peerOrganizations/org3.example.com/msp/config.yaml" "${PWD}/../organizations/peerOrganizations/org3.example.com/users/Aai-User2@org3.example.com/msp/config.yaml"
+
+  infoln "Generating aai-user3 msp"
+  set -x
+	fabric-ca-client enroll -u https://aai-user3:aai-user3pw@localhost:11054 --caname ca-org3 -M "${PWD}/../organizations/peerOrganizations/org3.example.com/users/Aai-User3@org3.example.com/msp" --tls.certfiles "${PWD}/fabric-ca/org3/tls-cert.pem"
+  { set +x; } 2>/dev/null
+
+  cp "${PWD}/../organizations/peerOrganizations/org3.example.com/msp/config.yaml" "${PWD}/../organizations/peerOrganizations/org3.example.com/users/Aai-User3@org3.example.com/msp/config.yaml"
+
+  infoln "Generating aai-user4 msp"
+  set -x
+	fabric-ca-client enroll -u https://aai-user4:aai-user4pw@localhost:11054 --caname ca-org3 -M "${PWD}/../organizations/peerOrganizations/org3.example.com/users/Aai-User4@org3.example.com/msp" --tls.certfiles "${PWD}/fabric-ca/org3/tls-cert.pem"
+  { set +x; } 2>/dev/null
+
+  cp "${PWD}/../organizations/peerOrganizations/org3.example.com/msp/config.yaml" "${PWD}/../organizations/peerOrganizations/org3.example.com/users/Aai-User4@org3.example.com/msp/config.yaml"
+
+  infoln "Generating aai-user5 msp"
+  set -x
+	fabric-ca-client enroll -u https://aai-user5:aai-user5pw@localhost:11054 --caname ca-org3 -M "${PWD}/../organizations/peerOrganizations/org3.example.com/users/Aai-User5@org3.example.com/msp" --tls.certfiles "${PWD}/fabric-ca/org3/tls-cert.pem"
+  { set +x; } 2>/dev/null
+
+  cp "${PWD}/../organizations/peerOrganizations/org3.example.com/msp/config.yaml" "${PWD}/../organizations/peerOrganizations/org3.example.com/users/Aai-User5@org3.example.com/msp/config.yaml"
 
   infoln "Generating the org admin msp"
   set -x
