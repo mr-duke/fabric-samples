@@ -2,30 +2,157 @@ test:
   name: evoting-contract-benchmark
   description: test benchmark
   workers:
-    number: 2
+    number: 100
   rounds:
-    - label: readAsset
+    - label: readAsset (25 TPS)
       description: Read asset benchmark
-      txDuration: 30
+      txNumber: 5000
       rateControl:
-        type: maximum-rate
+        type: fixed-rate
+        opts:
+          tps: 25
+      workload:
+        module: workload/getOption.js
+        arguments:
+          assets: 1
+          contractId: evoting-chaincode
+    - label: readAsset (50 TPS)
+      description: Read asset benchmark
+      txNumber: 5000
+      rateControl:
+        type: fixed-rate
+        opts:
+          tps: 50
+      workload:
+        module: workload/getOption.js
+        arguments:
+          assets: 1
+          contractId: evoting-chaincode
+    - label: readAsset (100 TPS)
+      description: Read asset benchmark
+      txNumber: 5000
+      rateControl:
+        type: fixed-rate
         opts:
           tps: 100
-          step: 100
-          sampleInterval: 10
-          includeFailed: true
       workload:
-        module: workload/readAsset.js
+        module: workload/getOption.js
         arguments:
-          assets: 5
+          assets: 1
+          contractId: evoting-chaincode
+    - label: readAsset (250 TPS)
+      description: Read asset benchmark
+      txNumber: 5000
+      rateControl:
+        type: fixed-rate
+        opts:
+          tps: 250
+      workload:
+        module: workload/getOption.js
+        arguments:
+          assets: 1
+          contractId: evoting-chaincode
+    - label: readAsset (375 TPS)
+      description: Read asset benchmark
+      txNumber: 5000
+      rateControl:
+        type: fixed-rate
+        opts:
+          tps: 375
+      workload:
+        module: workload/getOption.js
+        arguments:
+          assets: 1
+          contractId: evoting-chaincode
+    - label: readAsset (500 TPS)
+      description: Read asset benchmark
+      txNumber: 5000
+      rateControl:
+        type: fixed-rate
+        opts:
+          tps: 500
+      workload:
+        module: workload/getOption.js
+        arguments:
+          assets: 1
+          contractId: evoting-chaincode
+    - label: castVote (25 TPS)
+      description: Cast vote benchmark
+      txNumber: 5000
+      rateControl:
+        type: fixed-rate
+        opts:
+          tps: 25
+      workload:
+        module: workload/castVote.js
+        arguments:
+          assets: 1
+          contractId: evoting-chaincode
+    - label: castVote (50 TPS)
+      description: Cast vote benchmark
+      txNumber: 5000
+      rateControl:
+        type: fixed-rate
+        opts:
+          tps: 50
+      workload:
+        module: workload/castVote.js
+        arguments:
+          assets: 1
+          contractId: evoting-chaincode
+    - label: castVote (100 TPS)
+      description: Cast vote benchmark
+      txNumber: 5000
+      rateControl:
+        type: fixed-rate
+        opts:
+          tps: 100
+      workload:
+        module: workload/castVote.js
+        arguments:
+          assets: 1
+          contractId: evoting-chaincode
+    - label: castVote (250 TPS)
+      description: Cast vote benchmark
+      txNumber: 5000
+      rateControl:
+        type: fixed-rate
+        opts:
+          tps: 250
+      workload:
+        module: workload/castVote.js
+        arguments:
+          assets: 1
+          contractId: evoting-chaincode
+    - label: castVote (375 TPS)
+      description: Cast vote benchmark
+      txNumber: 5000
+      rateControl:
+        type: fixed-rate
+        opts:
+          tps: 375
+      workload:
+        module: workload/castVote.js
+        arguments:
+          assets: 1
+          contractId: evoting-chaincode      
+    - label: castVote (500 TPS)
+      description: Cast vote benchmark
+      txNumber: 5000
+      rateControl:
+        type: fixed-rate
+        opts:
+          tps: 500
+      workload:
+        module: workload/castVote.js
+        arguments:
+          assets: 1
           contractId: evoting-chaincode
 monitors:
   resource:
   - module: docker
     options:
-      interval: 5
+      interval: 3
       cpuUsageNormalization: true
       containers:
       - all
-
-

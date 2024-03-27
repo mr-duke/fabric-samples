@@ -128,13 +128,24 @@
                 <li>DLT: &nbsp<span style="font-weight: 500;">fabric</span></li>
                 <li>Name: &nbsp<span style="font-weight: 500;">evoting-contract-benchmark</span></li>
                 <li>Description: &nbsp<span style="font-weight: 500;">test benchmark</span></li>
-                <li>Benchmark Rounds: &nbsp<span style="font-weight: 500;">1</span></li>
+                <li>Benchmark Rounds: &nbsp<span style="font-weight: 500;">12</span></li>
                 <li><a href="#benchmarkInfo">Details</a></li>
             </ul>
             <ul>
                 <h3>&nbspBenchmark results</h3>
                 <li><a href="#benchmarksummary">Summary</a></li>
-                    <li><a href="#readAsset">readAsset</a></li>
+                    <li><a href="#readAsset (25 TPS)">readAsset (25 TPS)</a></li>
+                    <li><a href="#readAsset (50 TPS)">readAsset (50 TPS)</a></li>
+                    <li><a href="#readAsset (100 TPS)">readAsset (100 TPS)</a></li>
+                    <li><a href="#readAsset (250 TPS)">readAsset (250 TPS)</a></li>
+                    <li><a href="#readAsset (375 TPS)">readAsset (375 TPS)</a></li>
+                    <li><a href="#readAsset (500 TPS)">readAsset (500 TPS)</a></li>
+                    <li><a href="#castVote (25 TPS)">castVote (25 TPS)</a></li>
+                    <li><a href="#castVote (50 TPS)">castVote (50 TPS)</a></li>
+                    <li><a href="#castVote (100 TPS)">castVote (100 TPS)</a></li>
+                    <li><a href="#castVote (250 TPS)">castVote (250 TPS)</a></li>
+                    <li><a href="#castVote (375 TPS)">castVote (375 TPS)</a></li>
+                    <li><a href="#castVote (500 TPS)">castVote (500 TPS)</a></li>
             </ul>
             <ul>
                 <h3>&nbspSystem under test</h3>
@@ -152,74 +163,851 @@
                     </tr>
 
                     <tr>
-                         <td>readAsset</td> <td>4496</td> <td>0</td> <td>150.0</td> <td>0.03</td> <td>0.00</td> <td>0.01</td> <td>149.9</td>
+                         <td>readAsset (25 TPS)</td> <td>5000</td> <td>0</td> <td>25.4</td> <td>0.43</td> <td>0.01</td> <td>0.01</td> <td>25.4</td>
+                    </tr>
+                    <tr>
+                         <td>readAsset (50 TPS)</td> <td>5000</td> <td>0</td> <td>50.6</td> <td>0.09</td> <td>0.01</td> <td>0.01</td> <td>50.6</td>
+                    </tr>
+                    <tr>
+                         <td>readAsset (100 TPS)</td> <td>5000</td> <td>0</td> <td>100.6</td> <td>0.10</td> <td>0.00</td> <td>0.01</td> <td>100.6</td>
+                    </tr>
+                    <tr>
+                         <td>readAsset (250 TPS)</td> <td>5000</td> <td>0</td> <td>242.2</td> <td>0.39</td> <td>0.00</td> <td>0.01</td> <td>242.0</td>
+                    </tr>
+                    <tr>
+                         <td>readAsset (375 TPS)</td> <td>5000</td> <td>0</td> <td>354.1</td> <td>0.15</td> <td>0.00</td> <td>0.01</td> <td>353.8</td>
+                    </tr>
+                    <tr>
+                         <td>readAsset (500 TPS)</td> <td>5000</td> <td>0</td> <td>480.9</td> <td>0.35</td> <td>0.00</td> <td>0.02</td> <td>480.6</td>
+                    </tr>
+                    <tr>
+                         <td>castVote (25 TPS)</td> <td>5000</td> <td>0</td> <td>25.4</td> <td>0.45</td> <td>0.03</td> <td>0.11</td> <td>25.4</td>
+                    </tr>
+                    <tr>
+                         <td>castVote (50 TPS)</td> <td>5000</td> <td>0</td> <td>50.5</td> <td>0.30</td> <td>0.03</td> <td>0.10</td> <td>50.4</td>
+                    </tr>
+                    <tr>
+                         <td>castVote (100 TPS)</td> <td>4875</td> <td>125</td> <td>100.5</td> <td>2.58</td> <td>0.03</td> <td>0.18</td> <td>99.6</td>
+                    </tr>
+                    <tr>
+                         <td>castVote (250 TPS)</td> <td>4243</td> <td>757</td> <td>239.6</td> <td>1.00</td> <td>0.04</td> <td>0.32</td> <td>238.8</td>
+                    </tr>
+                    <tr>
+                         <td>castVote (375 TPS)</td> <td>1536</td> <td>3464</td> <td>347.9</td> <td>1.77</td> <td>0.05</td> <td>0.84</td> <td>338.9</td>
+                    </tr>
+                    <tr>
+                         <td>castVote (500 TPS)</td> <td>413</td> <td>4587</td> <td>434.1</td> <td>7.13</td> <td>0.04</td> <td>2.60</td> <td>425.9</td>
                     </tr>
                 </table>
             </div>
-            <div style="border-bottom: 1px solid #d9d9d9; padding-bottom: 10px;" id="readAsset">
-                <h2>Benchmark round: readAsset</h2>
+            <div style="border-bottom: 1px solid #d9d9d9; padding-bottom: 10px;" id="readAsset (25 TPS)">
+                <h2>Benchmark round: readAsset (25 TPS)</h2>
                 <p>Read asset benchmark</p>
-                <pre style="overflow: visible;white-space: pre-wrap;max-height:100%;">txDuration: 30
-rateControl:
-  type: maximum-rate
+                <pre style="overflow: visible;white-space: pre-wrap;max-height:100%;">rateControl:
+  type: fixed-rate
   opts:
-    tps: 100
-    step: 100
-    sampleInterval: 10
-    includeFailed: true
+    tps: 25
 </pre>
-                        <h3>Performance metrics for readAsset</h3>
+                        <h3>Performance metrics for readAsset (25 TPS)</h3>
                             <table style="min-width: 100%;">
                                 <tr>
                                      <th>Name</th> <th>Succ</th> <th>Fail</th> <th>Send Rate (TPS)</th> <th>Max Latency (s)</th> <th>Min Latency (s)</th> <th>Avg Latency (s)</th> <th>Throughput (TPS)</th>
                                 </tr>
                                 <tr>
-                                     <td>readAsset</td> <td>4496</td> <td>0</td> <td>150.0</td> <td>0.03</td> <td>0.00</td> <td>0.01</td> <td>149.9</td>
+                                     <td>readAsset (25 TPS)</td> <td>5000</td> <td>0</td> <td>25.4</td> <td>0.43</td> <td>0.01</td> <td>0.01</td> <td>25.4</td>
                                 </tr>
                             </table>
-                        <h3>Resource utilization for readAsset</h3>
+                        <h3>Resource utilization for readAsset (25 TPS)</h3>
                             <h4>Resource monitor: docker</h4>
                             <table style="min-width: 100%;">
                                 <tr>
                                 <table>
                                     <tr>
-                                         <th>Name</th> <th>CPU%(max)</th> <th>CPU%(avg)</th> <th>Memory(max) [MB]</th> <th>Memory(avg) [MB]</th> <th>Traffic In [MB]</th> <th>Traffic Out [MB]</th> <th>Disc Write [KB]</th> <th>Disc Read [B]</th>
+                                         <th>Name</th> <th>CPU%(max)</th> <th>CPU%(avg)</th> <th>Memory(max) [GB]</th> <th>Memory(avg) [GB]</th> <th>Traffic In [MB]</th> <th>Traffic Out [MB]</th> <th>Disc Write [MB]</th> <th>Disc Read [B]</th>
                                     </tr>
                                     <tr>
-                                         <td>&#x2F;dev-peer0.org2.example.com-evoting-chaincode_1.0.1-eab05ef49835a6cb23ef63f6d3ae1844e1ad7f78982006c3c71ef47604a9b282</td> <td>0.0225</td> <td>0.0025</td> <td>63.3</td> <td>63.2</td> <td>0.0171</td> <td>0.00622</td> <td>0.00</td> <td>0.00</td>
+                                         <td>&#x2F;dev-peer0.org1.example.com-evoting-chaincode_1.0.1-5fe51cfeaae48a597711ed0a0a28c5c0cbe30d8c1426055eb37197cb891c627b</td> <td>0.285</td> <td>0.0675</td> <td>0.115</td> <td>0.113</td> <td>9.47</td> <td>2.95</td> <td>0.00</td> <td>0.00</td>
                                     </tr>
                                     <tr>
-                                         <td>&#x2F;dev-peer0.org3.example.com-evoting-chaincode_1.0.1-eab05ef49835a6cb23ef63f6d3ae1844e1ad7f78982006c3c71ef47604a9b282</td> <td>0</td> <td>0</td> <td>63.9</td> <td>63.8</td> <td>0.00492</td> <td>0.00210</td> <td>0.00</td> <td>0.00</td>
+                                         <td>&#x2F;dev-peer0.org3.example.com-evoting-chaincode_1.0.1-5fe51cfeaae48a597711ed0a0a28c5c0cbe30d8c1426055eb37197cb891c627b</td> <td>0</td> <td>0</td> <td>0.0489</td> <td>0.0489</td> <td>0.0953</td> <td>0.0346</td> <td>0.00</td> <td>0.00</td>
                                     </tr>
                                     <tr>
-                                         <td>&#x2F;dev-peer0.org1.example.com-evoting-chaincode_1.0.1-eab05ef49835a6cb23ef63f6d3ae1844e1ad7f78982006c3c71ef47604a9b282</td> <td>0.5325</td> <td>0.26375</td> <td>84.8</td> <td>81.9</td> <td>8.47</td> <td>2.71</td> <td>0.00</td> <td>0.00</td>
+                                         <td>&#x2F;dev-peer0.org2.example.com-evoting-chaincode_1.0.1-5fe51cfeaae48a597711ed0a0a28c5c0cbe30d8c1426055eb37197cb891c627b</td> <td>0</td> <td>0</td> <td>0.0534</td> <td>0.0534</td> <td>0.112</td> <td>0.0397</td> <td>0.00</td> <td>0.00</td>
                                     </tr>
                                     <tr>
-                                         <td>&#x2F;peer0.org3.example.com</td> <td>0.05875</td> <td>0.035</td> <td>62.7</td> <td>62.7</td> <td>0.146</td> <td>0.0985</td> <td>304</td> <td>0.00</td>
+                                         <td>&#x2F;peer0.org3.example.com</td> <td>0.05625</td> <td>0.0375</td> <td>0.165</td> <td>0.159</td> <td>0.961</td> <td>0.569</td> <td>1.34</td> <td>0.00</td>
                                     </tr>
                                     <tr>
-                                         <td>&#x2F;ca_org3</td> <td>0</td> <td>0</td> <td>8.70</td> <td>8.70</td> <td>0.00</td> <td>0.00</td> <td>0.00</td> <td>0.00</td>
+                                         <td>&#x2F;ca_org3</td> <td>0.00375</td> <td>0</td> <td>0.00912</td> <td>0.00912</td> <td>0.00</td> <td>0.00</td> <td>0.00</td> <td>0.00</td>
                                     </tr>
                                     <tr>
-                                         <td>&#x2F;cli</td> <td>0</td> <td>0</td> <td>1.03</td> <td>1.03</td> <td>0.00</td> <td>0.00</td> <td>0.00</td> <td>0.00</td>
+                                         <td>&#x2F;cli</td> <td>0</td> <td>0</td> <td>0.000935</td> <td>0.000935</td> <td>0.00</td> <td>0.00</td> <td>0.00</td> <td>0.00</td>
                                     </tr>
                                     <tr>
-                                         <td>&#x2F;peer0.org1.example.com</td> <td>0.92375</td> <td>0.4325</td> <td>167</td> <td>164</td> <td>10.3</td> <td>10.3</td> <td>304</td> <td>0.00</td>
+                                         <td>&#x2F;peer0.org2.example.com</td> <td>0.07375</td> <td>0.03875</td> <td>0.175</td> <td>0.170</td> <td>0.979</td> <td>0.591</td> <td>1.36</td> <td>0.00</td>
                                     </tr>
                                     <tr>
-                                         <td>&#x2F;orderer.example.com</td> <td>0.0125</td> <td>0.00375</td> <td>18.8</td> <td>17.6</td> <td>0.0563</td> <td>0.161</td> <td>312</td> <td>0.00</td>
+                                         <td>&#x2F;orderer.example.com</td> <td>0.02</td> <td>0.00125</td> <td>0.432</td> <td>0.428</td> <td>0.491</td> <td>1.42</td> <td>2.02</td> <td>0.00</td>
                                     </tr>
                                     <tr>
-                                         <td>&#x2F;peer0.org2.example.com</td> <td>0.0625</td> <td>0.035</td> <td>58.2</td> <td>58.2</td> <td>0.159</td> <td>0.118</td> <td>304</td> <td>0.00</td>
+                                         <td>&#x2F;peer0.org1.example.com</td> <td>0.425</td> <td>0.13625</td> <td>1.31</td> <td>1.28</td> <td>13.1</td> <td>13.3</td> <td>1.34</td> <td>0.00</td>
                                     </tr>
                                     <tr>
-                                         <td>&#x2F;ca_orderer</td> <td>0</td> <td>0</td> <td>8.52</td> <td>8.52</td> <td>0.00</td> <td>0.00</td> <td>0.00</td> <td>0.00</td>
+                                         <td>&#x2F;ca_org2</td> <td>0.00875</td> <td>0</td> <td>0.00778</td> <td>0.00778</td> <td>0.00</td> <td>0.00</td> <td>0.00</td> <td>0.00</td>
                                     </tr>
                                     <tr>
-                                         <td>&#x2F;ca_org2</td> <td>0</td> <td>0</td> <td>8.54</td> <td>8.54</td> <td>0.00</td> <td>0.00</td> <td>0.00</td> <td>0.00</td>
+                                         <td>&#x2F;ca_orderer</td> <td>0.00875</td> <td>0</td> <td>0.00772</td> <td>0.00772</td> <td>0.0000668</td> <td>0.00</td> <td>0.00</td> <td>0.00</td>
                                     </tr>
                                     <tr>
-                                         <td>&#x2F;ca_org1</td> <td>0</td> <td>0</td> <td>8.73</td> <td>8.73</td> <td>0.00</td> <td>0.00</td> <td>0.00</td> <td>0.00</td>
+                                         <td>&#x2F;ca_org1</td> <td>0.00875</td> <td>0</td> <td>0.00866</td> <td>0.00866</td> <td>0.00</td> <td>0.00</td> <td>0.00</td> <td>0.00</td>
+                                    </tr>
+                                </table>
+                                </tr>
+                            </table>
+                            <div class="charting">
+                            </div>
+            </div>
+
+            <div style="border-bottom: 1px solid #d9d9d9; padding-bottom: 10px;" id="readAsset (50 TPS)">
+                <h2>Benchmark round: readAsset (50 TPS)</h2>
+                <p>Read asset benchmark</p>
+                <pre style="overflow: visible;white-space: pre-wrap;max-height:100%;">rateControl:
+  type: fixed-rate
+  opts:
+    tps: 50
+</pre>
+                        <h3>Performance metrics for readAsset (50 TPS)</h3>
+                            <table style="min-width: 100%;">
+                                <tr>
+                                     <th>Name</th> <th>Succ</th> <th>Fail</th> <th>Send Rate (TPS)</th> <th>Max Latency (s)</th> <th>Min Latency (s)</th> <th>Avg Latency (s)</th> <th>Throughput (TPS)</th>
+                                </tr>
+                                <tr>
+                                     <td>readAsset (50 TPS)</td> <td>5000</td> <td>0</td> <td>50.6</td> <td>0.09</td> <td>0.01</td> <td>0.01</td> <td>50.6</td>
+                                </tr>
+                            </table>
+                        <h3>Resource utilization for readAsset (50 TPS)</h3>
+                            <h4>Resource monitor: docker</h4>
+                            <table style="min-width: 100%;">
+                                <tr>
+                                <table>
+                                    <tr>
+                                         <th>Name</th> <th>CPU%(max)</th> <th>CPU%(avg)</th> <th>Memory(max) [GB]</th> <th>Memory(avg) [GB]</th> <th>Traffic In [MB]</th> <th>Traffic Out [MB]</th> <th>Disc Write [MB]</th> <th>Disc Read [B]</th>
+                                    </tr>
+                                    <tr>
+                                         <td>&#x2F;dev-peer0.org1.example.com-evoting-chaincode_1.0.1-5fe51cfeaae48a597711ed0a0a28c5c0cbe30d8c1426055eb37197cb891c627b</td> <td>0.26625</td> <td>0.1275</td> <td>0.116</td> <td>0.114</td> <td>9.54</td> <td>3.01</td> <td>0.00</td> <td>0.00</td>
+                                    </tr>
+                                    <tr>
+                                         <td>&#x2F;dev-peer0.org3.example.com-evoting-chaincode_1.0.1-5fe51cfeaae48a597711ed0a0a28c5c0cbe30d8c1426055eb37197cb891c627b</td> <td>0.08375</td> <td>0.0025</td> <td>0.0493</td> <td>0.0489</td> <td>0.114</td> <td>0.0418</td> <td>0.00</td> <td>0.00</td>
+                                    </tr>
+                                    <tr>
+                                         <td>&#x2F;dev-peer0.org2.example.com-evoting-chaincode_1.0.1-5fe51cfeaae48a597711ed0a0a28c5c0cbe30d8c1426055eb37197cb891c627b</td> <td>0.06125</td> <td>0.00125</td> <td>0.0532</td> <td>0.0532</td> <td>0.0974</td> <td>0.0352</td> <td>0.00</td> <td>0.00</td>
+                                    </tr>
+                                    <tr>
+                                         <td>&#x2F;peer0.org3.example.com</td> <td>0.2675</td> <td>0.04375</td> <td>0.174</td> <td>0.172</td> <td>0.793</td> <td>0.411</td> <td>1.34</td> <td>0.00</td>
+                                    </tr>
+                                    <tr>
+                                         <td>&#x2F;ca_org3</td> <td>0</td> <td>0</td> <td>0.00912</td> <td>0.00912</td> <td>0.00</td> <td>0.00</td> <td>0.00</td> <td>0.00</td>
+                                    </tr>
+                                    <tr>
+                                         <td>&#x2F;cli</td> <td>0</td> <td>0</td> <td>0.000935</td> <td>0.000935</td> <td>0.00</td> <td>0.00</td> <td>0.00</td> <td>0.00</td>
+                                    </tr>
+                                    <tr>
+                                         <td>&#x2F;peer0.org2.example.com</td> <td>0.245</td> <td>0.0425</td> <td>0.185</td> <td>0.184</td> <td>0.772</td> <td>0.378</td> <td>1.34</td> <td>0.00</td>
+                                    </tr>
+                                    <tr>
+                                         <td>&#x2F;orderer.example.com</td> <td>0.1375</td> <td>0.005</td> <td>0.439</td> <td>0.436</td> <td>0.490</td> <td>1.42</td> <td>2.03</td> <td>0.00</td>
+                                    </tr>
+                                    <tr>
+                                         <td>&#x2F;peer0.org1.example.com</td> <td>1.43625</td> <td>0.275</td> <td>1.31</td> <td>1.31</td> <td>12.9</td> <td>13.2</td> <td>1.34</td> <td>0.00</td>
+                                    </tr>
+                                    <tr>
+                                         <td>&#x2F;ca_org2</td> <td>0</td> <td>0</td> <td>0.00778</td> <td>0.00778</td> <td>0.00</td> <td>0.00</td> <td>0.00</td> <td>0.00</td>
+                                    </tr>
+                                    <tr>
+                                         <td>&#x2F;ca_orderer</td> <td>0</td> <td>0</td> <td>0.00772</td> <td>0.00772</td> <td>0.00</td> <td>0.00</td> <td>0.00</td> <td>0.00</td>
+                                    </tr>
+                                    <tr>
+                                         <td>&#x2F;ca_org1</td> <td>0</td> <td>0</td> <td>0.00866</td> <td>0.00866</td> <td>0.00</td> <td>0.00</td> <td>0.00</td> <td>0.00</td>
+                                    </tr>
+                                </table>
+                                </tr>
+                            </table>
+                            <div class="charting">
+                            </div>
+            </div>
+
+            <div style="border-bottom: 1px solid #d9d9d9; padding-bottom: 10px;" id="readAsset (100 TPS)">
+                <h2>Benchmark round: readAsset (100 TPS)</h2>
+                <p>Read asset benchmark</p>
+                <pre style="overflow: visible;white-space: pre-wrap;max-height:100%;">rateControl:
+  type: fixed-rate
+  opts:
+    tps: 100
+</pre>
+                        <h3>Performance metrics for readAsset (100 TPS)</h3>
+                            <table style="min-width: 100%;">
+                                <tr>
+                                     <th>Name</th> <th>Succ</th> <th>Fail</th> <th>Send Rate (TPS)</th> <th>Max Latency (s)</th> <th>Min Latency (s)</th> <th>Avg Latency (s)</th> <th>Throughput (TPS)</th>
+                                </tr>
+                                <tr>
+                                     <td>readAsset (100 TPS)</td> <td>5000</td> <td>0</td> <td>100.6</td> <td>0.10</td> <td>0.00</td> <td>0.01</td> <td>100.6</td>
+                                </tr>
+                            </table>
+                        <h3>Resource utilization for readAsset (100 TPS)</h3>
+                            <h4>Resource monitor: docker</h4>
+                            <table style="min-width: 100%;">
+                                <tr>
+                                <table>
+                                    <tr>
+                                         <th>Name</th> <th>CPU%(max)</th> <th>CPU%(avg)</th> <th>Memory(max) [GB]</th> <th>Memory(avg) [GB]</th> <th>Traffic In [MB]</th> <th>Traffic Out [MB]</th> <th>Disc Write [MB]</th> <th>Disc Read [B]</th>
+                                    </tr>
+                                    <tr>
+                                         <td>&#x2F;dev-peer0.org1.example.com-evoting-chaincode_1.0.1-5fe51cfeaae48a597711ed0a0a28c5c0cbe30d8c1426055eb37197cb891c627b</td> <td>0.3175</td> <td>0.2325</td> <td>0.117</td> <td>0.115</td> <td>9.56</td> <td>3.04</td> <td>0.00</td> <td>0.00</td>
+                                    </tr>
+                                    <tr>
+                                         <td>&#x2F;dev-peer0.org3.example.com-evoting-chaincode_1.0.1-5fe51cfeaae48a597711ed0a0a28c5c0cbe30d8c1426055eb37197cb891c627b</td> <td>0</td> <td>0</td> <td>0.0492</td> <td>0.0488</td> <td>0.109</td> <td>0.0383</td> <td>0.00</td> <td>0.00</td>
+                                    </tr>
+                                    <tr>
+                                         <td>&#x2F;dev-peer0.org2.example.com-evoting-chaincode_1.0.1-5fe51cfeaae48a597711ed0a0a28c5c0cbe30d8c1426055eb37197cb891c627b</td> <td>0</td> <td>0</td> <td>0.0533</td> <td>0.0533</td> <td>0.0977</td> <td>0.0350</td> <td>0.00</td> <td>0.00</td>
+                                    </tr>
+                                    <tr>
+                                         <td>&#x2F;peer0.org3.example.com</td> <td>0.04875</td> <td>0.0325</td> <td>0.174</td> <td>0.174</td> <td>0.696</td> <td>0.310</td> <td>1.34</td> <td>0.00</td>
+                                    </tr>
+                                    <tr>
+                                         <td>&#x2F;ca_org3</td> <td>0</td> <td>0</td> <td>0.00912</td> <td>0.00912</td> <td>0.00</td> <td>0.00</td> <td>0.00</td> <td>0.00</td>
+                                    </tr>
+                                    <tr>
+                                         <td>&#x2F;cli</td> <td>0</td> <td>0</td> <td>0.000935</td> <td>0.000935</td> <td>0.00</td> <td>0.00</td> <td>0.00</td> <td>0.00</td>
+                                    </tr>
+                                    <tr>
+                                         <td>&#x2F;peer0.org2.example.com</td> <td>0.04</td> <td>0.03125</td> <td>0.185</td> <td>0.185</td> <td>0.683</td> <td>0.289</td> <td>1.34</td> <td>0.00</td>
+                                    </tr>
+                                    <tr>
+                                         <td>&#x2F;orderer.example.com</td> <td>0.0025</td> <td>0.00125</td> <td>0.443</td> <td>0.441</td> <td>0.488</td> <td>1.42</td> <td>2.04</td> <td>0.00</td>
+                                    </tr>
+                                    <tr>
+                                         <td>&#x2F;peer0.org1.example.com</td> <td>1.5975</td> <td>0.46375</td> <td>1.31</td> <td>1.31</td> <td>12.9</td> <td>13.1</td> <td>1.34</td> <td>0.00</td>
+                                    </tr>
+                                    <tr>
+                                         <td>&#x2F;ca_org2</td> <td>0.005</td> <td>0</td> <td>0.00778</td> <td>0.00778</td> <td>0.00</td> <td>0.00</td> <td>0.00</td> <td>0.00</td>
+                                    </tr>
+                                    <tr>
+                                         <td>&#x2F;ca_orderer</td> <td>0.005</td> <td>0</td> <td>0.00772</td> <td>0.00772</td> <td>0.00</td> <td>0.00</td> <td>0.00</td> <td>0.00</td>
+                                    </tr>
+                                    <tr>
+                                         <td>&#x2F;ca_org1</td> <td>0.00875</td> <td>0</td> <td>0.00866</td> <td>0.00866</td> <td>0.00</td> <td>0.00</td> <td>0.00</td> <td>0.00</td>
+                                    </tr>
+                                </table>
+                                </tr>
+                            </table>
+                            <div class="charting">
+                            </div>
+            </div>
+
+            <div style="border-bottom: 1px solid #d9d9d9; padding-bottom: 10px;" id="readAsset (250 TPS)">
+                <h2>Benchmark round: readAsset (250 TPS)</h2>
+                <p>Read asset benchmark</p>
+                <pre style="overflow: visible;white-space: pre-wrap;max-height:100%;">rateControl:
+  type: fixed-rate
+  opts:
+    tps: 250
+</pre>
+                        <h3>Performance metrics for readAsset (250 TPS)</h3>
+                            <table style="min-width: 100%;">
+                                <tr>
+                                     <th>Name</th> <th>Succ</th> <th>Fail</th> <th>Send Rate (TPS)</th> <th>Max Latency (s)</th> <th>Min Latency (s)</th> <th>Avg Latency (s)</th> <th>Throughput (TPS)</th>
+                                </tr>
+                                <tr>
+                                     <td>readAsset (250 TPS)</td> <td>5000</td> <td>0</td> <td>242.2</td> <td>0.39</td> <td>0.00</td> <td>0.01</td> <td>242.0</td>
+                                </tr>
+                            </table>
+                        <h3>Resource utilization for readAsset (250 TPS)</h3>
+                            <h4>Resource monitor: docker</h4>
+                            <table style="min-width: 100%;">
+                                <tr>
+                                <table>
+                                    <tr>
+                                         <th>Name</th> <th>CPU%(max)</th> <th>CPU%(avg)</th> <th>Memory(max) [GB]</th> <th>Memory(avg) [GB]</th> <th>Traffic In [MB]</th> <th>Traffic Out [MB]</th> <th>Disc Write [MB]</th> <th>Disc Read [B]</th>
+                                    </tr>
+                                    <tr>
+                                         <td>&#x2F;dev-peer0.org1.example.com-evoting-chaincode_1.0.1-5fe51cfeaae48a597711ed0a0a28c5c0cbe30d8c1426055eb37197cb891c627b</td> <td>0.54375</td> <td>0.345</td> <td>0.117</td> <td>0.116</td> <td>9.39</td> <td>2.90</td> <td>0.00</td> <td>0.00</td>
+                                    </tr>
+                                    <tr>
+                                         <td>&#x2F;dev-peer0.org3.example.com-evoting-chaincode_1.0.1-5fe51cfeaae48a597711ed0a0a28c5c0cbe30d8c1426055eb37197cb891c627b</td> <td>0.015</td> <td>0.00125</td> <td>0.0496</td> <td>0.0494</td> <td>0.111</td> <td>0.0390</td> <td>0.00</td> <td>0.00</td>
+                                    </tr>
+                                    <tr>
+                                         <td>&#x2F;dev-peer0.org2.example.com-evoting-chaincode_1.0.1-5fe51cfeaae48a597711ed0a0a28c5c0cbe30d8c1426055eb37197cb891c627b</td> <td>0.0375</td> <td>0.00375</td> <td>0.0528</td> <td>0.0528</td> <td>0.100</td> <td>0.0359</td> <td>0.00</td> <td>0.00</td>
+                                    </tr>
+                                    <tr>
+                                         <td>&#x2F;peer0.org3.example.com</td> <td>0.11625</td> <td>0.0375</td> <td>0.174</td> <td>0.174</td> <td>0.638</td> <td>0.254</td> <td>1.35</td> <td>0.00</td>
+                                    </tr>
+                                    <tr>
+                                         <td>&#x2F;ca_org3</td> <td>0</td> <td>0</td> <td>0.00912</td> <td>0.00912</td> <td>0.00</td> <td>0.00</td> <td>0.00</td> <td>0.00</td>
+                                    </tr>
+                                    <tr>
+                                         <td>&#x2F;cli</td> <td>0</td> <td>0</td> <td>0.000935</td> <td>0.000935</td> <td>0.00</td> <td>0.00</td> <td>0.00</td> <td>0.00</td>
+                                    </tr>
+                                    <tr>
+                                         <td>&#x2F;peer0.org2.example.com</td> <td>0.12</td> <td>0.0375</td> <td>0.186</td> <td>0.185</td> <td>0.627</td> <td>0.234</td> <td>1.35</td> <td>0.00</td>
+                                    </tr>
+                                    <tr>
+                                         <td>&#x2F;orderer.example.com</td> <td>0.0375</td> <td>0.005</td> <td>0.443</td> <td>0.437</td> <td>0.490</td> <td>1.42</td> <td>2.02</td> <td>0.00</td>
+                                    </tr>
+                                    <tr>
+                                         <td>&#x2F;peer0.org1.example.com</td> <td>0.925</td> <td>0.6025</td> <td>1.34</td> <td>1.33</td> <td>12.7</td> <td>12.9</td> <td>1.35</td> <td>0.00</td>
+                                    </tr>
+                                    <tr>
+                                         <td>&#x2F;ca_org2</td> <td>0</td> <td>0</td> <td>0.00778</td> <td>0.00778</td> <td>0.00</td> <td>0.00</td> <td>0.00</td> <td>0.00</td>
+                                    </tr>
+                                    <tr>
+                                         <td>&#x2F;ca_orderer</td> <td>0</td> <td>0</td> <td>0.00772</td> <td>0.00772</td> <td>0.00</td> <td>0.00</td> <td>0.00</td> <td>0.00</td>
+                                    </tr>
+                                    <tr>
+                                         <td>&#x2F;ca_org1</td> <td>0</td> <td>0</td> <td>0.00866</td> <td>0.00866</td> <td>0.00</td> <td>0.00</td> <td>0.00</td> <td>0.00</td>
+                                    </tr>
+                                </table>
+                                </tr>
+                            </table>
+                            <div class="charting">
+                            </div>
+            </div>
+
+            <div style="border-bottom: 1px solid #d9d9d9; padding-bottom: 10px;" id="readAsset (375 TPS)">
+                <h2>Benchmark round: readAsset (375 TPS)</h2>
+                <p>Read asset benchmark</p>
+                <pre style="overflow: visible;white-space: pre-wrap;max-height:100%;">rateControl:
+  type: fixed-rate
+  opts:
+    tps: 375
+</pre>
+                        <h3>Performance metrics for readAsset (375 TPS)</h3>
+                            <table style="min-width: 100%;">
+                                <tr>
+                                     <th>Name</th> <th>Succ</th> <th>Fail</th> <th>Send Rate (TPS)</th> <th>Max Latency (s)</th> <th>Min Latency (s)</th> <th>Avg Latency (s)</th> <th>Throughput (TPS)</th>
+                                </tr>
+                                <tr>
+                                     <td>readAsset (375 TPS)</td> <td>5000</td> <td>0</td> <td>354.1</td> <td>0.15</td> <td>0.00</td> <td>0.01</td> <td>353.8</td>
+                                </tr>
+                            </table>
+                        <h3>Resource utilization for readAsset (375 TPS)</h3>
+                            <h4>Resource monitor: docker</h4>
+                            <table style="min-width: 100%;">
+                                <tr>
+                                <table>
+                                    <tr>
+                                         <th>Name</th> <th>CPU%(max)</th> <th>CPU%(avg)</th> <th>Memory(max) [GB]</th> <th>Memory(avg) [GB]</th> <th>Traffic In [MB]</th> <th>Traffic Out [MB]</th> <th>Disc Write [MB]</th> <th>Disc Read [B]</th>
+                                    </tr>
+                                    <tr>
+                                         <td>&#x2F;dev-peer0.org1.example.com-evoting-chaincode_1.0.1-5fe51cfeaae48a597711ed0a0a28c5c0cbe30d8c1426055eb37197cb891c627b</td> <td>0.7</td> <td>0.385</td> <td>0.117</td> <td>0.115</td> <td>9.24</td> <td>2.78</td> <td>0.00</td> <td>0.00</td>
+                                    </tr>
+                                    <tr>
+                                         <td>&#x2F;dev-peer0.org3.example.com-evoting-chaincode_1.0.1-5fe51cfeaae48a597711ed0a0a28c5c0cbe30d8c1426055eb37197cb891c627b</td> <td>0</td> <td>0</td> <td>0.0496</td> <td>0.0488</td> <td>0.131</td> <td>0.0471</td> <td>0.00</td> <td>0.00</td>
+                                    </tr>
+                                    <tr>
+                                         <td>&#x2F;dev-peer0.org2.example.com-evoting-chaincode_1.0.1-5fe51cfeaae48a597711ed0a0a28c5c0cbe30d8c1426055eb37197cb891c627b</td> <td>0</td> <td>0</td> <td>0.0534</td> <td>0.0534</td> <td>0.0788</td> <td>0.0288</td> <td>0.00</td> <td>0.00</td>
+                                    </tr>
+                                    <tr>
+                                         <td>&#x2F;peer0.org3.example.com</td> <td>0.05125</td> <td>0.02875</td> <td>0.174</td> <td>0.174</td> <td>0.647</td> <td>0.275</td> <td>1.34</td> <td>0.00</td>
+                                    </tr>
+                                    <tr>
+                                         <td>&#x2F;ca_org3</td> <td>0</td> <td>0</td> <td>0.00912</td> <td>0.00912</td> <td>0.00</td> <td>0.00</td> <td>0.00</td> <td>0.00</td>
+                                    </tr>
+                                    <tr>
+                                         <td>&#x2F;cli</td> <td>0</td> <td>0</td> <td>0.000935</td> <td>0.000935</td> <td>0.00</td> <td>0.00</td> <td>0.00</td> <td>0.00</td>
+                                    </tr>
+                                    <tr>
+                                         <td>&#x2F;peer0.org2.example.com</td> <td>0.04875</td> <td>0.02875</td> <td>0.186</td> <td>0.186</td> <td>0.590</td> <td>0.183</td> <td>1.34</td> <td>0.00</td>
+                                    </tr>
+                                    <tr>
+                                         <td>&#x2F;orderer.example.com</td> <td>0.00125</td> <td>0.00125</td> <td>0.418</td> <td>0.417</td> <td>0.490</td> <td>1.42</td> <td>2.02</td> <td>0.00</td>
+                                    </tr>
+                                    <tr>
+                                         <td>&#x2F;peer0.org1.example.com</td> <td>2.11125</td> <td>0.77125</td> <td>1.34</td> <td>1.34</td> <td>12.5</td> <td>12.7</td> <td>1.34</td> <td>0.00</td>
+                                    </tr>
+                                    <tr>
+                                         <td>&#x2F;ca_org2</td> <td>0</td> <td>0</td> <td>0.00778</td> <td>0.00778</td> <td>0.00</td> <td>0.00</td> <td>0.00</td> <td>0.00</td>
+                                    </tr>
+                                    <tr>
+                                         <td>&#x2F;ca_orderer</td> <td>0</td> <td>0</td> <td>0.00772</td> <td>0.00772</td> <td>0.00</td> <td>0.00</td> <td>0.00</td> <td>0.00</td>
+                                    </tr>
+                                    <tr>
+                                         <td>&#x2F;ca_org1</td> <td>0</td> <td>0</td> <td>0.00866</td> <td>0.00866</td> <td>0.00</td> <td>0.00</td> <td>0.00</td> <td>0.00</td>
+                                    </tr>
+                                </table>
+                                </tr>
+                            </table>
+                            <div class="charting">
+                            </div>
+            </div>
+
+            <div style="border-bottom: 1px solid #d9d9d9; padding-bottom: 10px;" id="readAsset (500 TPS)">
+                <h2>Benchmark round: readAsset (500 TPS)</h2>
+                <p>Read asset benchmark</p>
+                <pre style="overflow: visible;white-space: pre-wrap;max-height:100%;">rateControl:
+  type: fixed-rate
+  opts:
+    tps: 500
+</pre>
+                        <h3>Performance metrics for readAsset (500 TPS)</h3>
+                            <table style="min-width: 100%;">
+                                <tr>
+                                     <th>Name</th> <th>Succ</th> <th>Fail</th> <th>Send Rate (TPS)</th> <th>Max Latency (s)</th> <th>Min Latency (s)</th> <th>Avg Latency (s)</th> <th>Throughput (TPS)</th>
+                                </tr>
+                                <tr>
+                                     <td>readAsset (500 TPS)</td> <td>5000</td> <td>0</td> <td>480.9</td> <td>0.35</td> <td>0.00</td> <td>0.02</td> <td>480.6</td>
+                                </tr>
+                            </table>
+                        <h3>Resource utilization for readAsset (500 TPS)</h3>
+                            <h4>Resource monitor: docker</h4>
+                            <table style="min-width: 100%;">
+                                <tr>
+                                <table>
+                                    <tr>
+                                         <th>Name</th> <th>CPU%(max)</th> <th>CPU%(avg)</th> <th>Memory(max) [GB]</th> <th>Memory(avg) [GB]</th> <th>Traffic In [MB]</th> <th>Traffic Out [MB]</th> <th>Disc Write [MB]</th> <th>Disc Read [MB]</th>
+                                    </tr>
+                                    <tr>
+                                         <td>&#x2F;dev-peer0.org1.example.com-evoting-chaincode_1.0.1-5fe51cfeaae48a597711ed0a0a28c5c0cbe30d8c1426055eb37197cb891c627b</td> <td>0.85125</td> <td>0.405</td> <td>0.129</td> <td>0.124</td> <td>8.96</td> <td>2.59</td> <td>0.00</td> <td>0.00</td>
+                                    </tr>
+                                    <tr>
+                                         <td>&#x2F;dev-peer0.org3.example.com-evoting-chaincode_1.0.1-5fe51cfeaae48a597711ed0a0a28c5c0cbe30d8c1426055eb37197cb891c627b</td> <td>0</td> <td>0</td> <td>0.0491</td> <td>0.0490</td> <td>0.0912</td> <td>0.0318</td> <td>0.00</td> <td>0.00</td>
+                                    </tr>
+                                    <tr>
+                                         <td>&#x2F;dev-peer0.org2.example.com-evoting-chaincode_1.0.1-5fe51cfeaae48a597711ed0a0a28c5c0cbe30d8c1426055eb37197cb891c627b</td> <td>0</td> <td>0</td> <td>0.0534</td> <td>0.0531</td> <td>0.114</td> <td>0.0398</td> <td>0.00</td> <td>0.00</td>
+                                    </tr>
+                                    <tr>
+                                         <td>&#x2F;peer0.org3.example.com</td> <td>0.045</td> <td>0.0275</td> <td>0.174</td> <td>0.172</td> <td>0.595</td> <td>0.197</td> <td>27.9</td> <td>1.02</td>
+                                    </tr>
+                                    <tr>
+                                         <td>&#x2F;ca_org3</td> <td>0</td> <td>0</td> <td>0.00912</td> <td>0.00912</td> <td>0.00</td> <td>0.00</td> <td>0.00</td> <td>0.00</td>
+                                    </tr>
+                                    <tr>
+                                         <td>&#x2F;cli</td> <td>0</td> <td>0</td> <td>0.000935</td> <td>0.000935</td> <td>0.00</td> <td>0.00</td> <td>0.00</td> <td>0.00</td>
+                                    </tr>
+                                    <tr>
+                                         <td>&#x2F;peer0.org2.example.com</td> <td>0.045</td> <td>0.0275</td> <td>0.186</td> <td>0.186</td> <td>0.618</td> <td>0.234</td> <td>27.9</td> <td>0.891</td>
+                                    </tr>
+                                    <tr>
+                                         <td>&#x2F;orderer.example.com</td> <td>0.00125</td> <td>0.00125</td> <td>0.421</td> <td>0.420</td> <td>0.480</td> <td>1.41</td> <td>2.04</td> <td>0.00</td>
+                                    </tr>
+                                    <tr>
+                                         <td>&#x2F;peer0.org1.example.com</td> <td>1.22</td> <td>0.61125</td> <td>1.34</td> <td>1.34</td> <td>12.3</td> <td>12.4</td> <td>27.9</td> <td>0.781</td>
+                                    </tr>
+                                    <tr>
+                                         <td>&#x2F;ca_org2</td> <td>0</td> <td>0</td> <td>0.00778</td> <td>0.00778</td> <td>0.00</td> <td>0.00</td> <td>0.00</td> <td>0.00</td>
+                                    </tr>
+                                    <tr>
+                                         <td>&#x2F;ca_orderer</td> <td>0</td> <td>0</td> <td>0.00772</td> <td>0.00772</td> <td>0.00</td> <td>0.00</td> <td>0.00</td> <td>0.00</td>
+                                    </tr>
+                                    <tr>
+                                         <td>&#x2F;ca_org1</td> <td>0</td> <td>0</td> <td>0.00866</td> <td>0.00866</td> <td>0.00</td> <td>0.00</td> <td>0.00</td> <td>0.00</td>
+                                    </tr>
+                                </table>
+                                </tr>
+                            </table>
+                            <div class="charting">
+                            </div>
+            </div>
+
+            <div style="border-bottom: 1px solid #d9d9d9; padding-bottom: 10px;" id="castVote (25 TPS)">
+                <h2>Benchmark round: castVote (25 TPS)</h2>
+                <p>Cast vote benchmark</p>
+                <pre style="overflow: visible;white-space: pre-wrap;max-height:100%;">rateControl:
+  type: fixed-rate
+  opts:
+    tps: 25
+</pre>
+                        <h3>Performance metrics for castVote (25 TPS)</h3>
+                            <table style="min-width: 100%;">
+                                <tr>
+                                     <th>Name</th> <th>Succ</th> <th>Fail</th> <th>Send Rate (TPS)</th> <th>Max Latency (s)</th> <th>Min Latency (s)</th> <th>Avg Latency (s)</th> <th>Throughput (TPS)</th>
+                                </tr>
+                                <tr>
+                                     <td>castVote (25 TPS)</td> <td>5000</td> <td>0</td> <td>25.4</td> <td>0.45</td> <td>0.03</td> <td>0.11</td> <td>25.4</td>
+                                </tr>
+                            </table>
+                        <h3>Resource utilization for castVote (25 TPS)</h3>
+                            <h4>Resource monitor: docker</h4>
+                            <table style="min-width: 100%;">
+                                <tr>
+                                <table>
+                                    <tr>
+                                         <th>Name</th> <th>CPU%(max)</th> <th>CPU%(avg)</th> <th>Memory(max) [GB]</th> <th>Memory(avg) [GB]</th> <th>Traffic In [MB]</th> <th>Traffic Out [MB]</th> <th>Disc Write [MB]</th> <th>Disc Read [KB]</th>
+                                    </tr>
+                                    <tr>
+                                         <td>&#x2F;dev-peer0.org1.example.com-evoting-chaincode_1.0.1-5fe51cfeaae48a597711ed0a0a28c5c0cbe30d8c1426055eb37197cb891c627b</td> <td>0.29875</td> <td>0.06375</td> <td>0.122</td> <td>0.121</td> <td>10.6</td> <td>4.42</td> <td>0.00</td> <td>0.00</td>
+                                    </tr>
+                                    <tr>
+                                         <td>&#x2F;dev-peer0.org3.example.com-evoting-chaincode_1.0.1-5fe51cfeaae48a597711ed0a0a28c5c0cbe30d8c1426055eb37197cb891c627b</td> <td>0.15875</td> <td>0.03375</td> <td>0.0570</td> <td>0.0534</td> <td>5.23</td> <td>2.20</td> <td>0.00</td> <td>0.00</td>
+                                    </tr>
+                                    <tr>
+                                         <td>&#x2F;dev-peer0.org2.example.com-evoting-chaincode_1.0.1-5fe51cfeaae48a597711ed0a0a28c5c0cbe30d8c1426055eb37197cb891c627b</td> <td>0.165</td> <td>0.03625</td> <td>0.0605</td> <td>0.0582</td> <td>5.61</td> <td>2.36</td> <td>0.00</td> <td>0.00</td>
+                                    </tr>
+                                    <tr>
+                                         <td>&#x2F;peer0.org3.example.com</td> <td>0.48125</td> <td>0.13125</td> <td>0.181</td> <td>0.177</td> <td>30.7</td> <td>10.2</td> <td>70.5</td> <td>72.0</td>
+                                    </tr>
+                                    <tr>
+                                         <td>&#x2F;ca_org3</td> <td>0.0075</td> <td>0</td> <td>0.00912</td> <td>0.00912</td> <td>0.00</td> <td>0.00</td> <td>0.00</td> <td>0.00</td>
+                                    </tr>
+                                    <tr>
+                                         <td>&#x2F;cli</td> <td>0</td> <td>0</td> <td>0.000935</td> <td>0.000935</td> <td>0.00</td> <td>0.00</td> <td>0.00</td> <td>0.00</td>
+                                    </tr>
+                                    <tr>
+                                         <td>&#x2F;peer0.org2.example.com</td> <td>0.47625</td> <td>0.13625</td> <td>0.196</td> <td>0.192</td> <td>31.1</td> <td>10.9</td> <td>70.5</td> <td>0.00</td>
+                                    </tr>
+                                    <tr>
+                                         <td>&#x2F;orderer.example.com</td> <td>0.30375</td> <td>0.06875</td> <td>0.459</td> <td>0.443</td> <td>25.5</td> <td>74.0</td> <td>106</td> <td>136</td>
+                                    </tr>
+                                    <tr>
+                                         <td>&#x2F;peer0.org1.example.com</td> <td>2.0325</td> <td>0.3275</td> <td>1.37</td> <td>1.36</td> <td>80.5</td> <td>72.3</td> <td>70.5</td> <td>0.00</td>
+                                    </tr>
+                                    <tr>
+                                         <td>&#x2F;ca_org2</td> <td>0</td> <td>0</td> <td>0.00778</td> <td>0.00778</td> <td>0.00</td> <td>0.00</td> <td>0.00</td> <td>0.00</td>
+                                    </tr>
+                                    <tr>
+                                         <td>&#x2F;ca_orderer</td> <td>0</td> <td>0</td> <td>0.00772</td> <td>0.00772</td> <td>0.00</td> <td>0.00</td> <td>0.00</td> <td>0.00</td>
+                                    </tr>
+                                    <tr>
+                                         <td>&#x2F;ca_org1</td> <td>0</td> <td>0</td> <td>0.00866</td> <td>0.00866</td> <td>0.00</td> <td>0.00</td> <td>0.00</td> <td>0.00</td>
+                                    </tr>
+                                </table>
+                                </tr>
+                            </table>
+                            <div class="charting">
+                            </div>
+            </div>
+
+            <div style="border-bottom: 1px solid #d9d9d9; padding-bottom: 10px;" id="castVote (50 TPS)">
+                <h2>Benchmark round: castVote (50 TPS)</h2>
+                <p>Cast vote benchmark</p>
+                <pre style="overflow: visible;white-space: pre-wrap;max-height:100%;">rateControl:
+  type: fixed-rate
+  opts:
+    tps: 50
+</pre>
+                        <h3>Performance metrics for castVote (50 TPS)</h3>
+                            <table style="min-width: 100%;">
+                                <tr>
+                                     <th>Name</th> <th>Succ</th> <th>Fail</th> <th>Send Rate (TPS)</th> <th>Max Latency (s)</th> <th>Min Latency (s)</th> <th>Avg Latency (s)</th> <th>Throughput (TPS)</th>
+                                </tr>
+                                <tr>
+                                     <td>castVote (50 TPS)</td> <td>5000</td> <td>0</td> <td>50.5</td> <td>0.30</td> <td>0.03</td> <td>0.10</td> <td>50.4</td>
+                                </tr>
+                            </table>
+                        <h3>Resource utilization for castVote (50 TPS)</h3>
+                            <h4>Resource monitor: docker</h4>
+                            <table style="min-width: 100%;">
+                                <tr>
+                                <table>
+                                    <tr>
+                                         <th>Name</th> <th>CPU%(max)</th> <th>CPU%(avg)</th> <th>Memory(max) [GB]</th> <th>Memory(avg) [GB]</th> <th>Traffic In [MB]</th> <th>Traffic Out [MB]</th> <th>Disc Write [MB]</th> <th>Disc Read [KB]</th>
+                                    </tr>
+                                    <tr>
+                                         <td>&#x2F;dev-peer0.org1.example.com-evoting-chaincode_1.0.1-5fe51cfeaae48a597711ed0a0a28c5c0cbe30d8c1426055eb37197cb891c627b</td> <td>0.285</td> <td>0.14125</td> <td>0.123</td> <td>0.121</td> <td>10.7</td> <td>4.53</td> <td>0.00</td> <td>0.00</td>
+                                    </tr>
+                                    <tr>
+                                         <td>&#x2F;dev-peer0.org3.example.com-evoting-chaincode_1.0.1-5fe51cfeaae48a597711ed0a0a28c5c0cbe30d8c1426055eb37197cb891c627b</td> <td>0.18375</td> <td>0.07625</td> <td>0.0571</td> <td>0.0547</td> <td>5.56</td> <td>2.35</td> <td>0.00</td> <td>0.00</td>
+                                    </tr>
+                                    <tr>
+                                         <td>&#x2F;dev-peer0.org2.example.com-evoting-chaincode_1.0.1-5fe51cfeaae48a597711ed0a0a28c5c0cbe30d8c1426055eb37197cb891c627b</td> <td>0.16</td> <td>0.07125</td> <td>0.0605</td> <td>0.0573</td> <td>5.41</td> <td>2.29</td> <td>0.00</td> <td>0.00</td>
+                                    </tr>
+                                    <tr>
+                                         <td>&#x2F;peer0.org3.example.com</td> <td>0.47375</td> <td>0.2475</td> <td>0.186</td> <td>0.184</td> <td>30.8</td> <td>10.5</td> <td>70.5</td> <td>88.0</td>
+                                    </tr>
+                                    <tr>
+                                         <td>&#x2F;ca_org3</td> <td>0.005</td> <td>0</td> <td>0.00912</td> <td>0.00912</td> <td>0.00</td> <td>0.00</td> <td>0.00</td> <td>0.00</td>
+                                    </tr>
+                                    <tr>
+                                         <td>&#x2F;cli</td> <td>0</td> <td>0</td> <td>0.000935</td> <td>0.000935</td> <td>0.00</td> <td>0.00</td> <td>0.00</td> <td>0.00</td>
+                                    </tr>
+                                    <tr>
+                                         <td>&#x2F;peer0.org2.example.com</td> <td>0.43625</td> <td>0.23375</td> <td>0.200</td> <td>0.199</td> <td>30.6</td> <td>10.2</td> <td>70.5</td> <td>0.00</td>
+                                    </tr>
+                                    <tr>
+                                         <td>&#x2F;orderer.example.com</td> <td>0.3075</td> <td>0.14625</td> <td>0.491</td> <td>0.469</td> <td>25.6</td> <td>74.1</td> <td>106</td> <td>0.00</td>
+                                    </tr>
+                                    <tr>
+                                         <td>&#x2F;peer0.org1.example.com</td> <td>1.91125</td> <td>0.56875</td> <td>1.38</td> <td>1.37</td> <td>80.3</td> <td>72.3</td> <td>70.5</td> <td>0.00</td>
+                                    </tr>
+                                    <tr>
+                                         <td>&#x2F;ca_org2</td> <td>0.00875</td> <td>0</td> <td>0.00778</td> <td>0.00778</td> <td>0.00</td> <td>0.00</td> <td>0.00</td> <td>0.00</td>
+                                    </tr>
+                                    <tr>
+                                         <td>&#x2F;ca_orderer</td> <td>0.00875</td> <td>0</td> <td>0.00772</td> <td>0.00772</td> <td>0.00</td> <td>0.00</td> <td>0.00</td> <td>0.00</td>
+                                    </tr>
+                                    <tr>
+                                         <td>&#x2F;ca_org1</td> <td>0.00875</td> <td>0</td> <td>0.00866</td> <td>0.00866</td> <td>0.00</td> <td>0.00</td> <td>0.00</td> <td>0.00</td>
+                                    </tr>
+                                </table>
+                                </tr>
+                            </table>
+                            <div class="charting">
+                            </div>
+            </div>
+
+            <div style="border-bottom: 1px solid #d9d9d9; padding-bottom: 10px;" id="castVote (100 TPS)">
+                <h2>Benchmark round: castVote (100 TPS)</h2>
+                <p>Cast vote benchmark</p>
+                <pre style="overflow: visible;white-space: pre-wrap;max-height:100%;">rateControl:
+  type: fixed-rate
+  opts:
+    tps: 100
+</pre>
+                        <h3>Performance metrics for castVote (100 TPS)</h3>
+                            <table style="min-width: 100%;">
+                                <tr>
+                                     <th>Name</th> <th>Succ</th> <th>Fail</th> <th>Send Rate (TPS)</th> <th>Max Latency (s)</th> <th>Min Latency (s)</th> <th>Avg Latency (s)</th> <th>Throughput (TPS)</th>
+                                </tr>
+                                <tr>
+                                     <td>castVote (100 TPS)</td> <td>4875</td> <td>125</td> <td>100.5</td> <td>2.58</td> <td>0.03</td> <td>0.18</td> <td>99.6</td>
+                                </tr>
+                            </table>
+                        <h3>Resource utilization for castVote (100 TPS)</h3>
+                            <h4>Resource monitor: docker</h4>
+                            <table style="min-width: 100%;">
+                                <tr>
+                                <table>
+                                    <tr>
+                                         <th>Name</th> <th>CPU%(max)</th> <th>CPU%(avg)</th> <th>Memory(max) [GB]</th> <th>Memory(avg) [GB]</th> <th>Traffic In [MB]</th> <th>Traffic Out [MB]</th> <th>Disc Write [MB]</th> <th>Disc Read [KB]</th>
+                                    </tr>
+                                    <tr>
+                                         <td>&#x2F;dev-peer0.org1.example.com-evoting-chaincode_1.0.1-5fe51cfeaae48a597711ed0a0a28c5c0cbe30d8c1426055eb37197cb891c627b</td> <td>0.29625</td> <td>0.22125</td> <td>0.133</td> <td>0.129</td> <td>10.1</td> <td>4.14</td> <td>0.00</td> <td>0.00</td>
+                                    </tr>
+                                    <tr>
+                                         <td>&#x2F;dev-peer0.org3.example.com-evoting-chaincode_1.0.1-5fe51cfeaae48a597711ed0a0a28c5c0cbe30d8c1426055eb37197cb891c627b</td> <td>0.14875</td> <td>0.1125</td> <td>0.0587</td> <td>0.0574</td> <td>5.12</td> <td>2.10</td> <td>0.00</td> <td>0.00</td>
+                                    </tr>
+                                    <tr>
+                                         <td>&#x2F;dev-peer0.org2.example.com-evoting-chaincode_1.0.1-5fe51cfeaae48a597711ed0a0a28c5c0cbe30d8c1426055eb37197cb891c627b</td> <td>0.17</td> <td>0.11875</td> <td>0.0681</td> <td>0.0614</td> <td>5.30</td> <td>2.17</td> <td>0.00</td> <td>0.00</td>
+                                    </tr>
+                                    <tr>
+                                         <td>&#x2F;peer0.org3.example.com</td> <td>0.63375</td> <td>0.3825</td> <td>0.193</td> <td>0.190</td> <td>30.1</td> <td>9.68</td> <td>70.4</td> <td>112</td>
+                                    </tr>
+                                    <tr>
+                                         <td>&#x2F;ca_org3</td> <td>0</td> <td>0</td> <td>0.00912</td> <td>0.00912</td> <td>0.00</td> <td>0.00</td> <td>0.00</td> <td>0.00</td>
+                                    </tr>
+                                    <tr>
+                                         <td>&#x2F;cli</td> <td>0</td> <td>0</td> <td>0.000935</td> <td>0.000935</td> <td>0.00</td> <td>0.00</td> <td>0.00</td> <td>0.00</td>
+                                    </tr>
+                                    <tr>
+                                         <td>&#x2F;peer0.org2.example.com</td> <td>0.68625</td> <td>0.36875</td> <td>0.209</td> <td>0.205</td> <td>30.3</td> <td>10.0</td> <td>70.4</td> <td>32.0</td>
+                                    </tr>
+                                    <tr>
+                                         <td>&#x2F;orderer.example.com</td> <td>0.29</td> <td>0.22625</td> <td>0.511</td> <td>0.494</td> <td>25.1</td> <td>73.5</td> <td>106</td> <td>72.0</td>
+                                    </tr>
+                                    <tr>
+                                         <td>&#x2F;peer0.org1.example.com</td> <td>1.97875</td> <td>0.9925</td> <td>1.38</td> <td>1.35</td> <td>79.1</td> <td>70.9</td> <td>70.4</td> <td>0.00</td>
+                                    </tr>
+                                    <tr>
+                                         <td>&#x2F;ca_org2</td> <td>0</td> <td>0</td> <td>0.00778</td> <td>0.00778</td> <td>0.00</td> <td>0.00</td> <td>0.00</td> <td>0.00</td>
+                                    </tr>
+                                    <tr>
+                                         <td>&#x2F;ca_orderer</td> <td>0</td> <td>0</td> <td>0.00772</td> <td>0.00772</td> <td>0.00</td> <td>0.00</td> <td>0.00</td> <td>0.00</td>
+                                    </tr>
+                                    <tr>
+                                         <td>&#x2F;ca_org1</td> <td>0</td> <td>0</td> <td>0.00866</td> <td>0.00866</td> <td>0.00</td> <td>0.00</td> <td>0.00</td> <td>0.00</td>
+                                    </tr>
+                                </table>
+                                </tr>
+                            </table>
+                            <div class="charting">
+                            </div>
+            </div>
+
+            <div style="border-bottom: 1px solid #d9d9d9; padding-bottom: 10px;" id="castVote (250 TPS)">
+                <h2>Benchmark round: castVote (250 TPS)</h2>
+                <p>Cast vote benchmark</p>
+                <pre style="overflow: visible;white-space: pre-wrap;max-height:100%;">rateControl:
+  type: fixed-rate
+  opts:
+    tps: 250
+</pre>
+                        <h3>Performance metrics for castVote (250 TPS)</h3>
+                            <table style="min-width: 100%;">
+                                <tr>
+                                     <th>Name</th> <th>Succ</th> <th>Fail</th> <th>Send Rate (TPS)</th> <th>Max Latency (s)</th> <th>Min Latency (s)</th> <th>Avg Latency (s)</th> <th>Throughput (TPS)</th>
+                                </tr>
+                                <tr>
+                                     <td>castVote (250 TPS)</td> <td>4243</td> <td>757</td> <td>239.6</td> <td>1.00</td> <td>0.04</td> <td>0.32</td> <td>238.8</td>
+                                </tr>
+                            </table>
+                        <h3>Resource utilization for castVote (250 TPS)</h3>
+                            <h4>Resource monitor: docker</h4>
+                            <table style="min-width: 100%;">
+                                <tr>
+                                <table>
+                                    <tr>
+                                         <th>Name</th> <th>CPU%(max)</th> <th>CPU%(avg)</th> <th>Memory(max) [GB]</th> <th>Memory(avg) [GB]</th> <th>Traffic In [MB]</th> <th>Traffic Out [MB]</th> <th>Disc Write [MB]</th> <th>Disc Read [KB]</th>
+                                    </tr>
+                                    <tr>
+                                         <td>&#x2F;dev-peer0.org1.example.com-evoting-chaincode_1.0.1-5fe51cfeaae48a597711ed0a0a28c5c0cbe30d8c1426055eb37197cb891c627b</td> <td>0.67</td> <td>0.31</td> <td>0.147</td> <td>0.137</td> <td>9.35</td> <td>3.70</td> <td>0.00</td> <td>0.00</td>
+                                    </tr>
+                                    <tr>
+                                         <td>&#x2F;dev-peer0.org3.example.com-evoting-chaincode_1.0.1-5fe51cfeaae48a597711ed0a0a28c5c0cbe30d8c1426055eb37197cb891c627b</td> <td>0.44625</td> <td>0.18125</td> <td>0.0647</td> <td>0.0608</td> <td>5.42</td> <td>2.15</td> <td>0.00</td> <td>0.00</td>
+                                    </tr>
+                                    <tr>
+                                         <td>&#x2F;dev-peer0.org2.example.com-evoting-chaincode_1.0.1-5fe51cfeaae48a597711ed0a0a28c5c0cbe30d8c1426055eb37197cb891c627b</td> <td>0.3425</td> <td>0.17875</td> <td>0.0685</td> <td>0.0636</td> <td>5.53</td> <td>2.20</td> <td>0.00</td> <td>0.00</td>
+                                    </tr>
+                                    <tr>
+                                         <td>&#x2F;peer0.org3.example.com</td> <td>0.9125</td> <td>0.53875</td> <td>0.197</td> <td>0.194</td> <td>27.1</td> <td>10.3</td> <td>60.6</td> <td>0.00</td>
+                                    </tr>
+                                    <tr>
+                                         <td>&#x2F;ca_org3</td> <td>0.00875</td> <td>0.00125</td> <td>0.00912</td> <td>0.00912</td> <td>0.00</td> <td>0.00</td> <td>0.00</td> <td>0.00</td>
+                                    </tr>
+                                    <tr>
+                                         <td>&#x2F;cli</td> <td>0</td> <td>0</td> <td>0.000935</td> <td>0.000935</td> <td>0.00</td> <td>0.00</td> <td>0.00</td> <td>0.00</td>
+                                    </tr>
+                                    <tr>
+                                         <td>&#x2F;peer0.org2.example.com</td> <td>0.89625</td> <td>0.53</td> <td>0.212</td> <td>0.210</td> <td>27.2</td> <td>10.5</td> <td>60.6</td> <td>32.0</td>
+                                    </tr>
+                                    <tr>
+                                         <td>&#x2F;orderer.example.com</td> <td>0.5375</td> <td>0.31375</td> <td>0.536</td> <td>0.524</td> <td>21.2</td> <td>63.0</td> <td>91.0</td> <td>0.00</td>
+                                    </tr>
+                                    <tr>
+                                         <td>&#x2F;peer0.org1.example.com</td> <td>2.50125</td> <td>1.26875</td> <td>1.39</td> <td>1.35</td> <td>71.2</td> <td>63.6</td> <td>60.6</td> <td>0.00</td>
+                                    </tr>
+                                    <tr>
+                                         <td>&#x2F;ca_org2</td> <td>0</td> <td>0</td> <td>0.00778</td> <td>0.00778</td> <td>0.00</td> <td>0.00</td> <td>0.00</td> <td>0.00</td>
+                                    </tr>
+                                    <tr>
+                                         <td>&#x2F;ca_orderer</td> <td>0</td> <td>0</td> <td>0.00772</td> <td>0.00772</td> <td>0.00</td> <td>0.00</td> <td>0.00</td> <td>0.00</td>
+                                    </tr>
+                                    <tr>
+                                         <td>&#x2F;ca_org1</td> <td>0</td> <td>0</td> <td>0.00866</td> <td>0.00866</td> <td>0.00</td> <td>0.00</td> <td>0.00</td> <td>0.00</td>
+                                    </tr>
+                                </table>
+                                </tr>
+                            </table>
+                            <div class="charting">
+                            </div>
+            </div>
+
+            <div style="border-bottom: 1px solid #d9d9d9; padding-bottom: 10px;" id="castVote (375 TPS)">
+                <h2>Benchmark round: castVote (375 TPS)</h2>
+                <p>Cast vote benchmark</p>
+                <pre style="overflow: visible;white-space: pre-wrap;max-height:100%;">rateControl:
+  type: fixed-rate
+  opts:
+    tps: 375
+</pre>
+                        <h3>Performance metrics for castVote (375 TPS)</h3>
+                            <table style="min-width: 100%;">
+                                <tr>
+                                     <th>Name</th> <th>Succ</th> <th>Fail</th> <th>Send Rate (TPS)</th> <th>Max Latency (s)</th> <th>Min Latency (s)</th> <th>Avg Latency (s)</th> <th>Throughput (TPS)</th>
+                                </tr>
+                                <tr>
+                                     <td>castVote (375 TPS)</td> <td>1536</td> <td>3464</td> <td>347.9</td> <td>1.77</td> <td>0.05</td> <td>0.84</td> <td>338.9</td>
+                                </tr>
+                            </table>
+                        <h3>Resource utilization for castVote (375 TPS)</h3>
+                            <h4>Resource monitor: docker</h4>
+                            <table style="min-width: 100%;">
+                                <tr>
+                                <table>
+                                    <tr>
+                                         <th>Name</th> <th>CPU%(max)</th> <th>CPU%(avg)</th> <th>Memory(max) [GB]</th> <th>Memory(avg) [GB]</th> <th>Traffic In [MB]</th> <th>Traffic Out [MB]</th> <th>Disc Write [MB]</th> <th>Disc Read [KB]</th>
+                                    </tr>
+                                    <tr>
+                                         <td>&#x2F;dev-peer0.org1.example.com-evoting-chaincode_1.0.1-5fe51cfeaae48a597711ed0a0a28c5c0cbe30d8c1426055eb37197cb891c627b</td> <td>0.64625</td> <td>0.3125</td> <td>0.152</td> <td>0.151</td> <td>8.88</td> <td>3.54</td> <td>0.00</td> <td>0.00</td>
+                                    </tr>
+                                    <tr>
+                                         <td>&#x2F;dev-peer0.org3.example.com-evoting-chaincode_1.0.1-5fe51cfeaae48a597711ed0a0a28c5c0cbe30d8c1426055eb37197cb891c627b</td> <td>0.55875</td> <td>0.2675</td> <td>0.0811</td> <td>0.0733</td> <td>7.53</td> <td>2.99</td> <td>0.00</td> <td>0.00</td>
+                                    </tr>
+                                    <tr>
+                                         <td>&#x2F;dev-peer0.org2.example.com-evoting-chaincode_1.0.1-5fe51cfeaae48a597711ed0a0a28c5c0cbe30d8c1426055eb37197cb891c627b</td> <td>0.65125</td> <td>0.28875</td> <td>0.0825</td> <td>0.0764</td> <td>7.44</td> <td>2.93</td> <td>0.00</td> <td>0.00</td>
+                                    </tr>
+                                    <tr>
+                                         <td>&#x2F;peer0.org3.example.com</td> <td>0.99875</td> <td>0.525</td> <td>0.199</td> <td>0.197</td> <td>17.3</td> <td>14.2</td> <td>25.9</td> <td>32.0</td>
+                                    </tr>
+                                    <tr>
+                                         <td>&#x2F;ca_org3</td> <td>0</td> <td>0</td> <td>0.00912</td> <td>0.00912</td> <td>0.0000668</td> <td>0.00</td> <td>0.00</td> <td>0.00</td>
+                                    </tr>
+                                    <tr>
+                                         <td>&#x2F;cli</td> <td>0</td> <td>0</td> <td>0.000935</td> <td>0.000935</td> <td>0.00</td> <td>0.00</td> <td>0.00</td> <td>0.00</td>
+                                    </tr>
+                                    <tr>
+                                         <td>&#x2F;peer0.org2.example.com</td> <td>0.85</td> <td>0.42375</td> <td>0.220</td> <td>0.215</td> <td>17.2</td> <td>14.1</td> <td>25.9</td> <td>0.00</td>
+                                    </tr>
+                                    <tr>
+                                         <td>&#x2F;orderer.example.com</td> <td>0.33</td> <td>0.15</td> <td>0.544</td> <td>0.531</td> <td>8.66</td> <td>25.7</td> <td>37.2</td> <td>0.00</td>
+                                    </tr>
+                                    <tr>
+                                         <td>&#x2F;peer0.org1.example.com</td> <td>2.57125</td> <td>1.1125</td> <td>1.40</td> <td>1.38</td> <td>45.4</td> <td>40.5</td> <td>25.9</td> <td>0.00</td>
+                                    </tr>
+                                    <tr>
+                                         <td>&#x2F;ca_org2</td> <td>0</td> <td>0</td> <td>0.00778</td> <td>0.00778</td> <td>0.00</td> <td>0.00</td> <td>0.00</td> <td>0.00</td>
+                                    </tr>
+                                    <tr>
+                                         <td>&#x2F;ca_orderer</td> <td>0</td> <td>0</td> <td>0.00772</td> <td>0.00772</td> <td>0.00</td> <td>0.00</td> <td>0.00</td> <td>0.00</td>
+                                    </tr>
+                                    <tr>
+                                         <td>&#x2F;ca_org1</td> <td>0</td> <td>0</td> <td>0.00866</td> <td>0.00866</td> <td>0.00</td> <td>0.00</td> <td>0.00</td> <td>0.00</td>
+                                    </tr>
+                                </table>
+                                </tr>
+                            </table>
+                            <div class="charting">
+                            </div>
+            </div>
+
+            <div style="border-bottom: 1px solid #d9d9d9; padding-bottom: 10px;" id="castVote (500 TPS)">
+                <h2>Benchmark round: castVote (500 TPS)</h2>
+                <p>Cast vote benchmark</p>
+                <pre style="overflow: visible;white-space: pre-wrap;max-height:100%;">rateControl:
+  type: fixed-rate
+  opts:
+    tps: 500
+</pre>
+                        <h3>Performance metrics for castVote (500 TPS)</h3>
+                            <table style="min-width: 100%;">
+                                <tr>
+                                     <th>Name</th> <th>Succ</th> <th>Fail</th> <th>Send Rate (TPS)</th> <th>Max Latency (s)</th> <th>Min Latency (s)</th> <th>Avg Latency (s)</th> <th>Throughput (TPS)</th>
+                                </tr>
+                                <tr>
+                                     <td>castVote (500 TPS)</td> <td>413</td> <td>4587</td> <td>434.1</td> <td>7.13</td> <td>0.04</td> <td>2.60</td> <td>425.9</td>
+                                </tr>
+                            </table>
+                        <h3>Resource utilization for castVote (500 TPS)</h3>
+                            <h4>Resource monitor: docker</h4>
+                            <table style="min-width: 100%;">
+                                <tr>
+                                <table>
+                                    <tr>
+                                         <th>Name</th> <th>CPU%(max)</th> <th>CPU%(avg)</th> <th>Memory(max) [GB]</th> <th>Memory(avg) [GB]</th> <th>Traffic In [MB]</th> <th>Traffic Out [MB]</th> <th>Disc Write [MB]</th> <th>Disc Read [KB]</th>
+                                    </tr>
+                                    <tr>
+                                         <td>&#x2F;dev-peer0.org1.example.com-evoting-chaincode_1.0.1-5fe51cfeaae48a597711ed0a0a28c5c0cbe30d8c1426055eb37197cb891c627b</td> <td>1.01875</td> <td>0.3475</td> <td>0.171</td> <td>0.164</td> <td>8.56</td> <td>3.33</td> <td>0.00</td> <td>0.00</td>
+                                    </tr>
+                                    <tr>
+                                         <td>&#x2F;dev-peer0.org3.example.com-evoting-chaincode_1.0.1-5fe51cfeaae48a597711ed0a0a28c5c0cbe30d8c1426055eb37197cb891c627b</td> <td>0.86125</td> <td>0.3325</td> <td>0.0896</td> <td>0.0837</td> <td>8.12</td> <td>3.22</td> <td>0.00</td> <td>0.00</td>
+                                    </tr>
+                                    <tr>
+                                         <td>&#x2F;dev-peer0.org2.example.com-evoting-chaincode_1.0.1-5fe51cfeaae48a597711ed0a0a28c5c0cbe30d8c1426055eb37197cb891c627b</td> <td>0.72375</td> <td>0.29875</td> <td>0.0884</td> <td>0.0817</td> <td>8.12</td> <td>3.21</td> <td>0.00</td> <td>0.00</td>
+                                    </tr>
+                                    <tr>
+                                         <td>&#x2F;peer0.org3.example.com</td> <td>1.15625</td> <td>0.47625</td> <td>0.204</td> <td>0.201</td> <td>13.2</td> <td>15.4</td> <td>10.4</td> <td>0.00</td>
+                                    </tr>
+                                    <tr>
+                                         <td>&#x2F;ca_org3</td> <td>0</td> <td>0</td> <td>0.00912</td> <td>0.00912</td> <td>0.00</td> <td>0.00</td> <td>0.00</td> <td>0.00</td>
+                                    </tr>
+                                    <tr>
+                                         <td>&#x2F;cli</td> <td>0</td> <td>0</td> <td>0.000935</td> <td>0.000935</td> <td>0.00</td> <td>0.00</td> <td>0.00</td> <td>0.00</td>
+                                    </tr>
+                                    <tr>
+                                         <td>&#x2F;peer0.org2.example.com</td> <td>0.90375</td> <td>0.3775</td> <td>0.224</td> <td>0.222</td> <td>13.2</td> <td>15.4</td> <td>10.4</td> <td>0.00</td>
+                                    </tr>
+                                    <tr>
+                                         <td>&#x2F;orderer.example.com</td> <td>0.17</td> <td>0.06375</td> <td>0.540</td> <td>0.538</td> <td>3.73</td> <td>10.9</td> <td>15.7</td> <td>0.00</td>
+                                    </tr>
+                                    <tr>
+                                         <td>&#x2F;peer0.org1.example.com</td> <td>2.4875</td> <td>0.9825</td> <td>1.43</td> <td>1.36</td> <td>34.8</td> <td>31.0</td> <td>10.4</td> <td>24.0</td>
+                                    </tr>
+                                    <tr>
+                                         <td>&#x2F;ca_org2</td> <td>0</td> <td>0</td> <td>0.00778</td> <td>0.00778</td> <td>0.00</td> <td>0.00</td> <td>0.00</td> <td>0.00</td>
+                                    </tr>
+                                    <tr>
+                                         <td>&#x2F;ca_orderer</td> <td>0</td> <td>0</td> <td>0.00772</td> <td>0.00772</td> <td>0.00</td> <td>0.00</td> <td>0.00</td> <td>0.00</td>
+                                    </tr>
+                                    <tr>
+                                         <td>&#x2F;ca_org1</td> <td>0</td> <td>0</td> <td>0.00866</td> <td>0.00866</td> <td>0.00</td> <td>0.00</td> <td>0.00</td> <td>0.00</td>
                                     </tr>
                                 </table>
                                 </tr>
@@ -234,22 +1022,151 @@ rateControl:
                 <pre id="benchmarkInfo" style="overflow: visible;white-space: pre-wrap;max-height:100%;">name: evoting-contract-benchmark
 description: test benchmark
 workers:
-  number: 2
+  number: 100
 rounds:
-  - label: readAsset
+  - label: readAsset (25 TPS)
     description: Read asset benchmark
-    txDuration: 30
+    txNumber: 5000
     rateControl:
-      type: maximum-rate
+      type: fixed-rate
+      opts:
+        tps: 25
+    workload:
+      module: workload&#x2F;getOption.js
+      arguments:
+        assets: 1
+        contractId: evoting-chaincode
+  - label: readAsset (50 TPS)
+    description: Read asset benchmark
+    txNumber: 5000
+    rateControl:
+      type: fixed-rate
+      opts:
+        tps: 50
+    workload:
+      module: workload&#x2F;getOption.js
+      arguments:
+        assets: 1
+        contractId: evoting-chaincode
+  - label: readAsset (100 TPS)
+    description: Read asset benchmark
+    txNumber: 5000
+    rateControl:
+      type: fixed-rate
       opts:
         tps: 100
-        step: 100
-        sampleInterval: 10
-        includeFailed: true
     workload:
-      module: workload&#x2F;readAsset.js
+      module: workload&#x2F;getOption.js
       arguments:
-        assets: 5
+        assets: 1
+        contractId: evoting-chaincode
+  - label: readAsset (250 TPS)
+    description: Read asset benchmark
+    txNumber: 5000
+    rateControl:
+      type: fixed-rate
+      opts:
+        tps: 250
+    workload:
+      module: workload&#x2F;getOption.js
+      arguments:
+        assets: 1
+        contractId: evoting-chaincode
+  - label: readAsset (375 TPS)
+    description: Read asset benchmark
+    txNumber: 5000
+    rateControl:
+      type: fixed-rate
+      opts:
+        tps: 375
+    workload:
+      module: workload&#x2F;getOption.js
+      arguments:
+        assets: 1
+        contractId: evoting-chaincode
+  - label: readAsset (500 TPS)
+    description: Read asset benchmark
+    txNumber: 5000
+    rateControl:
+      type: fixed-rate
+      opts:
+        tps: 500
+    workload:
+      module: workload&#x2F;getOption.js
+      arguments:
+        assets: 1
+        contractId: evoting-chaincode
+  - label: castVote (25 TPS)
+    description: Cast vote benchmark
+    txNumber: 5000
+    rateControl:
+      type: fixed-rate
+      opts:
+        tps: 25
+    workload:
+      module: workload&#x2F;castVote.js
+      arguments:
+        assets: 1
+        contractId: evoting-chaincode
+  - label: castVote (50 TPS)
+    description: Cast vote benchmark
+    txNumber: 5000
+    rateControl:
+      type: fixed-rate
+      opts:
+        tps: 50
+    workload:
+      module: workload&#x2F;castVote.js
+      arguments:
+        assets: 1
+        contractId: evoting-chaincode
+  - label: castVote (100 TPS)
+    description: Cast vote benchmark
+    txNumber: 5000
+    rateControl:
+      type: fixed-rate
+      opts:
+        tps: 100
+    workload:
+      module: workload&#x2F;castVote.js
+      arguments:
+        assets: 1
+        contractId: evoting-chaincode
+  - label: castVote (250 TPS)
+    description: Cast vote benchmark
+    txNumber: 5000
+    rateControl:
+      type: fixed-rate
+      opts:
+        tps: 250
+    workload:
+      module: workload&#x2F;castVote.js
+      arguments:
+        assets: 1
+        contractId: evoting-chaincode
+  - label: castVote (375 TPS)
+    description: Cast vote benchmark
+    txNumber: 5000
+    rateControl:
+      type: fixed-rate
+      opts:
+        tps: 375
+    workload:
+      module: workload&#x2F;castVote.js
+      arguments:
+        assets: 1
+        contractId: evoting-chaincode
+  - label: castVote (500 TPS)
+    description: Cast vote benchmark
+    txNumber: 5000
+    rateControl:
+      type: fixed-rate
+      opts:
+        tps: 500
+    workload:
+      module: workload&#x2F;castVote.js
+      arguments:
+        assets: 1
         contractId: evoting-chaincode
 </pre>
                 <h3>SUT</h3>
