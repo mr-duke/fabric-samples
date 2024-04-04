@@ -19,7 +19,7 @@ Praxisprojekt für die Masterarbeit von Karl Herzog zum Thema **Blockchain-basie
   - [Beenden der Anwendung](#beenden-der-anwendung)
     - [Beenden und Löschen von Netzwerk und Chaincode](#beenden-und-löschen-von-netzwerk-und-chaincode)
     - [Beenden der Clientanwendungen](#beenden-der-clientanwendungen)
-  - [Performanz-/Lasttests mit Hyperledger Caliper](#performanz-lasttests-mit-hyperledger-caliper)
+  - [Lasttests mit Hyperledger Caliper](#lasttests-mit-hyperledger-caliper)
   - [Lizenz / License ](#lizenz--license-)
 
 
@@ -194,7 +194,18 @@ Im Verzeichnis `clients` ausführen:
 docker compose down
 ```
 
-## Performanz-/Lasttests mit Hyperledger Caliper
+## Lasttests mit Hyperledger Caliper
+
+In das Verzeichnis `caliper-workspace` wechseln.
+
+Bei Bedarf die Konfigurationsdateien unter `benchmarks`, `networks` und `workload` anpassen. Weitere Details in der [offiziellen Dokumentation](https://hyperledger.github.io/caliper/v0.5.0/getting-started/) von Caliper.
+
+Zum Starten der Lasttests ausführen:
+```bash
+npx caliper launch manager --caliper-workspace ./ --caliper-networkconfig networks/networkConfig.yaml --caliper-benchconfig benchmarks/myAssetBenchmark.yaml --caliper-flow-only-test
+```
+
+Nach Ende der Testläufe sind die Ergebnisse in der Datei `report.html` im Root-Verzeichnis verfügbar.
 
 ## Lizenz / License <a name="license"></a>
 
