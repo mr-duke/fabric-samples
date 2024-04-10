@@ -15,7 +15,7 @@ organizations:
       certificates:
       - name: 'Inf-User1'
         clientPrivateKey:
-          path: '../test-network/organizations/peerOrganizations/org1.example.com/users/Inf-User1@org1.example.com/msp/keystore/13cb494e01d04434bafefbea005451330549b1125c28706831f2754d6f363b7f_sk'
+          path: '../test-network/organizations/peerOrganizations/org1.example.com/users/Inf-User1@org1.example.com/msp/keystore/17536f086a5a39ef2e2b59ff3cd0786453c00a0aa12e8480a2ddd94cbbf19c90_sk'
         clientSignedCert:
           path: '../test-network/organizations/peerOrganizations/org1.example.com/users/Inf-User1@org1.example.com/msp/signcerts/cert.pem'
     connectionProfile:
