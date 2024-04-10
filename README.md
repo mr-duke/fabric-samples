@@ -1,11 +1,11 @@
 [//]: # (SPDX-License-Identifier: CC-BY-4.0)
 
-# INF-eVoting
+# INF E-Voting
 Praxisprojekt für die Masterarbeit von Karl Herzog zum Thema **Blockchain-basierte Abstimmungssysteme: Grundlagen und prototypische Umsetzung mit Hyperledger Fabric** an der TH Rosenheim
 
 **Inhaltsverzeichnis**
 
-- [INF-eVoting](#inf-evoting)
+- [INF E-Voting](#inf-e-voting)
   - [Installation der Systemvoraussetzungen](#installation-der-systemvoraussetzungen)
     - [Empfohlene Hardware-Voraussetzungen](#empfohlene-hardware-voraussetzungen)
     - [Software-Voraussetzungen](#software-voraussetzungen)
@@ -15,7 +15,7 @@ Praxisprojekt für die Masterarbeit von Karl Herzog zum Thema **Blockchain-basie
   - [Einrichtung des Fabric-Netzwerks](#einrichtung-des-fabric-netzwerks)
   - [Deployment des Chaincode](#deployment-des-chaincode)
     - [Optional: Prüfen des Chaincode während Testphase](#optional-prüfen-des-chaincode-während-testphase)
-  - [Starten der E-Voting Clientanwendung](#starten-der-e-voting-clientanwendung)
+  - [Starten der E-Voting Clientanwendungen](#starten-der-e-voting-clientanwendungen)
   - [Beenden der Anwendung](#beenden-der-anwendung)
     - [Beenden und Löschen von Netzwerk und Chaincode](#beenden-und-löschen-von-netzwerk-und-chaincode)
     - [Beenden der Clientanwendungen](#beenden-der-clientanwendungen)
@@ -158,14 +158,14 @@ export CORE_PEER_ADDRESS=localhost:11051
 peer lifecycle chaincode queryinstalled
 ```
 
-## Starten der E-Voting Clientanwendung
+## Starten der E-Voting Clientanwendungen
 
-Im `clients`-Verzeichnis ausführen, um die drei Clientanwendungen mit Docker Compose zu starten:
+Ins `clients`-Verzeichnis wechseln und die drei Clientanwendungen mit Docker Compose starten:
 - Das `--build` Flag ist optional und muss nur bei Änderungen am Quellcode verwendet werden. 
 - Alternativ kann Docker Compose auch im Hintergrund mit dem zusätzlichen  `-d` Flag gestartet werden
 
 ```bash
-cd ../clients/
+cd ../clients
 docker compose up --build
 ```
 
@@ -200,12 +200,16 @@ In das Verzeichnis `caliper-workspace` wechseln.
 
 Bei Bedarf die Konfigurationsdateien unter `benchmarks`, `networks` und `workload` anpassen. Weitere Details in der [offiziellen Dokumentation](https://hyperledger.github.io/caliper/v0.5.0/getting-started/) von Caliper.
 
+> ℹ️ Wichtig
+> 
+> Sollte das Blockchain-Netz **neu** aufgesetzt worden sein, muss der in der Datei `networkConfig.yaml` unter `clientPrivateKey` der Name des privaten Schlüssels von `Inf-User1` so angepasst werden, wie er unter dem entsprechenden Pfad zu finden ist (Der Schlüsselname endet standardmäßig auf `..._sk`). Mit diesem User werden die Lasttests ausgeführt.
+
 Zum Starten der Lasttests ausführen:
 ```bash
 npx caliper launch manager --caliper-workspace ./ --caliper-networkconfig networks/networkConfig.yaml --caliper-benchconfig benchmarks/myAssetBenchmark.yaml --caliper-flow-only-test
 ```
 
-Nach Ende der Testläufe sind die Ergebnisse in der Datei `report.html` im Root-Verzeichnis verfügbar.
+Nach Ende der Testläufe sind die Ergebnisse unter `caliper-workspace/report.html` verfügbar.
 
 ## Lizenz / License <a name="license"></a>
 
