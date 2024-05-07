@@ -1,7 +1,9 @@
 [//]: # (SPDX-License-Identifier: CC-BY-4.0)
 
 # INF E-Voting
-Praxisprojekt für die Masterarbeit von Karl Herzog zum Thema **Blockchain-basierte Abstimmungssysteme: Grundlagen und prototypische Umsetzung mit Hyperledger Fabric** an der TH Rosenheim
+Prototyp eines Blockchain-basierten Abstimmungssystems mithilfe von Hyperledger Fabric.
+
+Dieses Praxisprojekt ist Teil der Masterarbeit von Karl Herzog zum Thema **Blockchain-basierte Abstimmungssysteme: Grundlagen und prototypische Umsetzung mit Hyperledger Fabric** an der TH Rosenheim.
 
 **Inhaltsverzeichnis**
 
@@ -53,27 +55,27 @@ docker-compose --version
 sudo systemctl enable docker
 ```
 ### Alternatives Vorgehen unter Windows
-- Wichtig: Da der Sourcecode auf eine `Bash` Umgebung ausgerichtet, wird die Einrichtung von [WSL2](https://learn.microsoft.com/en-us/windows/wsl/install) sowie die Verwendung einer gängigen Linux-Distribution wie Ubuntu in der aktuellen LTS-Version sehr empfohlen.
+- Es wird die Einrichtung von [WSL2](https://learn.microsoft.com/en-us/windows/wsl/install) sowie die Verwendung einer gängigen Linux-Distribution wie Ubuntu in der aktuellen LTS-Version empfohlen.
 - [Docker Desktop](https://docs.docker.com/get-docker/)
 - [Node.js](https://nodejs.org/en)
 - [Jq](https://jqlang.github.io/jq/download/)
-- *Optional*: [Microsoft VS Code](https://code.visualstudio.com/) mit `Remote - WSL extension` zur vereinfachten Interaktion mit der WSL2 Linux-Distribution
+- *Optional*: [Microsoft VS Code](https://code.visualstudio.com/) mit `Remote - WSL extension` zur vereinfachten Interaktion mit der Linux-Distribution
 
 ### Klonen des Repository
-Klonen des Git-Repository in beliebiges Root-Verzeichnis (z.B. `/home/<username>`):
+Klonen des Git-Repository in beliebigem Verzeichnis (z.B. `/home/<username>`):
 
 ```bash
 git clone https://github.com/mr-duke/inf-evoting.git
 ```
 
 ### Download von Docker Images und Binaries
-Verschieben des Installationsskripts ins Root-Verzeichnis und ausführbar machen der Datei:
+Verschieben des Installationsskripts und ausführbar machen der Datei:
 
 ```bash
 mv inf-evoting/install-fabric.sh . && chmod +x install-fabric.sh
 ```
 
-Ausführen des Installationsskripts. Es werden alle notwendigen Docker Images für Hyperledger Fabric und die Binaries für die Fabric CLI Tools heruntergeladen (Hyperledger Version im Skript bei Bedarf anpassen):
+Ausführen des Installationsskripts. Es werden alle notwendigen Docker Images für Hyperledger Fabric und die Binaries für die Fabric CLI Tools heruntergeladen (Hyperledger Fabric Version im Skript bei Bedarf anpassen):
 
 ```bash
 ./install-fabric.sh
@@ -81,7 +83,7 @@ Ausführen des Installationsskripts. Es werden alle notwendigen Docker Images f�
 
 ## Einrichtung des Fabric-Netzwerks
 
-Zu folgendem Verzeichnis navigieren:
+In folgendes Verzeichnis wechseln:
 
 ```bash
 cd inf-evoting/test-network
@@ -108,7 +110,7 @@ cd ./addOrg3
 
 ## Deployment des Chaincode
 
-Im `test-network` Verzeichnis ausführen zum Packen, Installieren, Prüfen und Commiten des Chaincode (Typescript):
+Im `test-network` Verzeichnis ausführen, um den Chaincode (TypeScript) zu deployen. Es wird der vollständige *Fabric Chaincode Lifecycle* (Packen, Installieren, Prüfen und Commiten) durchlaufen:
 
 ```bash
 cd ..
@@ -116,7 +118,7 @@ cd ..
 ```
 
 ### Optional: Prüfen des Chaincode während Testphase
-Folgende Befehle sollten nur während der Testphase ausgeführt werden und ermöglichen es, den Chaincode direkt über die `Peer CLI` aufzurufen. Hierzu ist keine Clientwanwendung notwendig.
+Folgende Befehle sollten nur während der Testphase ausgeführt werden und ermöglichen es, den Chaincode direkt über die `Peer CLI` aufzurufen. Hierzu ist keine eigene Clientwanwendung notwendig.
 
 Umgebungsvariablen für `Peer CLI`setzen:
 
@@ -152,7 +154,7 @@ export CORE_PEER_MSPCONFIGPATH=${PWD}/organizations/peerOrganizations/org3.examp
 export CORE_PEER_ADDRESS=localhost:11051
 ```
 
-Überprüfen des installierten Chaincode:
+Überprüfen des installierten Chaincodes:
 
 ```bash
 peer lifecycle chaincode queryinstalled
@@ -196,15 +198,15 @@ docker compose down
 
 ## Lasttests mit Hyperledger Caliper
 
-In das Verzeichnis `caliper-workspace` wechseln.
+Ins Verzeichnis `caliper-workspace` wechseln.
 
 Bei Bedarf die Konfigurationsdateien unter `benchmarks`, `networks` und `workload` anpassen. Weitere Details in der [offiziellen Dokumentation](https://hyperledger.github.io/caliper/v0.5.0/getting-started/) von Caliper.
 
 > ℹ️ Wichtig
 > 
-> Sollte das Blockchain-Netz **neu** aufgesetzt worden sein, muss der in der Datei `networkConfig.yaml` unter `clientPrivateKey` der Name des privaten Schlüssels von `Inf-User1` so angepasst werden, wie er unter dem entsprechenden Pfad zu finden ist (Der Schlüsselname endet standardmäßig auf `..._sk`). Mit diesem User werden die Lasttests ausgeführt.
+> Sollte das Blockchain-Netz **neu** aufgesetzt worden sein, muss in der Datei `networkConfig.yaml` unter `clientPrivateKey` der Name des privaten Schlüssels von `Inf-User1` so angepasst werden, wie er unter dem entsprechenden Pfad zu finden ist (`/test-network/organizations/peerOrganizations/org1.example.com/users/Inf-User1@org1.example.com/msp/keystore/`). Der Schlüsselname endet standardmäßig auf `..._sk`. Mit diesem User werden die Lasttests ausgeführt.
 
-Zum Starten der Lasttests ausführen:
+Starten der Lasttests:
 ```bash
 npx caliper launch manager --caliper-workspace ./ --caliper-networkconfig networks/networkConfig.yaml --caliper-benchconfig benchmarks/myAssetBenchmark.yaml --caliper-flow-only-test
 ```
